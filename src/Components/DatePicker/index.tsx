@@ -9,6 +9,11 @@ export default function BasicSelect() {
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DemoContainer components={["DatePicker"]}>
         <DatePicker
+          slotProps={{
+            popper: {
+              placement: "top",
+            },
+          }}
           sx={{
             width: "100%",
             "& .MuiStack-root": {
@@ -26,7 +31,6 @@ export default function BasicSelect() {
               fontSize: "14px",
               fontFamily: '"Poppins", sans-serif',
             },
-
             "& .MuiIconButton-root": {
               padding: "0px",
             },

@@ -23,7 +23,7 @@ export default function CommunityTips() {
   const truncateText = (text: string, wordLimit: number) => {
     const words = text.split(" ");
     return words.length > wordLimit
-      ? words.slice(0, wordLimit).join(" ") + "..." // Adds "..." if longer than 25 words
+      ? words.slice(0, wordLimit).join(" ") + "..."
       : text;
   };
 
@@ -44,7 +44,7 @@ export default function CommunityTips() {
         }}
       >
         <Box sx={{ textAlign: "center" }}>
-          <Typography variant="h4" sx={{ fontWeight: "700" }}>
+          <Typography variant="h4" sx={{ fontWeight: "500" }}>
             Trip Finder
           </Typography>
           <Typography sx={{ marginTop: "12px" }}>
@@ -62,7 +62,7 @@ export default function CommunityTips() {
           >
             <TextField
               sx={{
-                width: "50%",
+                width: { lg: "50%", xs: "60%" },
                 "& .MuiOutlinedInput-input": {
                   fontFamily: '"Poppins", sans-serif',
                   fontSize: "14px",
@@ -78,7 +78,7 @@ export default function CommunityTips() {
             />
             <Select
               sx={{
-                width: "8%",
+                width: { lg: "8%", xs: "25%" },
                 height: "45px",
                 "& .MuiOutlinedInput-input": {
                   fontFamily: '"Poppins", sans-serif',
@@ -140,22 +140,24 @@ export default function CommunityTips() {
                 whiteSpace: "normal",
                 maxWidth: "100%", // Ensures it doesn't overflow
               }}
-              variant="h5"
+              variant="h6"
             >
               {truncateText(
                 "Discover Seoul: An 8-Day Adventure Through the Heart of South Korea, where history meets modern culture and flavors. This exciting trip will take you through Seoul's iconic spots, amazing food markets, and historical landmarks. Experience the vibrant nightlife and breathtaking cityscapes.",
-                3
+                4
               )}
             </Typography>
 
             <Typography
               sx={{
-                marginTop: "12px",
+                marginTop: "8px",
                 display: "block",
                 overflowWrap: "break-word",
                 wordBreak: "break-word",
                 whiteSpace: "normal",
                 maxWidth: "100%",
+                color: "gray",
+                fontSize: "14px",
               }}
             >
               {" "}
@@ -195,7 +197,7 @@ export default function CommunityTips() {
                 }}
               >
                 <Typography sx={{ fontSize: "14px" }}>4 Days</Typography>
-                <h4>.</h4>
+                <h4>•</h4>
                 <img src={HeART} style={{ height: "24px", width: "24px" }} />
                 <Typography sx={{ fontSize: "14px" }}>12</Typography>
               </div>
@@ -228,22 +230,24 @@ export default function CommunityTips() {
                 whiteSpace: "normal",
                 maxWidth: "100%", // Ensures it doesn't overflow
               }}
-              variant="h5"
+              variant="h6"
             >
               {truncateText(
                 "Discover Seoul: An 8-Day Adventure Through the Heart of South Korea, where history meets modern culture and flavors. This exciting trip will take you through Seoul's iconic spots, amazing food markets, and historical landmarks. Experience the vibrant nightlife and breathtaking cityscapes.",
-                3
+                4
               )}
             </Typography>
 
             <Typography
               sx={{
-                marginTop: "12px",
+                marginTop: "8px",
                 display: "block",
                 overflowWrap: "break-word",
                 wordBreak: "break-word",
                 whiteSpace: "normal",
                 maxWidth: "100%",
+                color: "gray",
+                fontSize: "14px",
               }}
             >
               {" "}
@@ -268,7 +272,8 @@ export default function CommunityTips() {
                 }}
               >
                 <Avatar
-                  src="/static/images/avatar/1.jpg"
+                  alt="Ash Simpson"
+                  src=""
                   sx={{ width: 26, height: 26 }}
                 />
 
@@ -282,7 +287,7 @@ export default function CommunityTips() {
                 }}
               >
                 <Typography sx={{ fontSize: "14px" }}>4 Days</Typography>
-                <h4>.</h4>
+                <h4>•</h4>
                 <img src={HeART} style={{ height: "24px", width: "24px" }} />
                 <Typography sx={{ fontSize: "14px" }}>12</Typography>
               </div>
@@ -315,22 +320,24 @@ export default function CommunityTips() {
                 whiteSpace: "normal",
                 maxWidth: "100%", // Ensures it doesn't overflow
               }}
-              variant="h5"
+              variant="h6"
             >
               {truncateText(
                 "Discover Seoul: An 8-Day Adventure Through the Heart of South Korea, where history meets modern culture and flavors. This exciting trip will take you through Seoul's iconic spots, amazing food markets, and historical landmarks. Experience the vibrant nightlife and breathtaking cityscapes.",
-                3
+                4
               )}
             </Typography>
 
             <Typography
               sx={{
-                marginTop: "12px",
+                marginTop: "8px",
                 display: "block",
                 overflowWrap: "break-word",
                 wordBreak: "break-word",
                 whiteSpace: "normal",
                 maxWidth: "100%",
+                color: "gray",
+                fontSize: "14px",
               }}
             >
               {" "}
@@ -355,7 +362,8 @@ export default function CommunityTips() {
                 }}
               >
                 <Avatar
-                  src="/static/images/avatar/1.jpg"
+                  alt="Ash Simpson"
+                  src=""
                   sx={{ width: 26, height: 26 }}
                 />
 
@@ -369,7 +377,7 @@ export default function CommunityTips() {
                 }}
               >
                 <Typography sx={{ fontSize: "14px" }}>4 Days</Typography>
-                <h4>.</h4>
+                <h4>•</h4>
                 <img src={HeART} style={{ height: "24px", width: "24px" }} />
                 <Typography sx={{ fontSize: "14px" }}>12</Typography>
               </div>
@@ -402,22 +410,24 @@ export default function CommunityTips() {
                 whiteSpace: "normal",
                 maxWidth: "100%", // Ensures it doesn't overflow
               }}
-              variant="h5"
+              variant="h6"
             >
               {truncateText(
                 "Discover Seoul: An 8-Day Adventure Through the Heart of South Korea, where history meets modern culture and flavors. This exciting trip will take you through Seoul's iconic spots, amazing food markets, and historical landmarks. Experience the vibrant nightlife and breathtaking cityscapes.",
-                3
+                4
               )}
             </Typography>
 
             <Typography
               sx={{
-                marginTop: "12px",
+                marginTop: "8px",
                 display: "block",
                 overflowWrap: "break-word",
                 wordBreak: "break-word",
                 whiteSpace: "normal",
                 maxWidth: "100%",
+                color: "gray",
+                fontSize: "14px",
               }}
             >
               {" "}
@@ -442,7 +452,8 @@ export default function CommunityTips() {
                 }}
               >
                 <Avatar
-                  src="/static/images/avatar/1.jpg"
+                  alt="Ash Simpson"
+                  src=""
                   sx={{ width: 26, height: 26 }}
                 />
 
@@ -456,7 +467,7 @@ export default function CommunityTips() {
                 }}
               >
                 <Typography sx={{ fontSize: "14px" }}>4 Days</Typography>
-                <h4>.</h4>
+                <h4>•</h4>
                 <img src={HeART} style={{ height: "24px", width: "24px" }} />
                 <Typography sx={{ fontSize: "14px" }}>12</Typography>
               </div>

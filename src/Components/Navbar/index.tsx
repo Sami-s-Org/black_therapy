@@ -9,9 +9,9 @@ import {
 import React, { useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
-import { useNavigate } from "react-router-dom";
-import { AddBox } from "@mui/icons-material";
+import { useNavigate, useLocation } from "react-router-dom";
 import CustomModal from "../SignUpModel";
+
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const handleclose = () => {
@@ -19,33 +19,19 @@ export default function Navbar() {
   };
 
   const navigate = useNavigate();
+  const location = useLocation();
 
-  const handlegoHome = () => {
-    navigate("/home");
-  };
+  const isActive = (path: string) => location.pathname === path;
 
-  const handlegoDestination = () => {
-    navigate("/destination");
-  };
-
-  const handlegoPromotion = () => {
-    navigate("/promotion");
-  };
-  const handlegoContactUs = () => {
-    navigate("/contactUs");
-  };
-  const handlegoCommunity = () => {
-    navigate("/CommunityTips");
-  };
-  const handlegoBase = () => {
-    navigate("/");
+  const handleNavigate = (path: string) => {
+    navigate(path);
+    handleclose();
   };
 
-  const [open, setOpen] = useState<boolean>(false);
+  const [open, setOpen] = useState(false);
 
   return (
     <div>
-      {" "}
       <AppBar
         position="absolute"
         sx={{
@@ -71,12 +57,7 @@ export default function Navbar() {
           >
             <MenuIcon />
           </IconButton>
-          <Box
-            onClick={() => {
-              handlegoBase();
-              handleclose();
-            }}
-          >
+          <Box onClick={() => handleNavigate("/")}>
             <Typography
               variant="h6"
               sx={{
@@ -98,24 +79,26 @@ export default function Navbar() {
             }}
             onClick={() => setOpen(true)}
           />
-
           <CustomModal open={open} handleClose={() => setOpen(false)} />
           <Box sx={{ display: { xs: "none", md: "flex" }, gap: "20px" }}>
-            <Button sx={{ color: "white" }} onClick={handlegoHome}>
-              Home
-            </Button>
-            <Button sx={{ color: "white" }} onClick={handlegoDestination}>
-              Destination
-            </Button>
-            <Button sx={{ color: "white" }} onClick={handlegoPromotion}>
-              Promotion
-            </Button>
-            <Button sx={{ color: "white" }} onClick={handlegoCommunity}>
-              Community Tips
-            </Button>
-            <Button sx={{ color: "white" }} onClick={handlegoContactUs}>
-              Contact Us
-            </Button>
+            {[
+              { label: "Home", path: "/home" },
+              { label: "Destination", path: "/destination" },
+              { label: "Promotion", path: "/promotion" },
+              { label: "Community Tips", path: "/CommunityTips" },
+              { label: "Contact Us", path: "/contactUs" },
+            ].map((item) => (
+              <Button
+                key={item.path}
+                sx={{
+                  color: "white",
+                  fontWeight: isActive(item.path) ? 600 : "normal",
+                }}
+                onClick={() => handleNavigate(item.path)}
+              >
+                {item.label}
+              </Button>
+            ))}
             <Button
               variant="contained"
               sx={{
@@ -133,12 +116,14 @@ export default function Navbar() {
           </Box>
         </Toolbar>
       </AppBar>
+
       {mobileMenuOpen && (
         <Box
           sx={{
             position: "absolute",
             top: "75px",
             left: 0,
+            boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
             width: "100%",
             background: "white",
             zIndex: 1111111,
@@ -147,76 +132,27 @@ export default function Navbar() {
             borderRadius: "0px 0px 20px 20px",
           }}
         >
-          <Button
-            sx={{
-              color: "black",
-              display: "block",
-              width: "100%",
-              textAlign: "start",
-            }}
-            onClick={() => {
-              handlegoHome();
-              handleclose();
-            }}
-          >
-            Home
-          </Button>
-          <Button
-            sx={{
-              color: "black",
-              display: "block",
-              width: "100%",
-              textAlign: "start",
-            }}
-            onClick={() => {
-              handlegoDestination();
-              handleclose();
-            }}
-          >
-            Destination
-          </Button>
-          <Button
-            sx={{
-              color: "black",
-              display: "block",
-              width: "100%",
-              textAlign: "start",
-            }}
-            onClick={() => {
-              handlegoPromotion();
-              handleclose();
-            }}
-          >
-            Promotion
-          </Button>
-          <Button
-            sx={{
-              color: "black",
-              display: "block",
-              width: "100%",
-              textAlign: "start",
-            }}
-            onClick={() => {
-              handlegoCommunity();
-              handleclose();
-            }}
-          >
-            Community Tips
-          </Button>
-          <Button
-            sx={{
-              color: "black",
-              display: "block",
-              width: "100%",
-              textAlign: "start",
-            }}
-            onClick={() => {
-              handlegoContactUs();
-              handleclose();
-            }}
-          >
-            Contact Us
-          </Button>
+          {[
+            { label: "Home", path: "/home" },
+            { label: "Destination", path: "/destination" },
+            { label: "Promotion", path: "/promotion" },
+            { label: "Community Tips", path: "/CommunityTips" },
+            { label: "Contact Us", path: "/contactUs" },
+          ].map((item) => (
+            <Button
+              key={item.path}
+              sx={{
+                color: "black",
+                display: "block",
+                width: "100%",
+                textAlign: "start",
+                fontWeight: isActive(item.path) ? 800 : "normal",
+              }}
+              onClick={() => handleNavigate(item.path)}
+            >
+              {item.label}
+            </Button>
+          ))}
         </Box>
       )}
     </div>

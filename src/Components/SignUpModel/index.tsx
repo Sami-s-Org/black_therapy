@@ -46,7 +46,7 @@ const handleAppleLogin = () => {
     &scope=name%20email
     &response_mode=fragment`;
 
-  window.location.href = appleAuthURL; // Redirect to Apple Login Page
+  window.location.href = appleAuthURL;
 };
 
 const CustomModal: React.FC<ModalProps> = ({ open, handleClose }) => {
@@ -62,7 +62,7 @@ const CustomModal: React.FC<ModalProps> = ({ open, handleClose }) => {
           bgcolor: "background.paper",
           boxShadow: " rgba(0, 0, 0, 0.24) 0px 3px 8px",
 
-          borderRadius: 2,
+          borderRadius: "20px",
         }}
       >
         <div
@@ -92,7 +92,7 @@ const CustomModal: React.FC<ModalProps> = ({ open, handleClose }) => {
           style={{
             backgroundColor: "#e3ebeb",
             padding: "20px ",
-            borderRadius: "0 0 8px 8px",
+            borderRadius: "0 0 20px 20px",
           }}
         >
           <Button
@@ -104,6 +104,7 @@ const CustomModal: React.FC<ModalProps> = ({ open, handleClose }) => {
               display: "flex",
               alignItems: "center",
               color: "black",
+              fontSize: "13px",
               backgroundColor: "white",
               justifyContent: "center",
               boxShadow: " rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
@@ -124,6 +125,7 @@ const CustomModal: React.FC<ModalProps> = ({ open, handleClose }) => {
               margin: "8px auto",
               padding: "5px",
               display: "flex",
+              fontSize: "13px",
               alignItems: "center",
               backgroundColor: "white",
               color: "black",
@@ -147,6 +149,7 @@ const CustomModal: React.FC<ModalProps> = ({ open, handleClose }) => {
               padding: "5px",
               backgroundColor: "white",
               display: "flex",
+              fontSize: "13px",
               alignItems: "center",
               color: "black",
               justifyContent: "center",

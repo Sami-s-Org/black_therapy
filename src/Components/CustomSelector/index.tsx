@@ -35,7 +35,6 @@ const BasicSelector: React.FC<BasicSelectorProps> = ({
           },
         }}
       >
-        {/* Render the placeholder only if it's provided */}
         {placeholder && !selectedValue && (
           <MenuItem value="" disabled>
             {placeholder}

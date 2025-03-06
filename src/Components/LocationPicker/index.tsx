@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { TextField, List, ListItem, Paper } from "@mui/material";
 
-const GOOGLE_API_KEY = "YOUR_GOOGLE_MAPS_API_KEY"; // Replace with your API key
+const GOOGLE_API_KEY = "YOUR_GOOGLE_MAPS_API_KEY";
 
 const LocationSearchInput = () => {
   const [query, setQuery] = useState("");
