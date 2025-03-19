@@ -12,6 +12,7 @@ import React from "react";
 import BasicSelect from "../../Components/DatePicker";
 import BasicSelector from "../../Components/CustomSelector";
 import HeART from "../../assets/heart-red-svgrepo-com.svg";
+import Footer from "../../Components/Footer";
 
 const Days = [" 1 Day ", " 2 Day ", " 3 Day ", " 4 Day ", " 5 Day"];
 export default function CommunityTips() {
@@ -475,6 +476,7 @@ export default function CommunityTips() {
           </Box>{" "}
         </Box>
       </Box>
+      <Footer />
     </div>
   );
 }

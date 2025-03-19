@@ -1,5 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import React from "react";
+import Footer from "../../Components/Footer";
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
         }}
       ></Box>
       <Typography>Home</Typography>
+      <Footer />
     </>
   );
 }

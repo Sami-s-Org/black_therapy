@@ -1,5 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import React from "react";
+import Footer from "../../Components/Footer";
 
 export default function Promotion() {
   return (
@@ -11,6 +12,7 @@ export default function Promotion() {
         }}
       ></Box>
       <Typography>Promotion</Typography>
+      <Footer />
     </>
   );
 }

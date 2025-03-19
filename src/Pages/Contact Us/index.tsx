@@ -1,6 +1,7 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import React from "react";
 import Textarea from "@mui/joy/Textarea";
+import Footer from "../../Components/Footer";
 export default function ContactUs() {
   return (
     <>
@@ -102,6 +103,7 @@ export default function ContactUs() {
           </form>
         </Box>
       </div>
+      <Footer />
     </>
   );
 }
