@@ -1,0 +1,89 @@
+.sidebar {
+  background-color: white;
+  color: #a88757;
+  width: 250px;
+  transition: width 0.3s ease;
+  height: calc(100vh - 40px);
+  border-radius: 16px;
+  box-sizing: border-box;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.open {
+  width: 200px;
+}
+
+.closed {
+  width: 60px;
+}
+
+.toggleBtn {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.menu {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.menu li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.menu li:hover {
+  background-color: #e0e0e0;
+  text-decoration: none;
+}
+
+.menu li a {
+  margin-left: 10px;
+  text-decoration: none;
+  color: #333;
+  flex-grow: 1;
+  text-decoration: none !important;
+}
+
+/* Active class for NavLink */
+.activeLink {
+  background-color: #a88757 !important;
+  color: #fff !important;
+  font-weight: 600;
+}
+
+.activeLink a {
+  color: #fff !important;
+  text-decoration: none;
+}
+.activeLink a:hover {
+  color: #fff !important;
+  text-decoration: none;
+}
+.menuItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  cursor: pointer;
+  text-decoration: none;
+  color: #333;
+  transition: background-color 0.3s, color 0.3s;
+}
+.Logout {
+  color: rgb(213, 46, 46);
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 18px;
+  margin-bottom: 20px;
+  text-align: center;
+}

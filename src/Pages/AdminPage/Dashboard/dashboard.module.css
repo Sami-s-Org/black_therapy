@@ -1,0 +1,14 @@
+.Containers {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-top: 32px;
+  width: 100%;
+}
+.dashcard {
+  width: 250px;
+  padding: 16px;
+  border-radius: 16px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}

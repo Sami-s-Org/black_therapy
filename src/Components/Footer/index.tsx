@@ -1,125 +1,113 @@
-import { Box, Typography } from "@mui/material";
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import styles from "../common.module.css";
+import { FaInstagram } from "react-icons/fa";
 
-export default function Footer() {
+import logo from "../../assets/Black-Yellow-Modern-Digital-Marketing-Facebook-Cover-5.png";
+const Footer = () => {
+  const navigate = useNavigate();
+
+  const handleNavigation = (path: string) => {
+    navigate(path);
+  };
+
   return (
-    <div style={{ borderTop: "1px solid gray" }}>
-      <Box
-        sx={{
-          maxWidth: "1200px",
-          margin: "30px auto",
-          padding: { lg: "0px", xs: "20px" },
-        }}
-      >
-        <Box
-          sx={{
-            padding: "20px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            flexWrap: { lg: "none", xs: "wrap", sm: "none" },
-          }}
-        >
-          <Box sx={{ width: { lg: "35%", xs: "100%", sm: "35%" } }}>
-            <Box>
-              <Box sx={{ display: "flex", alignItems: "center", gap: "20px" }}>
-                <img
-                  style={{ width: "2.25rem" }}
-                  src="https://tripplanner.ai/_next/image?url=%2Flogo%2Flogo.webp&w=32&q=75"
-                />
-                <Typography
-                  sx={{
-                    fontSize: "1.5rem",
-                    lineHeight: "2.5rem",
-                    fontWeight: "500",
-                  }}
-                >
-                  Trip Planner AI
-                </Typography>
-              </Box>
-              <Typography
-                sx={{
-                  marginTop: "8px",
-                  fontSize: "16px",
-                  color: "#7d7d7d",
-                  fontWeight: "500",
-                }}
-              >
-                Turn your next trip into a hassle-free experience with Trip
-                Planner AI.
-              </Typography>
-            </Box>
-          </Box>
-          <Box
-            sx={{
-              marginTop: { lg: "0px", sm: "0px", xs: "30px" },
-              width: { lg: "55%", xs: "100%", sm: "55%" },
-              display: "flex",
-              alignItems: "start",
-              justifyContent: "space-between",
-            }}
+    <>
+      <div className={styles.footer}>
+        <div className={styles.footerTop}>
+          <div className={styles.w50}>
+            <p className={styles.Newsletter}>Newsletter</p>
+            <p className={styles.Get}>Get Newsletter</p>
+          </div>
+          <div
+            className={styles.w50}
+            style={{ display: "flex", alignItems: "center" }}
           >
-            <Box sx={{ width: "30%", textAlign: "center" }}>
-              <Typography sx={{ fontWeight: "600", fontSize: "16px" }}>
-                Legal
-              </Typography>
-              <Typography
-                sx={{ fontWeight: "400", fontSize: "16px", marginTop: "8px" }}
-              >
-                Terms and Conditions
-              </Typography>
-              <Typography
-                sx={{ fontWeight: "400", fontSize: "16px", marginTop: "8px" }}
-              >
+            <input
+              className={styles.footerInput}
+              placeholder="Enter Your Email Address"
+            />
+            <button className={styles.Subscribe}>Subscribe Now</button>
+          </div>
+        </div>
+      </div>
+      <div className={styles.ContactBg}>
+        <p className={styles.Get}>Lets Celebrate Your Love</p>
+        <button
+          className={styles.ContactBtn}
+          onClick={() => handleNavigation("/contactUs")}
+        >
+          Contact Us Now
+        </button>
+      </div>
+      <footer className={styles.footer}>
+        <div className={styles.footerTop}>
+          <div className={styles.column}>
+            <img src={logo} className={styles.logofooter} />
+            <p className={styles.FooterDescripation}>
+              Black Therapy offers holistic healing and personalized coaching to
+              empower your mental and emotional well-being
+            </p>
+          </div>
+          <div className={styles.column}>
+            <h2>Quick Links</h2>
+            <ul>
+              <li onClick={() => handleNavigation("/")}>Find a Therapist</li>
+              <li onClick={() => handleNavigation("/findCoach")}>
+                Find a Coach
+              </li>
+              <li onClick={() => handleNavigation("/blog")}>Blog</li>
+              <li onClick={() => handleNavigation("/store")}>Store</li>
+              <li onClick={() => handleNavigation("/donate")}>Donate</li>
+            </ul>
+          </div>
+          <div className={styles.column}>
+            <h2>About</h2>
+            <ul>
+              <li onClick={() => handleNavigation("/")}>About Us</li>
+              <li onClick={() => handleNavigation("/ourTeam")}>
+                Meet Our Team
+              </li>
+              <li onClick={() => handleNavigation("/boardMembers")}>
+                Board Members
+              </li>
+              <li onClick={() => handleNavigation("/joinAsACoach")}>
+                Join As A Therapist
+              </li>
+              <li onClick={() => handleNavigation("/joinAsATherapist")}>
+                Join As A Coaches
+              </li>
+            </ul>
+          </div>
+          <div className={styles.column}>
+            <h2>Legal & Contact</h2>
+            <ul>
+              <li onClick={() => handleNavigation("/termsOfUse")}>
+                Terms of Use
+              </li>
+              <li onClick={() => handleNavigation("/privacyPolicy")}>
                 Privacy Policy
-              </Typography>
-            </Box>
-            <Box sx={{ width: "30%", textAlign: "center" }}>
-              <Typography sx={{ fontWeight: "600", fontSize: "16px" }}>
-                Support
-              </Typography>
-              <Typography
-                sx={{ fontWeight: "400", fontSize: "16px", marginTop: "8px" }}
-              >
-                Contact Us
-              </Typography>
-            </Box>
-            <Box sx={{ width: "30%", textAlign: "center" }}>
-              <Typography sx={{ fontWeight: "600", fontSize: "16px" }}>
-                Itineraries
-              </Typography>
-              <Typography
-                sx={{ fontWeight: "400", fontSize: "16px", marginTop: "8px" }}
-              >
-                Community Trips
-              </Typography>
-              <Typography
-                sx={{ fontWeight: "400", fontSize: "16px", marginTop: "8px" }}
-              >
-                Find Destinations
-              </Typography>
-            </Box>
-          </Box>
-        </Box>{" "}
-        <Box
-          sx={{
-            borderTop: "1px solid gray",
-            marginTop: "30px",
-            padding: "24px",
-          }}
-        >
-          <Typography
-            sx={{
-              fontWeight: "400",
-              fontSize: "16px",
-              color: "#7d7d7d",
-              textAlign: { xs: "center", lg: "start", sm: "start" },
-            }}
-          >
-            © 2023 Trip Planner AI. All rights reserved
-          </Typography>
-        </Box>
-      </Box>
-    </div>
+              </li>
+              <li onClick={() => handleNavigation("/ContactUs")}>Contact Us</li>
+            </ul>
+          </div>
+          {/* <div className={styles.column}>
+          <h2>Stay Connected</h2>
+          <input type="email" placeholder="Subscribe to Newsletter" />
+          <div className={styles.social}>
+            <div onClick={() => window.open("https://instagram.com", "_blank")}>
+              <FaInstagram />
+            </div>
+          </div>
+        </div> */}
+        </div>
+        <div className={styles.footerBottom}>
+          © 2025 Therapy For Black Men - All Rights Reserved. Designed by Avenue
+          Sol’s
+        </div>
+      </footer>
+    </>
   );
-}
+};
+
+export default Footer;

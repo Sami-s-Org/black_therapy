@@ -1,0 +1,40 @@
+.main {
+  position: relative;
+  width: 100%;
+  height: 50vh;
+  overflow: hidden;
+}
+
+.backgroundVideo {
+  width: 100%;
+  height: 50vh;
+  object-fit: cover;
+}
+* {
+  padding: 0%;
+  margin: 0%;
+  box-sizing: border-box;
+}
+.Heading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 4rem;
+  letter-spacing: 3px;
+  font-weight: bold;
+  text-align: center;
+  z-index: 1;
+  font-family: "Derivia Regular";
+}
+@media (min-width: 320px) and (max-width: 480px) {
+  .Heading {
+    font-size: 2.2rem;
+  }
+}
+@media (min-width: 481px) and (max-width: 768px) {
+  .Heading {
+    font-size: 3rem;
+  }
+}

@@ -1,160 +1,227 @@
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  Button,
-  Box,
-  IconButton,
-} from "@mui/material";
-import React, { useState } from "react";
-import MenuIcon from "@mui/icons-material/Menu";
-import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
-import { useNavigate, useLocation } from "react-router-dom";
-import CustomModal from "../SignUpModel";
+import React, { FC, useState, useEffect, useRef } from "react";
+import styles from "../common.module.css";
+import { motion, AnimatePresence } from "framer-motion";
+import { FaAngleDown, FaBars, FaTimes } from "react-icons/fa";
+import logo from "../../assets/Black-Yellow-Modern-Digital-Marketing-Facebook-Cover-5.png";
+import { useNavigate } from "react-router-dom";
 
-export default function Navbar() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const handleclose = () => {
-    setMobileMenuOpen(false);
-  };
-
+const Navbar: FC = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState<string>("");
+  const [activeLink, setActiveLink] = useState<string>("");
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
-  const location = useLocation();
 
-  const isActive = (path: string) => location.pathname === path;
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(e.target as Node)
+      ) {
+        setActiveDropdown("");
+        setMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
-  const handleNavigate = (path: string) => {
+  const navigateTo = (path: string) => {
+    setActiveLink(path);
     navigate(path);
-    handleclose();
+    setMenuOpen(false);
+    setActiveDropdown("");
   };
 
-  const [open, setOpen] = useState(false);
+  const toggleDropdown = (name: string) => {
+    setActiveDropdown(activeDropdown === name ? "" : name);
+  };
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(e.target as Node)
+      ) {
+        setActiveDropdown("");
+        setMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+
+    const handleScroll = () => {
+      const header = dropdownRef.current;
+      if (header) {
+        if (window.scrollY > window.innerHeight * 0.01) {
+          header.classList.add(styles.scrolled);
+        } else {
+          header.classList.remove(styles.scrolled);
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
-    <div>
-      <AppBar
-        position="absolute"
-        sx={{
-          background: "transparent",
-          boxShadow: "none",
-          padding: { lg: "10px 20px", xs: "10px 0px" },
-        }}
-      >
-        <Toolbar
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <IconButton
-            sx={{
-              display: { xs: "block", md: "none" },
-              color: "white",
-              padding: "0px",
-            }}
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Box onClick={() => handleNavigate("/")}>
-            <Typography
-              variant="h6"
-              sx={{
-                fontWeight: "bold",
-                color: "white",
-                fontFamily: "Kanit",
-                cursor: "pointer",
-              }}
-            >
-              COMPANYLOGO
-            </Typography>
-          </Box>
-          <PersonOutlineOutlinedIcon
-            sx={{
-              display: { xs: "block", md: "none" },
-              color: "white",
-              cursor: "pointer",
-              fontSize: 40,
-            }}
-            onClick={() => setOpen(true)}
-          />
-          <CustomModal open={open} handleClose={() => setOpen(false)} />
-          <Box sx={{ display: { xs: "none", md: "flex" }, gap: "20px" }}>
-            {[
-              { label: "Home", path: "/home" },
-              { label: "Destination", path: "/destination" },
-              { label: "Promotion", path: "/promotion" },
-              { label: "Community Tips", path: "/CommunityTips" },
-              { label: "Contact Us", path: "/contactUs" },
-            ].map((item) => (
-              <Button
-                key={item.path}
-                sx={{
-                  color: "white",
-                  fontWeight: isActive(item.path) ? 600 : "normal",
-                }}
-                onClick={() => handleNavigate(item.path)}
-              >
-                {item.label}
-              </Button>
-            ))}
-            <Button
-              variant="contained"
-              sx={{
-                background: "transparent",
-                color: "white",
-                textTransform: "none",
-                border: "1.5px solid white",
-                borderRadius: "35px",
-                marginLeft: "30px",
-              }}
-              onClick={() => setOpen(true)}
-            >
-              Sign Up
-            </Button>
-          </Box>
-        </Toolbar>
-      </AppBar>
+    <header className={styles.header} ref={dropdownRef}>
+      <div className={styles.container}>
+        <img src={logo} className={styles.logo} />
 
-      {mobileMenuOpen && (
-        <Box
-          sx={{
-            position: "absolute",
-            top: "75px",
-            left: 0,
-            boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
-            width: "100%",
-            background: "white",
-            zIndex: 1111111,
-            textAlign: "center",
-            padding: "20px",
-            borderRadius: "0px 0px 20px 20px",
-          }}
-        >
-          {[
-            { label: "Home", path: "/home" },
-            { label: "Destination", path: "/destination" },
-            { label: "Promotion", path: "/promotion" },
-            { label: "Community Tips", path: "/CommunityTips" },
-            { label: "Contact Us", path: "/contactUs" },
-          ].map((item) => (
-            <Button
-              key={item.path}
-              sx={{
-                color: "black",
-                display: "block",
-                width: "100%",
-                textAlign: "start",
-                fontWeight: isActive(item.path) ? 800 : "normal",
-              }}
-              onClick={() => handleNavigate(item.path)}
-            >
-              {item.label}
-            </Button>
-          ))}
-        </Box>
-      )}
-    </div>
+        <nav className={`${styles.nav} ${menuOpen ? styles.open : ""}`}>
+          <ul>
+            <li>
+              <a
+                className={`${styles.navLink} ${
+                  activeLink === "/" ? styles.active : ""
+                }`}
+                onClick={() => navigateTo("/")}
+              >
+                Home
+              </a>
+            </li>
+            <li>
+              <a
+                className={`${styles.navLink} ${
+                  activeLink === "/findTherapist" ? styles.active : ""
+                }`}
+                onClick={() => navigateTo("/findTherapist")}
+              >
+                Find a Therapist
+              </a>
+            </li>
+            <li>
+              <a
+                className={`${styles.navLink} ${
+                  activeLink === "/findCoach" ? styles.active : ""
+                }`}
+                onClick={() => navigateTo("/findCoach")}
+              >
+                Find a Coach
+              </a>
+            </li>
+
+            <li className={styles.dropdown}>
+              <span
+                style={{ display: "flex", alignItems: "center" }}
+                onClick={() => toggleDropdown("about")}
+                className={`${styles.navLink} ${
+                  activeDropdown === "about" ? styles.active : ""
+                }`}
+              >
+                <p>About</p> <FaAngleDown style={{ marginTop: "2px" }} />
+              </span>
+              <AnimatePresence>
+                {activeDropdown === "about" && (
+                  <motion.ul
+                    className={styles.dropdownMenu}
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <li>
+                      <a onClick={() => navigateTo("/joinAsATherapist")}>
+                        Join As A Therapist
+                      </a>
+                    </li>
+                    <li>
+                      <a onClick={() => navigateTo("/joinAsACoach")}>
+                        Join As A Coach
+                      </a>
+                    </li>
+                    <li>
+                      <a onClick={() => navigateTo("/ourTeam")}>
+                        Meet Our Team
+                      </a>
+                    </li>
+                    <li>
+                      <a onClick={() => navigateTo("/boardMembers")}>
+                        Board Members
+                      </a>
+                    </li>
+                    <li>
+                      <a onClick={() => navigateTo("/termsOfUse")}>
+                        Terms of Use
+                      </a>
+                    </li>
+                    <li>
+                      <a onClick={() => navigateTo("/privacyPolicy")}>
+                        Privacy Policy
+                      </a>
+                    </li>
+                  </motion.ul>
+                )}
+              </AnimatePresence>
+            </li>
+
+            <li className={styles.dropdown}>
+              <span
+                style={{ display: "flex", alignItems: "center" }}
+                onClick={() => toggleDropdown("resources")}
+                className={`${styles.navLink} ${
+                  activeDropdown === "resources" ? styles.active : ""
+                }`}
+              >
+                <p> Resources</p> <FaAngleDown style={{ marginTop: "2px" }} />
+              </span>
+              <AnimatePresence>
+                {activeDropdown === "resources" && (
+                  <motion.ul
+                    className={styles.dropdownMenu}
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <li>
+                      <a onClick={() => navigateTo("/findTherapist")}>
+                        Find a Therapist
+                      </a>
+                    </li>
+                    <li>
+                      <a onClick={() => navigateTo("/findCoach")}>
+                        Find a Coach
+                      </a>
+                    </li>
+                    <li>
+                      <a onClick={() => navigateTo("/blog")}>Blog</a>
+                    </li>
+                    <li>
+                      <a onClick={() => navigateTo("/contactUs")}>Contact Us</a>
+                    </li>
+                  </motion.ul>
+                )}
+              </AnimatePresence>
+            </li>
+
+            <li>
+              <a
+                className={`${styles.navLink} ${
+                  activeLink === "/store" ? styles.active : ""
+                }`}
+                onClick={() => navigateTo("/store")}
+              >
+                Store
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <div className={styles.donate} onClick={() => navigateTo("/donate")}>
+          <p>❤️ Donate</p>
+        </div>
+
+        <div className={styles.menuIcon} onClick={() => setMenuOpen(!menuOpen)}>
+          {menuOpen ? <FaTimes /> : <FaBars />}
+        </div>
+      </div>
+    </header>
   );
-}
+};
+
+export default Navbar;

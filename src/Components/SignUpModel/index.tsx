@@ -12,7 +12,6 @@ const FACEBOOK_CLIENT_ID = "YOUR_FACEBOOK_CLIENT_ID";
 const APPLE_CLIENT_ID = "YOUR_APPLE_CLIENT_ID";
 const REDIRECT_URI = "http://localhost:3000/home";
 
-// Redirect to Google OAuth
 const handleGoogleLogin = () => {
   const googleAuthURL =
     `https://accounts.google.com/o/oauth2/v2/auth?` +

@@ -1,0 +1,131 @@
+.wrapper {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+.lightBg {
+  background-color: #f5f5f5;
+}
+
+.inner {
+  border-radius: 24px;
+  padding: 40px;
+  background-color: #fff;
+  flex-wrap: wrap;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.imageContainer {
+  flex: 1;
+  min-width: 300px;
+  text-align: center;
+}
+
+.imageContainer img {
+  width: 100%;
+  max-width: 100%;
+  border-radius: 20px;
+  object-fit: cover;
+}
+
+.textContainer {
+  flex: 1;
+  min-width: 300px;
+  color: #7d7d7d;
+}
+
+.textContainer h2 {
+  font-family: "Derivia Regular";
+  letter-spacing: 2px;
+  font-size: 60px;
+  font-weight: normal;
+  text-align: start;
+  color: #a88757;
+  margin-bottom: 10px;
+}
+.flx {
+  display: flex;
+  gap: 40px;
+  flex-direction: row;
+  align-items: center;
+}
+.textContainer h4 {
+  font-size: 1.2rem;
+  color: #a88757;
+  margin-bottom: 20px;
+}
+h4 {
+  color: #a88757;
+}
+.textContainer p {
+  font-size: 1rem;
+  color: #7d7d7d;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+.dfff {
+  margin-top: 16px;
+}
+.dfff > p {
+  font-size: 1rem;
+  color: #131313;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+.email {
+  display: flex;
+  align-items: start;
+  gap: 12px;
+}
+.icon {
+  color: #a88757 !important ;
+  font-size: 24px;
+}
+.email > p > a {
+  text-decoration: none;
+  font-family: "Derivia Regular";
+  font-weight: bold;
+  letter-spacing: 2px;
+  cursor: pointer;
+  color: #a88757 !important ;
+}
+
+@media (max-width: 768px) {
+  .inner {
+    flex-direction: column;
+    padding: 20px;
+  }
+  .textContainer h2 {
+    text-align: center !important;
+  }
+  .imageContainer,
+  .textContainer {
+    text-align: center;
+    width: 100%;
+  }
+  .flx {
+    flex-wrap: wrap;
+  }
+  .wrapper {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 40px 20px;
+  }
+  .textContainer h2 {
+    font-family: "Derivia Regular";
+    letter-spacing: 2px;
+    font-size: 32px;
+    font-weight: normal;
+    text-align: start;
+    color: #a88757;
+    margin-bottom: 10px;
+  }
+}
+.emailLink {
+  word-break: break-word;
+  color: inherit; /* or a custom color */
+  text-decoration: underline;
+  cursor: pointer;
+  color: #a88757;
+}
