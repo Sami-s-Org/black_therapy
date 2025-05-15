@@ -41,7 +41,9 @@ const Sidebar = () => {
                     }`}
                   >
                     <span className={styles.icon}>{item.icon}</span>
-                    {isOpen && <span>{item.label}</span>}
+                    {isOpen && (
+                      <span className={styles.label}>{item.label}</span>
+                    )}
                   </li>
                 )}
               </NavLink>

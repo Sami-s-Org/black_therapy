@@ -40,7 +40,7 @@ const AdminLoginModal: React.FC<AdminLoginModalProps> = ({ onLogin }) => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        zIndex: 1000,
+        zIndex: 11111111111,
       }}
     >
       <div
@@ -49,7 +49,7 @@ const AdminLoginModal: React.FC<AdminLoginModalProps> = ({ onLogin }) => {
           padding: "2rem",
           borderRadius: "8px",
           boxShadow: "0 0 10px rgba(0,0,0,0.3)",
-          minWidth: "500px",
+          maxWidth: "500px",
         }}
       >
         <h2

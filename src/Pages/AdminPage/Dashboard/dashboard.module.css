@@ -12,3 +12,11 @@
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
+@media (min-width: 320px) and (max-width: px) {
+  .Containers {
+    flex-wrap: wrap;
+  }
+  .dashcard {
+    width: 100%;
+  }
+}

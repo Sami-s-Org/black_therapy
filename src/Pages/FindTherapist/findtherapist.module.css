@@ -131,17 +131,23 @@ strong {
   .page {
     padding: 40px 20px;
     max-width: 100%;
-    padding: 0px;
+    margin: 0px;
   }
   .card {
     width: 100%;
   }
+  .featuredTitle {
+    font-size: 32px;
+  }
 }
 @media (min-width: 481px) and (max-width: 768px) {
+  .featuredTitle {
+    font-size: 32px;
+  }
   .page {
     padding: 40px 20px;
     max-width: 100%;
-    padding: 0px;
+    margin: 0px;
   }
   .card {
     width: 50%;

@@ -87,3 +87,14 @@
   margin-bottom: 20px;
   text-align: center;
 }
+@media (min-width: 320px) and (max-width: 520px) {
+  .sidebar {
+    width: 50px;
+  }
+  .Logout {
+    font-size: 12px;
+  }
+  .label {
+    display: none !important;
+  }
+}
