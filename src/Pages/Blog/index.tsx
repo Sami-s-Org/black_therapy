@@ -5,6 +5,7 @@ import HeaderBar from '../../Components/Headbar'
 import { useNavigate } from 'react-router-dom'
 import { collection, getDocs } from 'firebase/firestore'
 import { db } from '../../Share/FireBase'
+import dummay from '../../assets/dfb58278-4ea5-44e3-bbfd-79dc456ff3b8.jpeg'
 
 interface Blog {
   id: string
@@ -112,7 +113,7 @@ const BlogPage = () => {
                 transition={{ type: 'spring', stiffness: 120 }}
               >
                 <div className={styles.imageWrapper}>
-                  <img src={blog.image} alt={blog.title} className={styles.image} />
+                  <img src={blog.image || dummay} alt={blog.title} className={styles.image} />
                 </div>
                 <div className={styles.content}>
                   <h1>{blog.title}</h1>
