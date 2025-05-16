@@ -4,7 +4,7 @@
   padding: 40px 0;
 }
 * {
-  font-family: "Mulish", sans-serif;
+  font-family: 'Mulish', sans-serif;
   padding: 0%;
   margin: 0%;
   box-sizing: border-box;
@@ -40,7 +40,7 @@
 }
 .auther {
   color: #a88757;
-  font-family: "Derivia Regular";
+  font-family: 'Derivia Regular';
   font-size: 2rem;
   font-style: italic;
   margin-top: 6px;
@@ -48,7 +48,7 @@
   color: white;
 }
 .textContainer h2 {
-  font-family: "Derivia Regular";
+  font-family: 'Derivia Regular';
   font-size: 60px;
   font-weight: normal;
   letter-spacing: 2px;
@@ -78,15 +78,19 @@
   font-size: 20px;
 }
 .list > ul > li {
-  color: white;
+  color: #131313;
 }
-h4 {
+h3 {
   color: #a88757;
+  font-family: 'Derivia Regular';
+  font-weight: 400;
+  font-size: 32px;
+  text-align: center;
 }
 .textContainer p {
   font-size: 24px;
   color: #7d7d7d;
-  font-family: "Derivia Regular";
+  font-family: 'Derivia Regular';
   line-height: 28px;
   letter-spacing: 3px;
   margin-bottom: 10px;
@@ -111,7 +115,7 @@ h4 {
 }
 .email > p > a {
   text-decoration: none;
-  font-family: "Derivia Regular";
+  font-family: 'Derivia Regular';
   font-weight: bold;
   letter-spacing: 2px;
   cursor: pointer;
@@ -130,7 +134,7 @@ h4 {
     flex-wrap: wrap;
   }
   .textContainer h2 {
-    font-family: "Derivia Regular";
+    font-family: 'Derivia Regular';
     font-size: 32px;
     font-weight: normal;
     letter-spacing: 2px;

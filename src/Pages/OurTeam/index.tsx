@@ -24,7 +24,7 @@ export default function OurTeam() {
                 </div>
                 <div className={styles.textContainer}>
                   <h2>Benjamin Calixte</h2>
-                  <h4>Founder of Therapy for Black Men</h4>
+                  <h3>Founder of Therapy for Black Men</h3>
                   <p>
                     "Our team is committed to helping improve our men's overall well-being and mental health as well as
                     preventing the suffering that occurs when wounds are unaddressed. Our boys and men deserve better."
@@ -40,7 +40,7 @@ export default function OurTeam() {
                 </div>
               </div>
               <div className={styles.dfff}>
-                <h4>Why Therapy for Black Men Matters</h4>
+                <h3>Why Therapy for Black Men Matters</h3>
                 <p>
                   My greatest joy in life was being a stay-at-home dad. That role, rooted in love and service, taught me
                   the profound importance of presence, connection, and intentional impact. It shaped my understanding of
@@ -58,7 +58,7 @@ export default function OurTeam() {
                   Black men could find the care and guidance they need to thrive. Together with my wife, Vladimire, we
                   built TherapyForBlackMen.org—a platform to educate, inspire, and empower Black men every single day.
                 </p>
-                <h4>Championing Mental Wellness for Black Men</h4>
+                <h3>Championing Mental Wellness for Black Men</h3>
                 <p>
                   As a certified professional coach and New York University-trained life and executive coach, I approach
                   health and wellness holistically. My professional journey includes 17 years in customer relations and
@@ -76,7 +76,7 @@ export default function OurTeam() {
                   culturally resonant support. By bridging the gap between need and access, we strive to ensure that
                   Black men and boys have the resources they deserve.
                 </p>
-                <h4>A Voice for Change</h4>
+                <h3>A Voice for Change</h3>
                 <p>
                   In addition to our direct services, I am deeply committed to raising awareness of the systemic issues
                   affecting Black men. From unconscious bias and inclusion to the empathy gap and societal perceptions,
@@ -87,13 +87,13 @@ export default function OurTeam() {
                   I also serve as a Couples Coach, focusing on holistic approaches to relationships and guiding
                   individuals toward deeper connections.
                 </p>
-                <h4>A Life Rooted in Love and Purpose</h4>
+                <h3>A Life Rooted in Love and Purpose</h3>
                 <p>
                   When I’m not coaching or advocating, you’ll often find me reading, writing, or coaching my children in
                   track and field. I’m proud to have been married to my incredible wife, Vladimire, for 20 years, and
                   together we’ve built a family centered on love and growth.
                 </p>
-                <h4>Why This Work Matters</h4>
+                <h3>Why This Work Matters</h3>
                 <p>
                   Our mission is simple but vital: to improve the mental health and overall well-being of Black men and
                   boys, breaking the cycles of unaddressed wounds and generational pain. We are here to say that Black
@@ -110,7 +110,7 @@ export default function OurTeam() {
                 </div>
                 <div className={styles.textContainer}>
                   <h2>Vladimire Calixte</h2>
-                  <h4>Founder of Therapy for Black Men</h4>
+                  <h3>Founder of Therapy for Black Men</h3>
                   <p>
                     "Your healing matters because healing is a destiny decision."
                     <br />
@@ -143,7 +143,7 @@ export default function OurTeam() {
                 </p>
                 <p>I’m here to tell you: you’re not meant to go on your journey alone.</p>
 
-                <h4>Why I Founded TherapyForBlackMen.org</h4>
+                <h3>Why I Founded TherapyForBlackMen.org</h3>
                 <p>
                   As a mother and wife, I witness the immeasurable power of a loving father and husband in shaping a
                   family. I see my husband, Benjamin, pouring his strength and care into our children every single day.
@@ -156,7 +156,7 @@ export default function OurTeam() {
                   the tools, support, and community needed to reclaim their strength and rewrite their narratives.
                 </p>
 
-                <h4>About Vladimire Calixte</h4>
+                <h3>About Vladimire Calixte</h3>
                 <p>
                   I am proud to bring both lived experience and professional expertise to this mission. Over the last 20
                   years, I’ve worked with individuals, couples, and families from all walks of life—including
@@ -181,7 +181,7 @@ export default function OurTeam() {
                   and mother to two incredible children who remind me every day of the importance of love and healing.
                 </p>
 
-                <h4>My Commitment to You</h4>
+                <h3>My Commitment to You</h3>
                 <p>
                   Through TherapyForBlackMen.org, my mission is clear: to ensure that no Black man has to navigate his
                   healing journey alone. Together, we can challenge the myths, break the stigmas, and embrace the
@@ -198,7 +198,7 @@ export default function OurTeam() {
                 </div>
                 <div className={styles.textContainer}>
                   <h2>Sacheen Sawney</h2>
-                  <h4>Virtual Care Executive Manager</h4>
+                  <h3>Virtual Care Executive Manager</h3>
                   <p>
                     "Healing is a collective effort. Together, we can create a world where Black men feel seen,
                     supported, and empowered to thrive."
@@ -260,7 +260,7 @@ export default function OurTeam() {
                 </div>
                 <div className={styles.textContainer}>
                   <h2>Sabrina Lamour</h2>
-                  <h4>Celebrity Photographer for Therapy for Black Men</h4>
+                  <h3>Celebrity Photographer for Therapy for Black Men</h3>
                   <p>
                     "Through the lens, I don’t just capture moments—I uncover stories, emotions, and the essence of who
                     we are." <br />

@@ -89,17 +89,19 @@ export default function FindCoach() {
             {filteredCoaches.length > 0 ? (
               filteredCoaches.map((coach, index) => (
                 <div key={index} className={styles.card}>
-                  <img src={coach.image} alt={coach.name} className={styles.avatar} />
-                  <h2>{coach.name}</h2>
-                  <p style={{ color: '#131313' }}>
-                    <strong>Specialization:</strong> {coach.specialization}
-                  </p>
-                  <p style={{ color: '#131313' }}>
-                    <strong>Location:</strong> {coach.location}
-                  </p>
-                  <p style={{ color: '#131313' }}>
-                    <strong>Price:</strong> {coach.price}
-                  </p>
+                  <div>
+                    <img src={coach.image} alt={coach.name} className={styles.avatar} />
+                    <h2 style={{ textTransform: 'capitalize' }}>{coach.name}</h2>
+                    <p style={{ color: '#131313' }}>
+                      <strong>Specialization:</strong> {coach.specialization}
+                    </p>
+                    <p style={{ color: '#131313' }}>
+                      <strong>Location:</strong> {coach.location}
+                    </p>
+                    <p style={{ color: '#131313' }}>
+                      <strong>Price:</strong> {coach.price}
+                    </p>
+                  </div>
                   <button onClick={() => handleGoProfile(coach)} className={styles.profileBtn}>
                     View Profile
                   </button>

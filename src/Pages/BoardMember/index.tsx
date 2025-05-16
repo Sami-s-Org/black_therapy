@@ -21,7 +21,7 @@ const BoardMembers = () => {
               </div>
               <div className={styles.textContainer}>
                 <h2>Georges Louis-Jeune</h2>
-                <h4>Board Member</h4>
+                <h3>Board Member</h3>
                 <p>
                   Georges Louis-Jeune is a devoted leader, compassionate advocate, and a champion of creating meaningful
                   impact for individuals and families. As the Information Systems Manager for CVS Corporation, Georges
@@ -55,7 +55,7 @@ const BoardMembers = () => {
                 or a dream—makes success possible. Yet he also recognizes the power of human connection, believing that
                 sometimes all it takes to change a life is a listening ear.
               </p>
-              <h4>Why Therapy for Black Men Matters</h4>
+              <h3>Why Therapy for Black Men Matters</h3>
               <p>
                 For Georges, Therapy for Black Men represents more than a platform—it’s a movement to dismantle
                 barriers, foster healing, and empower Black men to reclaim their mental health and well-being. He
@@ -78,7 +78,7 @@ const BoardMembers = () => {
               </div>
               <div className={styles.textContainer}>
                 <h2>Steven Pascal</h2>
-                <h4>Board Member</h4>
+                <h3>Board Member</h3>
                 <p>
                   Steven Pascal is a dedicated advocate for vulnerable populations, bringing 25 years of transformative
                   experience in human services to Therapy for Black Men. His career spans critical areas such as

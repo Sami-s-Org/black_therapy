@@ -90,17 +90,19 @@ export default function FindTherapist() {
             {filteredTherapists.length > 0 ? (
               filteredTherapists.map((therapist, index) => (
                 <div key={index} className={styles.card}>
-                  <img src={therapist.image} alt={therapist.name} className={styles.avatar} />
-                  <h2>{therapist.name}</h2>
-                  <p style={{ color: '#131313' }}>
-                    <strong>Specialization:</strong> {therapist.specialization}
-                  </p>
-                  <p style={{ color: '#131313' }}>
-                    <strong>Location:</strong> {therapist.location}
-                  </p>
-                  <p style={{ color: '#131313' }}>
-                    <strong>Price:</strong> {therapist.price}
-                  </p>
+                  <div>
+                    <img src={therapist.image} alt={therapist.name} className={styles.avatar} />
+                    <h2 style={{ textTransform: 'capitalize' }}>{therapist.name}</h2>
+                    <p style={{ color: '#131313' }}>
+                      <strong>Specialization:</strong> {therapist.specialization}
+                    </p>
+                    <p style={{ color: '#131313' }}>
+                      <strong>Location:</strong> {therapist.location}
+                    </p>
+                    <p style={{ color: '#131313' }}>
+                      <strong>Price:</strong> {therapist.price}
+                    </p>
+                  </div>
                   <button onClick={() => handleGoProfile(therapist)} className={styles.profileBtn}>
                     View Profile
                   </button>

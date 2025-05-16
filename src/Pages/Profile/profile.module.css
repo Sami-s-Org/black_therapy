@@ -1,6 +1,6 @@
 /* Global Reset */
 * {
-  font-family: "Mulish", sans-serif;
+  font-family: 'Mulish', sans-serif;
   padding: 0%;
   margin: 0%;
   box-sizing: border-box;
@@ -12,7 +12,6 @@
   justify-content: center;
   align-items: center;
   background-color: #fff;
-  min-height: 100vh;
   animation: fadeIn 0.8s ease;
   margin: 40px auto;
 }
@@ -53,13 +52,13 @@
   border: 3px solid #a88757;
 }
 strong {
-  font-family: "Derivia Regular";
+  font-family: 'Derivia Regular';
   letter-spacing: 3px;
   color: #a88757;
 }
 /* Name */
 .card h2 {
-  font-family: "Derivia Regular";
+  font-family: 'Derivia Regular';
   font-size: 30px !important;
   color: #a88757;
   letter-spacing: 3px;

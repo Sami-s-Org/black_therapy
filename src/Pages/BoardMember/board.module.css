@@ -36,7 +36,7 @@
 }
 
 .textContainer h2 {
-  font-family: "Derivia Regular";
+  font-family: 'Derivia Regular';
   letter-spacing: 2px;
   font-size: 60px;
   font-weight: normal;
@@ -50,10 +50,10 @@
   flex-direction: row;
   align-items: center;
 }
-.textContainer h4 {
-  font-size: 1.2rem;
+.textContainer h3 {
+  font-size: 32px;
   color: #a88757;
-  margin-bottom: 20px;
+  font-family: 'Derivia Regular';
 }
 h4 {
   color: #a88757;
@@ -84,7 +84,7 @@ h4 {
 }
 .email > p > a {
   text-decoration: none;
-  font-family: "Derivia Regular";
+  font-family: 'Derivia Regular';
   font-weight: bold;
   letter-spacing: 2px;
   cursor: pointer;
@@ -113,7 +113,7 @@ h4 {
     padding: 40px 20px;
   }
   .textContainer h2 {
-    font-family: "Derivia Regular";
+    font-family: 'Derivia Regular';
     letter-spacing: 2px;
     font-size: 32px;
     font-weight: normal;
