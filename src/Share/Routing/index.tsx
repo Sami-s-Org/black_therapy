@@ -1,37 +1,31 @@
-import React, { PropsWithChildren } from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useLocation,
-} from "react-router-dom";
+import React, { PropsWithChildren } from 'react'
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
 
-import Navbar from "../../Components/Navbar";
-import ContactUs from "../../Pages/Contact Us";
-import Home from "../../Pages/Home";
-import MainSlider from "../../Components/MianSlider";
-import Footer from "../../Components/Footer";
-import JoinAsACoach from "../../Pages/JoinAsACoach";
-import JoinAsATherapist from "../../Pages/JoinaAsATherapist";
-import FindCoach from "../../Pages/FindCoach";
-import BoardMembers from "../../Pages/BoardMember";
-import OurTeam from "../../Pages/OurTeam";
-import ApplyForFreeHelp from "../../Pages/ApplyFreehelp";
-import Store from "../../Pages/Store";
-import Profile from "../../Pages/Profile";
-import FindTherapist from "../../Pages/FindTherapist";
-import PrivacyPolicy from "../../Pages/Privacypolicy";
-import TermsOfUse from "../../Pages/Privacypolicy/TermUsed";
-import BlogPage from "../../Pages/Blog";
-import Donate from "../../Pages/Donate";
-import BlogDetailPage from "../../Pages/Blog/blogDetails";
-import AdminPanel from "../../Pages/AdminPage";
-import ToastNotification from "../../Components/Toast";
+import Navbar from '../../Components/Navbar'
+import ContactUs from '../../Pages/Contact Us'
+import Home from '../../Pages/Home'
+import Footer from '../../Components/Footer'
+import JoinAsACoach from '../../Pages/JoinAsACoach'
+import JoinAsATherapist from '../../Pages/JoinaAsATherapist'
+import FindCoach from '../../Pages/FindCoach'
+import BoardMembers from '../../Pages/BoardMember'
+import OurTeam from '../../Pages/OurTeam'
+import ApplyForFreeHelp from '../../Pages/ApplyFreehelp'
+import Store from '../../Pages/Store'
+import Profile from '../../Pages/Profile'
+import FindTherapist from '../../Pages/FindTherapist'
+import PrivacyPolicy from '../../Pages/Privacypolicy'
+import TermsOfUse from '../../Pages/Privacypolicy/TermUsed'
+import BlogPage from '../../Pages/Blog'
+import Donate from '../../Pages/Donate'
+import BlogDetailPage from '../../Pages/Blog/blogDetails'
+import AdminPanel from '../../Pages/AdminPage'
+import ToastNotification from '../../Components/Toast'
 
 // Layout component that checks for admin route
 const Layout: React.FC<PropsWithChildren<{}>> = ({ children }) => {
-  const location = useLocation();
-  const isAdminRoute = location.pathname.startsWith("/admin");
+  const location = useLocation()
+  const isAdminRoute = location.pathname.startsWith('/admin')
 
   return (
     <>
@@ -40,8 +34,8 @@ const Layout: React.FC<PropsWithChildren<{}>> = ({ children }) => {
       <ToastNotification />
       {!isAdminRoute && <Footer />}
     </>
-  );
-};
+  )
+}
 
 const AppRouter = () => {
   return (
@@ -68,7 +62,7 @@ const AppRouter = () => {
         </Routes>
       </Layout>
     </Router>
-  );
-};
+  )
+}
 
-export default AppRouter;
+export default AppRouter

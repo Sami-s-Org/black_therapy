@@ -1,5 +1,4 @@
-import React from "react";
-import styles from "./mianslider.module.css";
+import styles from './mianslider.module.css'
 
 const MianSlider = () => {
   return (
@@ -15,9 +14,7 @@ const MianSlider = () => {
 
       <div className={styles.content}>
         <div className={styles.textContent}>
-          <h1 className={styles.mainHeadline}>
-            Supporting Black Men to Wholeness
-          </h1>
+          <h1 className={styles.mainHeadline}>Supporting Black Men to Wholeness</h1>
           <p className={styles.subtext}>Connect with a Therapist Today</p>
           <button className={styles.ctaButton}>Get Support</button>
         </div>
@@ -25,7 +22,7 @@ const MianSlider = () => {
 
       <div className={styles.additionalMessaging}>
         <div className={styles.message}>Supporting Black Men to Wholeness</div>
-        <div style={{ textTransform: "uppercase" }} className={styles.message}>
+        <div style={{ textTransform: 'uppercase' }} className={styles.message}>
           THERAPY FOR BLACK MEN
         </div>
         <div className={styles.message}>Connect with a Therapist Today</div>
@@ -35,7 +32,7 @@ const MianSlider = () => {
         <img className={styles.logo} src="" />
       </div> */}
     </section>
-  );
-};
+  )
+}
 
-export default MianSlider;
+export default MianSlider

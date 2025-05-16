@@ -6,6 +6,8 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  margin: 0;
+  padding: 0;
 }
 
 .backgroundVideo {
@@ -16,6 +18,8 @@
   height: 100%;
   object-fit: cover;
   filter: brightness(50%);
+  margin: 0;
+  padding: 0;
 }
 
 .overlay {
@@ -24,7 +28,10 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.4); /* Optional dark overlay */
+  background: rgba(0, 0, 0, 0.4);
+  margin: 0;
+  padding: 0;
+  /* Optional dark overlay */
 }
 
 .content {
@@ -32,48 +39,79 @@
   z-index: 2;
   text-align: center;
   color: white;
+  margin: 0;
+  padding: 0;
 }
 
 .mainHeadline {
-  font-size: 40px;
+  font-size: clamp(2rem, 4vw, 3.5rem);
   font-family: "Derivia Regular";
-  letter-spacing: 2px;
+  letter-spacing: clamp(1px, 0.2vw, 2px);
   font-weight: bold;
-  margin-bottom: 1rem;
+  margin-bottom: clamp(1rem, 2vw, 1.5rem);
+  line-height: 1.2;
 }
+
 * {
   font-family: "Mulish", sans-serif;
-  padding: 0%;
-  margin: 0%;
+  padding: 0;
+  margin: 0;
   box-sizing: border-box;
 }
 
 .subtext {
-  font-size: 120px;
+  font-size: clamp(2.5rem, 8vw, 7.5rem);
   font-weight: 400;
   color: white;
   font-family: "Derivia Regular";
-  margin-bottom: 2rem;
+  margin-bottom: clamp(1.5rem, 3vw, 2rem);
+  line-height: 1.1;
 }
 
 .ctaButton {
-  width: 180px;
-  height: 55px;
-  font-size: 16px;
-  font-weight: bold;
-  background-color: #a88757;
+  background: linear-gradient(135deg, #a88757, #8c6e43);
   color: #fff;
+  padding: 0 2rem;
+  height: 55px;
+  font-weight: 600;
+  font-size: 1.125rem;
   border: none;
-  margin-bottom: 12px;
-  border-radius: 0px;
+  border-radius: 0;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(168, 135, 87, 0.25);
+  display: inline-block;
+  min-width: 220px;
+  text-align: center;
+  line-height: 55px;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.ctaButton::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.1);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+
+.ctaButton:hover::before {
+  transform: translateX(0);
 }
 
 .ctaButton:hover {
-  background-color: #1b1b1b;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  transform: scale(1.1);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(168, 135, 87, 0.4);
 }
 
 .additionalMessaging {
@@ -83,12 +121,12 @@
   transform: translateX(-50%);
   text-align: center;
   color: white;
-  font-size: 1.2rem;
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
   font-weight: 500;
 }
 
 .message {
-  margin-bottom: 10px;
+  margin-bottom: clamp(0.5rem, 1vw, 0.75rem);
 }
 
 .logoContainer {
@@ -102,18 +140,19 @@
   height: 50px;
   width: auto;
 }
+
 @media (min-width: 320px) and (max-width: 480px) {
   .mainHeadline {
-    font-size: 32px;
+    font-size: clamp(1.75rem, 5vw, 2rem);
+    letter-spacing: 1px;
   }
+
   .message {
-    font-size: 14px;
+    font-size: clamp(0.875rem, 3vw, 1rem);
   }
+
   .subtext {
-    font-size: 48px;
-    font-weight: 400;
-    color: white;
-    font-family: "Derivia Regular";
-    margin-bottom: 2rem;
+    font-size: clamp(2rem, 6vw, 3rem);
+    margin-bottom: 1.5rem;
   }
 }

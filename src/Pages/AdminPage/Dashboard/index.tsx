@@ -1,83 +1,80 @@
-import React, { useEffect, useState } from "react";
-import style from "./dashboard.module.css";
-import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
-import { db } from "../../../Share/FireBase";
+import { useEffect, useState } from 'react'
+import style from './dashboard.module.css'
+import { collection, getDocs } from 'firebase/firestore'
+import { db } from '../../../Share/FireBase'
 
 interface Appointment {
-  id: string;
-  userName: string;
-  userEmail: string;
-  userPhone: string;
-  userLocation: string;
-  coachName?: string;
-  coachSpecialization?: string;
-  therapistName?: string;
-  therapistSpecialization?: string;
-  appointmentDate: string;
-  appointmentTime: string;
-  status: string;
-  therapistId: string;
+  id: string
+  userName: string
+  userEmail: string
+  userPhone: string
+  userLocation: string
+  coachName?: string
+  coachSpecialization?: string
+  therapistName?: string
+  therapistSpecialization?: string
+  appointmentDate: string
+  appointmentTime: string
+  status: string
+  therapistId: string
 }
 
 interface Therapist {
-  id: string;
-  name: string;
-  specialization: string;
-  location: string;
-  bio: string;
-  imageUrl: string;
+  id: string
+  name: string
+  specialization: string
+  location: string
+  bio: string
+  imageUrl: string
 }
 
 interface Coach {
-  id: string;
-  name: string;
-  specialization: string;
-  location: string;
-  bio: string;
-  imageUrl: string;
+  id: string
+  name: string
+  specialization: string
+  location: string
+  bio: string
+  imageUrl: string
 }
 export default function AdminDashboard() {
-  const [appointments, setAppointments] = useState<Appointment[]>([]);
-  const [therapists, setTherapists] = useState<Therapist[]>([]);
-  const [coaches, setCoaches] = useState<Coach[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [isloading, setisLoading] = useState(false);
+  const [appointments, setAppointments] = useState<Appointment[]>([])
+  const [therapists, setTherapists] = useState<Therapist[]>([])
+  const [coaches, setCoaches] = useState<Coach[]>([])
+  const [_loading, setLoading] = useState(true)
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const appointmentSnapshot = await getDocs(
-          collection(db, "appointments")
-        );
+        const appointmentSnapshot = await getDocs(collection(db, 'appointments'))
         const appointmentData = appointmentSnapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
-        })) as Appointment[];
+        })) as Appointment[]
 
-        const therapistSnapshot = await getDocs(collection(db, "therapists"));
+        const therapistSnapshot = await getDocs(collection(db, 'therapists'))
         const therapistData = therapistSnapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
-        })) as Therapist[];
+        })) as Therapist[]
 
-        const coachSnapshot = await getDocs(collection(db, "coaches"));
+        const coachSnapshot = await getDocs(collection(db, 'coaches'))
         const coachData = coachSnapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
-        })) as Coach[];
+        })) as Coach[]
 
-        setAppointments(appointmentData);
-        setTherapists(therapistData);
-        setCoaches(coachData);
+        setAppointments(appointmentData)
+        setTherapists(therapistData)
+        setCoaches(coachData)
       } catch (error) {
-        console.error("Error fetching data: ", error);
+        console.error('Error fetching data: ', error)
       } finally {
-        setLoading(false);
+        setLoading(false)
       }
-    };
+    }
 
-    fetchData();
-  }, []);
+    fetchData()
+  }, [])
 
   return (
     <div>
@@ -101,5 +98,5 @@ export default function AdminDashboard() {
         </div>
       </div>
     </div>
-  );
+  )
 }

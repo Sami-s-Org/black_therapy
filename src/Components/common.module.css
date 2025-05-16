@@ -10,10 +10,12 @@
   font-family: "Derivia Regular";
   transition: background-color 0.3s ease, color 0.3s ease;
 }
+
 .scrolled {
   background: linear-gradient(160deg, #606060, #1c1c1c, #000000);
   color: #ffcc00 !important;
 }
+
 @font-face {
   font-family: "Derivia Regular";
   font-style: normal;
@@ -21,6 +23,7 @@
   src: local("Derivia Regular"),
     url("../assets/Derivia-Regular.otf") format("woff");
 }
+
 .container {
   display: flex;
   justify-content: space-between;
@@ -64,13 +67,16 @@
   cursor: pointer;
   font-family: "Derivia Regular";
 }
+
 .dropdown span:hover {
   color: #a88757;
 }
+
 .dropdown span > p {
   font-family: "Derivia Regular";
   letter-spacing: 2px;
 }
+
 .dropdown span {
   display: flex;
   align-items: baseline;
@@ -80,12 +86,14 @@
   color: white;
   font-weight: 500;
 }
+
 * {
   padding: 0%;
   font-family: "Mulish", sans-serif;
   margin: 0%;
   box-sizing: border-box;
 }
+
 .dropdownMenu {
   position: absolute;
   top: 2.8rem;
@@ -103,9 +111,11 @@
   letter-spacing: 2px;
   z-index: 100;
 }
+
 .column {
   width: calc(25% - 30px);
 }
+
 .navLink.active {
   position: relative;
 }
@@ -123,29 +133,35 @@
 
 /* For dropdown parent items */
 .dropdown > .navLink.active::after {
-  bottom: 0px; /* Adjust based on your design */
+  bottom: 0px;
+  /* Adjust based on your design */
 }
+
 .dropdownMenu li {
   padding: 10px 20px;
   width: 100%;
 }
+
 .dropdownMenu li a {
   color: #131313 !important;
   cursor: pointer;
-  font-size: 16px;
+  font-size: var(--font-size-base);
   font-weight: 400;
   letter-spacing: 2px;
   transition: 0.2s;
   font-family: "Derivia Regular";
 }
+
 .dropdownMenu li:hover {
   background-color: #a88757 !important;
   color: #fff !important;
 }
+
 .dropdownMenu li:hover a {
   background-color: #a88757 !important;
   color: #fff !important;
 }
+
 .donate {
   background: #a88757;
   letter-spacing: 2px;
@@ -158,6 +174,7 @@
   justify-content: center;
   align-items: center;
 }
+
 .donate > p {
   font-family: "Derivia Regular";
   font-size: 16px;
@@ -177,27 +194,31 @@
   cursor: pointer;
   color: white;
 }
+
 @media screen and (max-width: 510px) {
   .column {
     width: 100%;
     text-align: center;
   }
+
   .column h2 {
     margin-bottom: 1rem;
     font-family: "Derivia Regular";
-    font-size: 2rem;
     text-align: center !important;
     margin-bottom: 16px;
     color: white;
   }
+
   .w50 {
     width: 100%;
   }
 }
+
 @media screen and (max-width: 960px) {
   .w50 {
     width: 100% !important;
   }
+
   .nav {
     position: absolute;
     top: 100%;
@@ -210,33 +231,41 @@
     padding: 1.5rem 2rem;
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.08);
   }
+
   .footerTop {
     padding: 20px;
   }
+
   .donate {
     display: none;
   }
+
   .Newsletter {
     text-align: center;
   }
+
   .Get {
-    font-size: 32px;
     text-align: center;
   }
+
   .nav ul li a {
     color: #131313 !important;
   }
+
   .dropdown span {
     color: #131313 !important;
   }
+
   .nav.open {
     display: flex;
   }
+
   .container {
     gap: 0px;
     padding: 1.5rem;
     justify-content: space-between;
   }
+
   .nav ul {
     flex-direction: column;
     gap: 1.2rem;
@@ -246,6 +275,7 @@
     display: block;
   }
 }
+
 .footer {
   background: #a88757;
   color: #eee;
@@ -263,12 +293,13 @@
 .column h2 {
   margin-bottom: 1rem;
   font-family: "Derivia Regular";
-  font-size: 30px;
+  font-size: var(--font-size-xl);
   font-weight: 400;
   text-align: start;
   margin-bottom: 16px;
   color: white;
 }
+
 .logofooter {
   height: 100px;
   width: 100px;
@@ -283,14 +314,14 @@
   margin-bottom: 0.6rem;
 }
 
-.column ul li a {
+.column ul li {
   color: #ccc;
   text-decoration: none;
-  font-size: 0.95rem;
+  font-size: var(--font-size-sm);
   cursor: pointer;
 }
 
-.column ul li a:hover {
+.column ul li:hover {
   color: #f0c040;
 }
 
@@ -306,6 +337,7 @@
   color: #fff;
   font-size: 1.4rem;
 }
+
 .FooterDescripation {
   font-size: 16px;
 }
@@ -317,12 +349,14 @@
   color: #fff;
   padding: 20px;
 }
+
 * {
   font-family: "Mulish", sans-serif;
   padding: 0%;
   margin: 0%;
   box-sizing: border-box;
 }
+
 .Newsletter {
   font-family: "Mulish", sans-serif;
   line-height: 18.2px;
@@ -331,23 +365,27 @@
   color: white;
   letter-spacing: 4px;
 }
+
 .Get {
   font-family: "Derivia Regular";
   line-height: 60px;
-  font-size: 60px;
+  font-size: var(--font-size-4xl);
   margin-top: 12px;
   font-weight: 400;
   color: white;
 }
+
 .flxx {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
 }
+
 .w50 {
   width: calc(50% - 30px);
 }
+
 .Subscribe {
   background-color: #131313;
   color: white;
@@ -358,10 +396,12 @@
   font-weight: 400;
   border: #131313;
 }
+
 .footerInput {
   height: 60px;
   border-radius: 0%;
 }
+
 .ContactBg {
   background-color: black;
   display: flex;
@@ -371,6 +411,7 @@
   gap: 24px;
   padding: 40px;
 }
+
 .Celebratetext {
   font-family: "Derivia Regular";
   line-height: 60px;
@@ -379,6 +420,7 @@
   font-weight: 400;
   color: white;
 }
+
 .ContactBtn {
   background-color: #a88757;
   color: white;

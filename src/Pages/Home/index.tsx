@@ -1,134 +1,262 @@
-import { Box, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import styles from "./home.module.css";
-import MianSlider from "../../Components/MianSlider";
-import { Link, useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
-import HomeSlider from "../../Components/HomeSilder";
-import Testimonials from "../../Components/Testimonial";
-import AuthModal from "../../Components/ModelAuth";
-import bgImage from "../../assets/wmremove-transformed.jpeg";
-import Reverence from "../../assets/wmremove-transformed111.jpeg";
-import Apply from "../../assets/DeWatermark.ai_1745345508366.png";
-import Support from "../../assets/757b6fea-2487-4fd0-9a62-a4baec514e7b.jpeg";
-import Therapist from "../../assets/dfb58278-4ea5-44e3-bbfd-79dc456ff3b8.jpeg";
+import { useEffect, useState } from 'react'
+import styles from './home.module.css'
+import MianSlider from '../../Components/MianSlider'
+import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
+import HomeSlider from '../../Components/HomeSilder'
+import Testimonials from '../../Components/Testimonial'
+import AuthModal from '../../Components/ModelAuth'
+import Reverence from '../../assets/wmremove-transformed111.jpeg'
+import Support from '../../assets/757b6fea-2487-4fd0-9a62-a4baec514e7b.jpeg'
+import Therapist from '../../assets/dfb58278-4ea5-44e3-bbfd-79dc456ff3b8.jpeg'
 
-const boxVariants = {
-  hidden: { opacity: 0, scale: 0.8, y: 30 },
-  visible: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.6 } },
-};
+// Standardized animation variants
+const standardTransition = {
+  duration: 0.6,
+  ease: [0.16, 1, 0.3, 1], // matches CSS cubic-bezier
+}
+
+const fadeInVariant = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: standardTransition,
+  },
+}
+
+const fadeUpVariant = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: standardTransition,
+  },
+}
+
+const staggerContainerVariant = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      ...standardTransition,
+      staggerChildren: 0.1,
+      delayChildren: 0.1,
+    },
+  },
+}
+
+const staggerItemVariant = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: standardTransition,
+  },
+}
+
+const cardVariant = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      ...standardTransition,
+      delay: i * 0.1,
+    },
+  }),
+}
+
+// Service cards data
 const cards = [
   {
-    title: "Find a Therapist",
-    desc: "Use our directory to find the right therapist or coach for your needs.",
+    title: 'Find a Therapist',
+    desc: 'Use our directory to find the right therapist or coach for your needs.',
     image:
-      "https://media.istockphoto.com/id/1329038035/photo/psychological-counselling-black-male-patient-with-depression-having-session-with.jpg?s=612x612&w=0&k=20&c=3JNZsAhwNlEuDmxSaUZL_8cK26PECyob5Fv-ZKtBo98=",
-    button: "Find Now",
+      'https://media.istockphoto.com/id/1329038035/photo/psychological-counselling-black-male-patient-with-depression-having-session-with.jpg?s=612x612&w=0&k=20&c=3JNZsAhwNlEuDmxSaUZL_8cK26PECyob5Fv-ZKtBo98=',
+    button: 'Find Now',
   },
   {
-    title: "Free Help",
-    desc: "Apply for sponsored therapy sessions, thanks to our donors.",
+    title: 'Free Help',
+    desc: 'Apply for sponsored therapy sessions, thanks to our donors.',
     image:
-      "https://bostonglobe-prod.cdn.arcpublishing.com/resizer/v2/DQTVFL3D7ZCSDEE2HNGOOY7T3I.jpg?auth=492ba5b949629887ff5935861ac3dc3d0de35d3d33a0396c462dc7c051e4b983&width=1440",
-    button: "Apply",
+      'https://bostonglobe-prod.cdn.arcpublishing.com/resizer/v2/DQTVFL3D7ZCSDEE2HNGOOY7T3I.jpg?auth=492ba5b949629887ff5935861ac3dc3d0de35d3d33a0396c462dc7c051e4b983&width=1440',
+    button: 'Apply',
   },
   {
-    title: "Join as a Therapist",
-    desc: "Grow your online presence by joining our directory.",
+    title: 'Join as a Therapist',
+    desc: 'Grow your online presence by joining our directory.',
     image: Therapist,
-    button: "Join Us",
+    button: 'Join Us',
   },
   {
-    title: "Support Us",
-    desc: "Help Black men & boys access therapy by donating.",
+    title: 'Support Us',
+    desc: 'Help Black men & boys access therapy by donating.',
     image: Support,
-
-    button: "Donate",
+    button: 'Donate',
   },
-];
+]
+
+// Support options data
+const supportOptions = [
+  { title: 'Individual Therapy', link: '/specialties/individual-therapy', desc: 'Personalized one-on-one care.' },
+  {
+    title: 'Couples Therapy',
+    link: '/specialties/couples-therapy',
+    desc: 'Strengthen your bond through guided sessions.',
+  },
+  {
+    title: 'Family Therapy',
+    link: '/specialties/family-therapy',
+    desc: 'Foster healthier communication and dynamics.',
+  },
+  { title: 'Child & Adolescent Support', link: '/specialties/child-adolescent', desc: 'Specialized care for youth.' },
+  { title: 'Group Therapy', link: '/specialties/group-therapy', desc: 'Heal together through shared experiences.' },
+  {
+    title: 'Faith-Based Therapy',
+    link: '/specialties/faith-based',
+    desc: 'Spiritually centered support for those seeking a faith-driven approach.',
+  },
+  {
+    title: 'Trauma-Informed Therapy',
+    link: '/specialties/trauma-informed',
+    desc: 'Compassionate, trauma-sensitive care.',
+  },
+  { title: 'Coaching', link: '/coaches', desc: 'Guidance toward personal growth and success.' },
+]
+
+// Values data
+const values = [
+  ['Healing', 'Starts with Support'],
+  ['Growth', 'Guided by Experts'],
+  ['Strength', 'In Vulnerability'],
+  ['Community', "You're Not Alone"],
+]
 
 export default function Home() {
-  const navigate = useNavigate();
-  const [showModal, setShowModal] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showModal, setShowModal] = useState(false)
+
   useEffect(() => {
-    window.scrollTo(0, 0);
-  });
+    window.scrollTo(0, 0)
+  }, [])
+
   return (
     <>
       {showModal && <AuthModal closeModal={() => setShowModal(false)} />}
 
-      <MianSlider />
+      {/* Main Slider/Banner */}
+      <section className={styles.mainSlider}>
+        <MianSlider />
+      </section>
+
+      {/* Hero Section */}
       <section className={styles.heroContainer}>
         <div className={styles.banner2}>
           <div className={styles.overlay}>
-            <div className={styles.quote}>
-              “We see you. We hear you. We’re here for you.”
-            </div>
-            <p className={styles.overlayText}>
-              "Even in brokenness, light reaches us. Healing is not far—it lives
-              within the reach of grace."
-            </p>
+            <motion.div variants={fadeUpVariant} initial="hidden" animate="visible" transition={{ duration: 0.8 }}>
+              <div className={styles.quote}>"We see you. We hear you. We're here for you."</div>
+              <p className={styles.overlayText}>
+                "Even in brokenness, light reaches us. Healing is not far—it lives within the reach of grace."
+              </p>
+            </motion.div>
 
             <div className={styles.buttons}>
-              <button onClick={() => setIsModalOpen(true)}>
+              <motion.button
+                onClick={() => setShowModal(true)}
+                className={styles.primaryButton}
+                variants={fadeUpVariant}
+                initial="hidden"
+                animate="visible"
+                transition={{ delay: 0.3 }}
+                whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
+              >
                 Find a Therapist
-              </button>
-              <button onClick={() => setIsModalOpen(true)}>Find a Coach</button>
+              </motion.button>
+              <motion.button
+                onClick={() => setShowModal(true)}
+                className={styles.primaryButton}
+                variants={fadeUpVariant}
+                initial="hidden"
+                animate="visible"
+                transition={{ delay: 0.4 }}
+                whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
+              >
+                Find a Coach
+              </motion.button>
             </div>
           </div>
         </div>
       </section>
-      <div style={{ backgroundColor: "#f5f5f5" }}>
+
+      {/* Values Section */}
+      <section className={styles.valuesSection} style={{ backgroundColor: '#f8f7f5' }}>
+        <div className={styles.sectionShape}></div>
         <div className={styles.wrapper}>
-          <div className={styles.container333}>
-            {["Healing", "Growth", "Strength", "Community"].map(
-              (title, index) => (
-                <motion.div
-                  key={title}
-                  className={styles.box}
-                  variants={boxVariants}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, amount: 0.3 }}
-                  whileHover={{ scale: 1.05, rotate: 1 }}
-                >
-                  <h2 className={styles.big}>{title}</h2>
-                  <p className={styles.small}>
-                    {
-                      [
-                        "Starts with Support",
-                        "Guided by Experts",
-                        "In Vulnerability",
-                        "You're Not Alone",
-                      ][index]
-                    }
-                  </p>
-                </motion.div>
-              )
-            )}
+          <motion.div
+            variants={fadeUpVariant}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-100px' }}
+          >
+            <h2 className={styles.sectionHeading}>Our Values</h2>
+            <div className={styles.decorativeLine}></div>
+          </motion.div>
+
+          <div className={styles.valueContainer}>
+            {values.map(([title, desc], index) => (
+              <motion.div
+                key={title}
+                className={styles.valueBox}
+                custom={index}
+                variants={cardVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: '-100px' }}
+                whileHover={{
+                  scale: 1.05,
+                  y: -5,
+                  transition: { duration: 0.2 },
+                }}
+              >
+                <h2 className={styles.valueTitle}>{title}</h2>
+                <p className={styles.valueDesc}>{desc}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
-      </div>
-      <div className={styles.fff}>
-        <div className={styles.section}>
-          <div className={styles.containercardd}>
+        <div className={styles.sectionShape}></div>
+      </section>
+
+      {/* Service Cards Section */}
+      <section className={styles.cardsSection}>
+        <div className={styles.sectionShape}></div>
+        <div className={styles.wrapper}>
+          <motion.div
+            variants={fadeUpVariant}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-100px' }}
+          >
+            <h2 className={styles.sectionHeading}>Our Services</h2>
+            <div className={styles.decorativeLine}></div>
+          </motion.div>
+
+          <div className={styles.cardGrid}>
             {cards.map((card, idx) => (
               <motion.div
                 key={idx}
                 className={styles.card}
-                whileHover={{ scale: 1.05 }}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                custom={idx}
+                variants={cardVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: '-100px' }}
+                whileHover={{
+                  scale: 1.03,
+                  transition: { duration: 0.2 },
+                }}
               >
-                <img
-                  src={card.image}
-                  alt={card.title}
-                  className={styles.imageff}
-                />
-                <div className={styles.textContent}>
+                <img src={card.image} alt={card.title} className={styles.cardImage} />
+                <div className={styles.cardContent}>
                   <h3>{card.title}</h3>
                   <p>{card.desc}</p>
                   <button>{card.button}</button>
@@ -137,182 +265,269 @@ export default function Home() {
             ))}
           </div>
         </div>
-      </div>
-      <div className={styles.ffffqq}>
-        <div className={styles.wrapper}>
-          <div className={styles.quoteSection}>
-            <p className={styles.quote}>
-              We see you. We hear you. We’re here for you.
-            </p>
-          </div>
+        <div className={styles.sectionShape}></div>
+      </section>
 
-          <div className={styles.banner}>
-            <img
-              src={bgImage}
-              alt="African American man feeling the light"
-              className={styles.image}
-            />
-            <div className={styles.overlay}>
-              <p className={styles.brokenness}>
-                Even in brokenness, light reaches us. Healing is not far—it
-                lives within the reach of grace.
-              </p>
-            </div>
-          </div>
-
-          <div className={styles.buttonGroup}>
-            <button onClick={() => setIsModalOpen(true)} className={styles.btn}>
-              Find a Therapist
-            </button>
-            <button
-              onClick={() => setIsModalOpen(true)}
-              className={styles.btnOutline}
+      {/* Quote Banner Section */}
+      <section className={styles.quoteBannerSection}>
+        <div className={styles.quoteBanner}>
+          <div className={styles.quoteBannerOverlay}>
+            <motion.p
+              className={styles.quoteBannerText}
+              variants={fadeInVariant}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-100px' }}
             >
-              Find a Coach
-            </button>
-          </div>
-        </div>
-      </div>
+              Even in brokenness, light reaches us. Healing is not far—it lives within the reach of grace.
+            </motion.p>
 
-      <div>
-        <div className={styles.safeSpaceSection}>
-          <div className={styles.container}>
-            <div className={styles.imageWrapper}>
-              <img
-                src={Reverence}
-                alt="Reverence and Surrender"
-                className={styles.image}
-              />
-              <div className={styles.overlayQuote}>
-                <em>
-                  "Here, you are not just heard—you are held. You are not just
-                  seen—you are known."
-                </em>
-              </div>
-            </div>
-            <div className={styles.textWrapper}>
-              <h2>A Safe Space, Always</h2>
-              <p>
-                At Therapy for Black Men, we are more than a platform—we are a
-                sanctuary for your voice and your healing. Here, you will find a
-                judgment-free zone where you can lay down your burdens and speak
-                your heart without fear.
-              </p>
-              <p>
-                We are built on the principles of compassion, empathy, honor,
-                and respect, ensuring that every interaction uplifts and
-                empowers you. Your experiences, your pain, your triumphs—they
-                all matter deeply to us.
-              </p>{" "}
-              <button
-                style={{ marginTop: "24px", width: "180px" }}
-                className={styles.btn}
+            <div className={styles.bannerButtonGroup}>
+              <motion.button
+                onClick={() => setShowModal(true)}
+                className={styles.bannerPrimaryButton}
+                variants={fadeUpVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: '-100px' }}
+                transition={{ delay: 0.2 }}
+                whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
               >
-                Conatct Us
-              </button>
+                Find a Therapist
+              </motion.button>
+              <motion.button
+                onClick={() => setShowModal(true)}
+                className={styles.bannerSecondaryButton}
+                variants={fadeUpVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: '-100px' }}
+                transition={{ delay: 0.3 }}
+                whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
+              >
+                Find a Coach
+              </motion.button>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div className={styles.supportSection}>
-        <div className={styles.containermmm}>
-          <h2 className={styles.headingsss}>Support Options</h2>
-          <p className={styles.subheading}>
-            Are you seeking support for yourself or a loved one?
-          </p>
-          <h3 className={styles.title}>
-            Find the Right Support for You or a Loved One
-          </h3>
+      {/* Safe Space Section */}
+      <section className={styles.safeSpaceSection}>
+        <div className={styles.sectionShape}></div>
+        <div className={styles.safeSpaceContent}>
+          <motion.div
+            className={styles.imageWrapper}
+            variants={fadeUpVariant}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-100px' }}
+          >
+            <img src={Reverence} alt="Reverence and Surrender" className={styles.safeSpaceImage} />
+            <div className={styles.overlayQuote}>
+              <em>"Here, you are not just heard—you are held. You are not just seen—you are known."</em>
+            </div>
+          </motion.div>
+
+          <motion.div
+            className={styles.textWrapper}
+            variants={staggerContainerVariant}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-100px' }}
+          >
+            <motion.h2 variants={staggerItemVariant}>A Safe Space, Always</motion.h2>
+            <motion.p variants={staggerItemVariant}>
+              At Therapy for Black Men, we are more than a platform—we are a sanctuary for your voice and your healing.
+              Here, you will find a judgment-free zone where you can lay down your burdens and speak your heart without
+              fear.
+            </motion.p>
+            <motion.p variants={staggerItemVariant}>
+              We are built on the principles of compassion, empathy, honor, and respect, ensuring that every interaction
+              uplifts and empowers you. Your experiences, your pain, your triumphs—they all matter deeply to us.
+            </motion.p>
+            <motion.button
+              variants={staggerItemVariant}
+              className={styles.primaryButton}
+              whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
+            >
+              Contact Us
+            </motion.button>
+          </motion.div>
+        </div>
+        <div className={styles.sectionShape}></div>
+      </section>
+
+      {/* Support Options Section */}
+      <section className={styles.supportSection}>
+        <div className={styles.sectionShape}></div>
+        <div className={styles.supportContainer}>
+          <motion.div
+            variants={fadeUpVariant}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-100px' }}
+          >
+            <h2 className={styles.sectionHeading}>Support Options</h2>
+            <div className={styles.decorativeLine}></div>
+            <motion.p
+              className={styles.sectionSubheading}
+              variants={fadeInVariant}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-100px' }}
+            >
+              Are you seeking support for yourself or a loved one?
+            </motion.p>
+          </motion.div>
 
           <ul className={styles.supportList}>
-            <li>
-              <Link to="/specialties/individual-therapy">
-                Individual Therapy:
-              </Link>{" "}
-              Personalized one-on-one care.
-            </li>
-            <li>
-              <Link to="/specialties/couples-therapy">Couples Therapy:</Link>{" "}
-              Strengthen your bond through guided sessions.
-            </li>
-            <li>
-              <Link to="/specialties/family-therapy">Family Therapy:</Link>{" "}
-              Foster healthier communication and dynamics.
-            </li>
-            <li>
-              <Link to="/specialties/child-adolescent">
-                Child & Adolescent Support:
-              </Link>{" "}
-              Specialized care for youth.
-            </li>
-            <li>
-              <Link to="/specialties/group-therapy">Group Therapy:</Link> Heal
-              together through shared experiences.
-            </li>
-            <li>
-              <Link to="/specialties/faith-based">Faith-Based Therapy:</Link>{" "}
-              Spiritually centered support for those seeking a faith-driven
-              approach.
-            </li>
-            <li>
-              <Link to="/specialties/trauma-informed">
-                Trauma-Informed Therapy:
-              </Link>{" "}
-              Compassionate, trauma-sensitive care.
-            </li>
-            <li>
-              <Link to="/coaches">Coaching:</Link> Guidance toward personal
-              growth and success.
-            </li>
+            {supportOptions.map((item, index) => (
+              <motion.li
+                key={index}
+                custom={index}
+                variants={cardVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: '-100px' }}
+                whileHover={{ x: 5, transition: { duration: 0.2 } }}
+              >
+                <Link to={item.link}>{item.title}</Link>
+                {item.desc}
+              </motion.li>
+            ))}
           </ul>
 
-          <p className={styles.closing}>
-            Taking the first step toward healing can feel daunting, but you’re
-            not alone. Let us walk with you.
-          </p>
+          <motion.p
+            className={styles.closing}
+            variants={fadeInVariant}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ delay: 0.3 }}
+          >
+            Taking the first step toward healing can feel daunting, but you're not alone. Let us walk with you.
+          </motion.p>
 
-          <button className={styles.ctaButton}>
-            Take the first step toward wholeness today.
-          </button>
-        </div>
-      </div>
-      <div style={{ backgroundColor: "#f3f3f3" }}>
-        <div className={styles.wrapper}>
-          <p className={styles.headingsss}>Featured Therapists</p>
-          <HomeSlider />{" "}
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "centerss",
-            }}
+          <motion.button
+            className={styles.ctaButton}
+            variants={fadeUpVariant}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ delay: 0.4 }}
+            whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
           >
-            <button
-              onClick={() => setIsModalOpen(true)}
-              className={styles.Findbtn}
+            Take the first step toward wholeness today
+          </motion.button>
+        </div>
+        <div className={styles.sectionShape}></div>
+      </section>
+
+      {/* Featured Therapists Section */}
+      <section className={styles.featuredSection}>
+        <div className={styles.sectionShape}></div>
+        <div className={styles.wrapper}>
+          <motion.div
+            variants={fadeUpVariant}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-100px' }}
+          >
+            <h2 className={styles.sectionHeading}>Featured Therapists</h2>
+            <div className={styles.decorativeLine}></div>
+          </motion.div>
+
+          <motion.div
+            variants={fadeInVariant}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ delay: 0.2 }}
+          >
+            <HomeSlider />
+          </motion.div>
+
+          <motion.div
+            style={{ display: 'flex', justifyContent: 'center', marginTop: '2.5rem' }}
+            variants={fadeUpVariant}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ delay: 0.3 }}
+          >
+            <motion.button
+              onClick={() => setShowModal(true)}
+              className={styles.ctaButton}
+              whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
             >
-              Find A Therapists
-            </button>
-          </div>
+              Find A Therapist
+            </motion.button>
+          </motion.div>
         </div>
-      </div>
-      <div style={{ backgroundColor: "#f3f3f3" }}>
+        <div className={styles.sectionShape}></div>
+      </section>
+
+      {/* Featured Coaches Section */}
+      <section className={styles.featuredSection}>
+        <div className={styles.sectionShape}></div>
         <div className={styles.wrapper}>
-          <p className={styles.headingsss}>Featured Coaches</p>
-          <HomeSlider />
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "centerss",
-            }}
+          <motion.div
+            variants={fadeUpVariant}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-100px' }}
           >
-            <button className={styles.Findbtn}>Find A Coach</button>
-          </div>
+            <h2 className={styles.sectionHeading}>Featured Coaches</h2>
+            <div className={styles.decorativeLine}></div>
+          </motion.div>
+
+          <motion.div
+            variants={fadeInVariant}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ delay: 0.2 }}
+          >
+            <HomeSlider />
+          </motion.div>
+
+          <motion.div
+            style={{ display: 'flex', justifyContent: 'center', marginTop: '2.5rem' }}
+            variants={fadeUpVariant}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ delay: 0.3 }}
+          >
+            <motion.button
+              onClick={() => setShowModal(true)}
+              className={styles.ctaButton}
+              whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
+            >
+              Find A Coach
+            </motion.button>
+          </motion.div>
         </div>
-      </div>
-      <Testimonials />
+        <div className={styles.sectionShape}></div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className={styles.testimonialsSection}>
+        <div className={styles.sectionShape}></div>
+        <div className={styles.wrapper}>
+          <motion.div
+            variants={fadeInVariant}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ delay: 0.2 }}
+          >
+            <Testimonials />
+          </motion.div>
+        </div>
+        <div className={styles.sectionShape}></div>
+      </section>
     </>
-  );
+  )
 }

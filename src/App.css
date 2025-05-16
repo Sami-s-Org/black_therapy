@@ -12,9 +12,11 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
+
 * {
   font-family: "Poppins", sans-serif;
 }
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -34,7 +36,51 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+
+/* Base Styles */
+:root {
+  --primary-color: #a88757;
+  --primary-dark: #8c6e43;
+  --primary-light: #dbc8a9;
+  --text-dark: #131313;
+  --text-light: #7d7d7d;
+  --background-light: #f8f7f5;
+  --background-white: #ffffff;
+  --box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  --transition-standard: all 0.3s ease;
+  --spacing-sm: 1rem;
+  --spacing-md: 2rem;
+  --spacing-lg: 4rem;
+  --border-radius: 0;
+  --container-width: 1280px;
+  --font-heading: "Derivia Regular", serif;
+  --font-body: "Mulish", sans-serif;
+  --section-spacing: 0;
+  --accent-gradient: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+
+  /* Animation standardization */
+  --anim-duration-fast: 0.4s;
+  --anim-duration-normal: 0.6s;
+  --anim-duration-slow: 0.8s;
+  --anim-easing: cubic-bezier(0.16, 1, 0.3, 1);
+  --anim-delay-increment: 0.05s;
+
+  /* Typography Base */
+  --font-size-xs: clamp(0.75rem, 1vw, 0.875rem);
+  --font-size-sm: clamp(0.875rem, 1.2vw, 1rem);
+  --font-size-base: clamp(1rem, 1.5vw, 1.125rem);
+  --font-size-lg: clamp(1.125rem, 2vw, 1.25rem);
+  --font-size-xl: clamp(1.25rem, 2.5vw, 1.5rem);
+  --font-size-2xl: clamp(1.5rem, 3vw, 2rem);
+  --font-size-3xl: clamp(2rem, 4vw, 2.5rem);
+  --font-size-4xl: clamp(2.5rem, 5vw, 3.75rem);
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
 }

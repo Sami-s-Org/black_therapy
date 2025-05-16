@@ -1,36 +1,30 @@
-import React, { useEffect, useState } from "react";
-import {
-  Routes,
-  Route,
-  useNavigate,
-  useLocation,
-  Navigate,
-} from "react-router-dom";
-import Sidebar from "../../Components/sidebar";
+import { useEffect, useState } from 'react'
+import { Routes, Route, useNavigate, Navigate } from 'react-router-dom'
+import Sidebar from '../../Components/sidebar'
 
-import AdminDashboard from "./Dashboard";
-import Adminbloges from "./Adminblog";
-import AdminCoaches from "./AdminCoaches";
-import AdminTherapists from "./Admintherapist";
-import AdminAppoinments from "./AdminAppoints";
-import AdminLoginModal from "../../Components/AdminLogin";
+import AdminDashboard from './Dashboard'
+import Adminbloges from './Adminblog'
+import AdminCoaches from './AdminCoaches'
+import AdminTherapists from './Admintherapist'
+import AdminAppoinments from './AdminAppoints'
+import AdminLoginModal from '../../Components/AdminLogin'
 
 export default function AdminPanel() {
-  const [showLogin, setShowLogin] = useState(false);
-  const navigate = useNavigate();
+  const [showLogin, setShowLogin] = useState(false)
+  const navigate = useNavigate()
 
   useEffect(() => {
-    const isAdmin = localStorage.getItem("isAdmin") === "true";
+    const isAdmin = localStorage.getItem('isAdmin') === 'true'
 
     if (!isAdmin) {
-      setShowLogin(true);
+      setShowLogin(true)
     }
-  }, []);
+  }, [])
 
   const handleLoginSuccess = () => {
-    setShowLogin(false);
-    navigate("/admin/dashboard");
-  };
+    setShowLogin(false)
+    navigate('/admin/dashboard')
+  }
 
   return (
     <div>
@@ -38,13 +32,13 @@ export default function AdminPanel() {
       {!showLogin && (
         <div
           style={{
-            display: "flex",
-            width: "100%",
-            height: "100vh",
-            background: "#f5f5f5",
-            padding: "20px",
-            boxSizing: "border-box",
-            gap: "20px",
+            display: 'flex',
+            width: '100%',
+            height: '100vh',
+            background: '#f5f5f5',
+            padding: '20px',
+            boxSizing: 'border-box',
+            gap: '20px',
           }}
         >
           <Sidebar />
@@ -93,19 +87,19 @@ export default function AdminPanel() {
         </div>
       )}
     </div>
-  );
+  )
 }
 
 interface Props {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
 const ProtectedRoute: React.FC<Props> = ({ children }) => {
-  const isAdmin = localStorage.getItem("isAdmin") === "true";
+  const isAdmin = localStorage.getItem('isAdmin') === 'true'
 
   if (!isAdmin) {
-    return <Navigate to="/admin" replace />;
+    return <Navigate to="/admin" replace />
   }
 
-  return <>{children}</>;
-};
+  return <>{children}</>
+}

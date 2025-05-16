@@ -1,73 +1,64 @@
-import React, { useEffect, useState } from "react";
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "../../../Share/FireBase";
-import styles from "../admin.module.css";
+import { useEffect, useState } from 'react'
+import { collection, getDocs } from 'firebase/firestore'
+import { db } from '../../../Share/FireBase'
+import styles from '../admin.module.css'
 
 interface Appointment {
-  id: string;
-  userName: string;
-  userEmail: string;
-  userPhone: string;
-  userLocation: string;
-  coachName?: string;
-  coachSpecialization?: string;
-  therapistName?: string;
-  therapistSpecialization?: string;
-  appointmentDate: string;
-  appointmentTime: string;
-  therapistId: string;
+  id: string
+  userName: string
+  userEmail: string
+  userPhone: string
+  userLocation: string
+  coachName?: string
+  coachSpecialization?: string
+  therapistName?: string
+  therapistSpecialization?: string
+  appointmentDate: string
+  appointmentTime: string
+  therapistId: string
 }
 
 export default function AdminAppointments() {
-  const [appointments, setAppointments] = useState<Appointment[]>([]);
-  const [filteredAppointments, setFilteredAppointments] = useState<
-    Appointment[]
-  >([]);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
+  const [appointments, setAppointments] = useState<Appointment[]>([])
+  const [filteredAppointments, setFilteredAppointments] = useState<Appointment[]>([])
+  const [searchTerm, setSearchTerm] = useState('')
+  const [currentPage, setCurrentPage] = useState(1)
+  const itemsPerPage = 5
 
   useEffect(() => {
     const fetchAppointments = async () => {
       try {
-        const snapshot = await getDocs(collection(db, "appointments"));
+        const snapshot = await getDocs(collection(db, 'appointments'))
         const data = snapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
-        })) as Appointment[];
-        setAppointments(data);
-        setFilteredAppointments(data);
+        })) as Appointment[]
+        setAppointments(data)
+        setFilteredAppointments(data)
       } catch (error) {
-        console.error("Error fetching appointments:", error);
+        console.error('Error fetching appointments:', error)
       }
-    };
+    }
 
-    fetchAppointments();
-  }, []);
+    fetchAppointments()
+  }, [])
 
   useEffect(() => {
-    const lowerTerm = searchTerm.toLowerCase();
+    const lowerTerm = searchTerm.toLowerCase()
     const filtered = appointments.filter((a) =>
-      [
-        a.userName,
-        a.userEmail,
-        a.userPhone,
-        a.userLocation,
-        a.coachName,
-        a.therapistName,
-      ]
+      [a.userName, a.userEmail, a.userPhone, a.userLocation, a.coachName, a.therapistName]
         .filter(Boolean)
         .some((field) => field!.toLowerCase().includes(lowerTerm))
-    );
-    setFilteredAppointments(filtered);
-    setCurrentPage(1);
-  }, [searchTerm, appointments]);
+    )
+    setFilteredAppointments(filtered)
+    setCurrentPage(1)
+  }, [searchTerm, appointments])
 
-  const indexOfLast = currentPage * itemsPerPage;
-  const indexOfFirst = indexOfLast - itemsPerPage;
-  const currentItems = filteredAppointments.slice(indexOfFirst, indexOfLast);
+  const indexOfLast = currentPage * itemsPerPage
+  const indexOfFirst = indexOfLast - itemsPerPage
+  const currentItems = filteredAppointments.slice(indexOfFirst, indexOfLast)
 
-  const totalPages = Math.ceil(filteredAppointments.length / itemsPerPage);
+  const totalPages = Math.ceil(filteredAppointments.length / itemsPerPage)
 
   return (
     <div className={styles.w100}>
@@ -80,10 +71,10 @@ export default function AdminAppointments() {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             style={{
-              padding: "8px",
-              width: "300px",
-              borderRadius: "8px",
-              border: "1px solid #ccc",
+              padding: '8px',
+              width: '300px',
+              borderRadius: '8px',
+              border: '1px solid #ccc',
             }}
           />
         </div>
@@ -112,13 +103,8 @@ export default function AdminAppointments() {
                     <td>{appointment.userEmail}</td>
                     <td>{appointment.userPhone}</td>
                     <td>{appointment.userLocation}</td>
-                    <td>
-                      {appointment.coachName || appointment.therapistName}
-                    </td>
-                    <td>
-                      {appointment.coachSpecialization ||
-                        appointment.therapistSpecialization}
-                    </td>
+                    <td>{appointment.coachName || appointment.therapistName}</td>
+                    <td>{appointment.coachSpecialization || appointment.therapistSpecialization}</td>
                     <td>{appointment.appointmentDate}</td>
                     <td>{appointment.appointmentTime}</td>
                   </tr>
@@ -139,9 +125,7 @@ export default function AdminAppointments() {
               </span>
               <button
                 className={styles.PaginationBtn}
-                onClick={() =>
-                  setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-                }
+                onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
                 disabled={currentPage === totalPages}
               >
                 Next ➡
@@ -151,5 +135,5 @@ export default function AdminAppointments() {
         )}
       </div>
     </div>
-  );
+  )
 }

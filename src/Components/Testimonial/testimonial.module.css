@@ -1,8 +1,24 @@
+/* Import typography system from home page */
+:root {
+  --font-size-xs: clamp(0.75rem, 1vw, 0.875rem);
+  --font-size-sm: clamp(0.875rem, 1.2vw, 1rem);
+  --font-size-base: clamp(1rem, 1.5vw, 1.125rem);
+  --font-size-lg: clamp(1.125rem, 2vw, 1.25rem);
+  --font-size-xl: clamp(1.25rem, 2.5vw, 1.5rem);
+  --font-size-2xl: clamp(1.5rem, 3vw, 2rem);
+  --font-size-3xl: clamp(2rem, 4vw, 2.5rem);
+  --font-size-4xl: clamp(2.5rem, 5vw, 3.75rem);
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+}
+
 @keyframes fadeSlideUp {
   0% {
     transform: translateY(50px);
     opacity: 0;
   }
+
   100% {
     transform: translateY(0);
     opacity: 1;
@@ -10,27 +26,52 @@
 }
 
 .testimonialSection {
-  /* background: linear-gradient(to bottom, #000000, #1c1c1c); */
-  background-color: #fff;
-  padding: 40px 0px;
-  color: #f3f4f6;
+  background-color: #fcfbf9;
+  padding: 0;
+  color: #131313;
   text-align: center;
-  animation: fadeSlideUp 1s ease forwards;
+  position: relative;
+  overflow: hidden;
+}
+
+.testimonialSection::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at top right, rgba(168, 135, 87, 0.08), transparent 60%);
+  pointer-events: none;
 }
 
 .container {
   max-width: 1280px;
   margin: 0 auto;
+  padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 5vw, 2.5rem);
+  position: relative;
 }
 
 .heading {
   font-family: "Derivia Regular";
-  font-size: 60px;
+  font-size: var(--font-size-4xl);
   color: #a88757;
-  margin-bottom: 2rem;
+  margin-bottom: clamp(2.5rem, 6vw, 4rem);
   font-weight: 400;
-  letter-spacing: 1px;
-  text-transform: uppercase;
+  letter-spacing: clamp(0.5px, 0.15vw, 1px);
+  position: relative;
+  display: inline-block;
+}
+
+.heading::after {
+  content: '';
+  position: absolute;
+  bottom: -0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(to right, #a88757, #8c6e43);
 }
 
 .carousel {
@@ -38,129 +79,218 @@
   flex-wrap: nowrap;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  gap: 2rem;
-  padding-bottom: 2rem;
+  gap: clamp(2rem, 5vw, 3rem);
+  padding: clamp(1rem, 3vw, 2rem);
+  margin: -1rem;
+  scroll-padding: 1rem;
 }
+
 .carousel::-webkit-scrollbar {
-  display: none;
+  height: 8px;
+  background: #f0f0f0;
+  border-radius: 4px;
 }
+
+.carousel::-webkit-scrollbar-thumb {
+  background: #a88757;
+  border-radius: 4px;
+}
+
 .card {
-  flex: 0 0 100%;
-  max-width: 600px;
-  margin: 0 auto;
-  background: #f5f5f5;
-  padding: 2rem;
-  border-radius: 0px;
-  box-shadow: 0 10px 25px rgba(255, 255, 255, 0.05);
+  flex: 0 0 min(100%, 500px);
+  margin: 1rem;
+  background: #ffffff;
+  padding: clamp(2rem, 5vw, 3rem);
+  border-radius: 2px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
   scroll-snap-align: center;
-  backdrop-filter: blur(10px);
-  transition: transform 0.4s ease;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid rgba(168, 135, 87, 0.1);
 }
 
 .card:hover {
-  transform: scale(1.02);
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
 }
 
 .quoteIcon {
-  font-size: 2rem;
+  font-size: clamp(2rem, 5vw, 2.5rem);
   color: #a88757;
-  margin-bottom: 1rem;
+  margin-bottom: clamp(1rem, 3vw, 1.5rem);
+  opacity: 0.8;
 }
 
 .quote {
-  font-size: 1.2rem;
+  font-size: var(--font-size-xl);
   font-style: italic;
   color: #131313;
-  margin-bottom: 1.5rem;
+  margin-bottom: clamp(1.5rem, 4vw, 2rem);
+  line-height: var(--line-height-relaxed);
+  position: relative;
 }
 
 .author {
-  font-size: 0.95rem;
+  font-size: var(--font-size-base);
   font-family: "Derivia Regular";
   color: #a88757;
+  line-height: var(--line-height-normal);
+  letter-spacing: 0.5px;
 }
 
 .messageBox {
-  padding: 40px 0px 0px 0px;
+  position: relative;
+  background: #ffffff;
+  padding: clamp(4rem, 8vw, 6rem) clamp(1.5rem, 5vw, 2.5rem);
+  margin-top: clamp(4rem, 8vw, 6rem);
   animation: fadeSlideUp 1.5s ease forwards;
+  position: relative;
+}
+
+.messageBox::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(168, 135, 87, 0.2), transparent);
+}
+
+.messageBox::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at bottom left, rgba(168, 135, 87, 0.05), transparent 60%);
+  pointer-events: none;
+  z-index: 0;
 }
 
 .supportTitle {
-  font-size: 60px;
-  margin-bottom: 1.5rem;
+  font-size: var(--font-size-3xl);
+  margin-bottom: clamp(1.5rem, 4vw, 2rem);
   font-weight: 400;
   color: #a88757;
   font-family: "Derivia Regular";
+  line-height: var(--line-height-tight);
+  position: relative;
+  z-index: 1;
 }
 
 .supportText {
-  font-size: 1rem;
-  color: #131313 !important;
-  line-height: 1.8;
-  margin: 0.5rem 0;
-  padding: 0 1rem;
+  font-size: var(--font-size-lg);
+  color: #131313;
+  line-height: var(--line-height-relaxed);
+  margin: clamp(1rem, 3vw, 1.5rem) auto;
+  max-width: min(90%, 800px);
+  position: relative;
+  z-index: 1;
 }
 
 .contact {
-  margin: 2rem 0;
+  margin: clamp(2.5rem, 6vw, 4rem) 0;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  font-size: 1.1rem;
+  gap: clamp(1rem, 2vw, 1.5rem);
+  font-size: var(--font-size-lg);
+  position: relative;
+  z-index: 1;
 }
 
 .contact a {
   color: #131313;
   font-weight: 600;
   text-decoration: none;
-  letter-spacing: 4px;
-  transition: color 0.3s ease;
+  letter-spacing: clamp(1px, 0.2vw, 2px);
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 2px;
+}
+
+.contact a:hover {
+  color: #a88757;
+  transform: translateY(-2px);
+  background: rgba(168, 135, 87, 0.05);
 }
 
 .cta {
-  font-size: 1.3rem;
+  font-size: var(--font-size-xl);
   font-weight: 600;
-  color: #131313;
-  margin-top: 2rem;
-  background: linear-gradient(to right, #a88757, #a88757);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: pulse 2s infinite ease-in-out;
+  margin-top: clamp(2.5rem, 6vw, 4rem);
+  color: #a88757;
+  line-height: var(--line-height-tight);
+  letter-spacing: 0.5px;
+  position: relative;
+  z-index: 1;
 }
 
-@keyframes pulse {
-  0%,
-  100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.03);
-  }
+.cta span {
+  background: linear-gradient(135deg, #a88757, #8c6e43);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+  display: inline-block;
+  margin-left: 0.5rem;
+  transition: transform 0.3s ease;
 }
+
+.cta:hover span {
+  transform: translateX(5px);
+}
+
 @media (max-width: 768px) {
+  .container {
+    padding: clamp(2rem, 4vw, 3rem) clamp(1rem, 3vw, 1.5rem);
+  }
+
   .heading {
-    font-size: 32px;
-  }
-  .testimonialSection {
-    padding: 40px 20px !important;
-  }
-  .messageBox {
-    padding: 40px 20px 0 20px;
-    animation: fadeSlideUp 1.5s ease forwards;
-  }
-}
-@media (min-width: 768px) {
-  .carousel {
-    flex-wrap: nowrap;
+    font-size: var(--font-size-3xl);
+    margin-bottom: clamp(2rem, 5vw, 3rem);
   }
 
   .card {
-    flex: 0 0 45%;
+    flex: 0 0 100%;
+    margin: 0.5rem;
+  }
+
+  .quote {
+    font-size: var(--font-size-lg);
+  }
+
+  .messageBox {
+    margin-top: clamp(3rem, 6vw, 4rem);
+    padding: clamp(3rem, 6vw, 4rem) clamp(1rem, 3vw, 1.5rem);
+  }
+
+  .supportText {
+    font-size: var(--font-size-base);
+  }
+
+  .contact {
+    font-size: var(--font-size-base);
+    margin: clamp(2rem, 4vw, 3rem) 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .carousel {
+    flex-wrap: nowrap;
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+  }
+
+  .card {
+    flex: 0 0 calc(50% - 2rem);
   }
 
   .contact {
     flex-direction: row;
     justify-content: center;
-    gap: 2rem;
+    gap: clamp(2rem, 5vw, 3rem);
   }
 }

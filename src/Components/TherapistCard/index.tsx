@@ -31,3 +31,5 @@
 // };
 
 // export default TherapistCard;
+
+export {}

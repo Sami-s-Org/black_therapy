@@ -1,9 +1,8 @@
 // src/Components/Headbar/index.tsx
-import React from "react";
-import style from "./headbar.module.css";
+import style from './headbar.module.css'
 
 interface HeaderBarProps {
-  heading: string;
+  heading: string
 }
 
 export default function HeaderBar({ heading }: HeaderBarProps) {
@@ -19,5 +18,5 @@ export default function HeaderBar({ heading }: HeaderBarProps) {
         <p className={style.Heading}>{heading}</p>
       </div>
     </div>
-  );
+  )
 }

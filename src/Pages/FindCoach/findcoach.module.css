@@ -94,9 +94,11 @@
   font-size: 18px;
   margin-bottom: 0.4rem;
 }
+
 strong {
   color: #a88757;
 }
+
 .avatar {
   width: 140px;
   height: 140px;
@@ -128,31 +130,38 @@ strong {
     font-family: "Derivia Regular";
     margin-bottom: 1rem;
   }
+
   .page {
     padding: 40px 20px;
     max-width: 100%;
     margin: 0% !important;
   }
+
   .card {
     width: 100%;
   }
+
   .featuredTitle {
     font-size: 32px;
   }
 }
+
 @media (min-width: 481px) and (max-width: 768px) {
   .page {
     padding: 40px 20px;
     max-width: 100%;
     margin: 0% !important;
   }
+
   .featuredTitle {
     font-size: 32px;
   }
+
   .card {
     width: 50%;
   }
 }
+
 .searchContainer {
   display: flex;
   justify-content: end;
