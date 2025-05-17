@@ -1,6 +1,5 @@
 import React, { PropsWithChildren } from 'react'
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
-
 import Navbar from '../../Components/Navbar'
 import ContactUs from '../../Pages/Contact Us'
 import Home from '../../Pages/Home'
@@ -22,8 +21,6 @@ import BlogDetailPage from '../../Pages/Blog/blogDetails'
 import AdminPanel from '../../Pages/AdminPage'
 import ToastNotification from '../../Components/Toast'
 import ChatBot from '../../Components/Chatbot'
-
-// Layout component that checks for admin route
 const Layout: React.FC<PropsWithChildren<{}>> = ({ children }) => {
   const location = useLocation()
   const isAdminRoute = location.pathname.startsWith('/admin')
@@ -33,6 +30,7 @@ const Layout: React.FC<PropsWithChildren<{}>> = ({ children }) => {
       {!isAdminRoute && <Navbar />}
       {children}
       <ToastNotification />
+      {!isAdminRoute && <ChatBot />}
       {!isAdminRoute && <Footer />}
     </>
   )
@@ -60,7 +58,6 @@ const AppRouter = () => {
           <Route path="/blogDetails" element={<BlogDetailPage />} />
           <Route path="/admin/*" element={<AdminPanel />} />
           <Route path="/findTherapist" element={<FindTherapist />} />
-          <ChatBot />
         </Routes>
       </Layout>
     </Router>
