@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import styles from './contactus.module.css'
 import HeaderBar from '../../Components/Headbar'
 import { motion } from 'framer-motion'
+import ChatBot from '../../Components/Chatbot'
 
 export default function ContactUs() {
   useEffect(() => {

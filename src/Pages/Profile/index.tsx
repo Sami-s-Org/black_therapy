@@ -109,8 +109,8 @@ export default function Profile() {
         'T1eJoCXb1R1bXkDjC' // ✅ Your EmailJS public key
       )
       .then((response) => {
-        console.log('Professional email sent:', response.text)
-        notifySuccess('Professional email sent')
+        console.log(' Email Sucessfully sent:', response.text)
+        notifySuccess('Email Sucessfully sent')
       })
       .catch((error) => {
         console.error('Error sending professional email:', error)
@@ -120,7 +120,7 @@ export default function Profile() {
         if (error?.status) {
           console.error('EmailJS status code:', error.status)
         }
-        notifyError(`Error sending professional email: ${error.text || error.message}`)
+        notifyError(`Error sending  email: ${error.text || error.message}`)
       })
   }
 

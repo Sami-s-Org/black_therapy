@@ -21,6 +21,7 @@ import Donate from '../../Pages/Donate'
 import BlogDetailPage from '../../Pages/Blog/blogDetails'
 import AdminPanel from '../../Pages/AdminPage'
 import ToastNotification from '../../Components/Toast'
+import ChatBot from '../../Components/Chatbot'
 
 // Layout component that checks for admin route
 const Layout: React.FC<PropsWithChildren<{}>> = ({ children }) => {
@@ -59,6 +60,7 @@ const AppRouter = () => {
           <Route path="/blogDetails" element={<BlogDetailPage />} />
           <Route path="/admin/*" element={<AdminPanel />} />
           <Route path="/findTherapist" element={<FindTherapist />} />
+          <ChatBot />
         </Routes>
       </Layout>
     </Router>

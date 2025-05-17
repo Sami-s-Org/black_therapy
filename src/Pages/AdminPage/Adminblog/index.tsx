@@ -225,8 +225,16 @@ export default function Adminbloges() {
                 <td>{Array.isArray(blog.tags) ? blog.tags.join(', ') : ''}</td>
                 <td>{blog.image && <img src={blog.image} alt="blog" width="80" />}</td>
                 <td>
-                  <FaEdit onClick={() => handleEdit(blog)} style={{ cursor: 'pointer', marginRight: '10px' }} />
-                  <FaTrash onClick={() => handleDelete(blog.id)} style={{ cursor: 'pointer', color: 'red' }} />
+                  <FaEdit
+                    size={16}
+                    onClick={() => handleEdit(blog)}
+                    style={{ cursor: 'pointer', marginRight: '10px' }}
+                  />
+                  <FaTrash
+                    size={16}
+                    onClick={() => handleDelete(blog.id)}
+                    style={{ cursor: 'pointer', color: 'red' }}
+                  />
                 </td>
               </tr>
             ))}
