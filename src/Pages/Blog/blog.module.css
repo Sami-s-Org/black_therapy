@@ -190,7 +190,13 @@
   height: 200px;
   border-radius: 8px 8px 0 0;
 }
-
+.clamptext {
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Number of lines to show */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .meta {
   font-size: 0.9rem;
   color: #7d7d7d;

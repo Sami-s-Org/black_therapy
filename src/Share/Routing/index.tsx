@@ -14,13 +14,15 @@ import Store from '../../Pages/Store'
 import Profile from '../../Pages/Profile'
 import FindTherapist from '../../Pages/FindTherapist'
 import PrivacyPolicy from '../../Pages/Privacypolicy'
-import TermsOfUse from '../../Pages/Privacypolicy/TermUsed'
+import TermsOfUse from '../../Pages/TermUsed'
 import BlogPage from '../../Pages/Blog'
 import Donate from '../../Pages/Donate'
 import BlogDetailPage from '../../Pages/Blog/blogDetails'
 import AdminPanel from '../../Pages/AdminPage'
 import ToastNotification from '../../Components/Toast'
 import ChatBot from '../../Components/Chatbot'
+import AppointmentList from '../../Pages/Appointmentslist'
+import Chatpage from '../../Pages/Chatpage'
 const Layout: React.FC<PropsWithChildren<{}>> = ({ children }) => {
   const location = useLocation()
   const isAdminRoute = location.pathname.startsWith('/admin')
@@ -58,6 +60,8 @@ const AppRouter = () => {
           <Route path="/blogDetails" element={<BlogDetailPage />} />
           <Route path="/admin/*" element={<AdminPanel />} />
           <Route path="/findTherapist" element={<FindTherapist />} />
+          <Route path="/appointmentlist" element={<AppointmentList />} />
+          <Route path="/chat" element={<Chatpage />} />
         </Routes>
       </Layout>
     </Router>

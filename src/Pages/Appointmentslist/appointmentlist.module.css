@@ -1,8 +1,7 @@
 .container {
-  padding: 20px;
   max-width: 1280px;
-  margin: 70px auto;
-  background-color: #f5f5f5;
+  margin: 0px auto;
+  padding: 40px 20px;
 }
 
 .w100 {
@@ -319,4 +318,8 @@ select {
   font-size: 18px;
   background-color: #a88757;
   border: 2px solid #a88757;
+}
+.searchInput {
+  width: 300px;
+  margin-bottom: 24px;
 }

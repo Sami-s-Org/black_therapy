@@ -45,7 +45,7 @@
 
 .mainHeadline {
   font-size: var(--font-size-3xl);
-  font-family: "Derivia Regular";
+  font-family: 'Derivia Regular';
   letter-spacing: clamp(1px, 0.2vw, 2px);
   font-weight: bold;
   margin-bottom: clamp(1rem, 2vw, 1.5rem);
@@ -54,7 +54,7 @@
 }
 
 * {
-  font-family: "Mulish", sans-serif;
+  font-family: 'Mulish', sans-serif;
   padding: 0;
   margin: 0;
   box-sizing: border-box;
@@ -64,7 +64,7 @@
   font-size: var(--font-size-5xl);
   font-weight: 400;
   color: white;
-  font-family: "Derivia Regular";
+  font-family: 'Derivia Regular';
   margin-bottom: clamp(1.5rem, 3vw, 2rem);
   line-height: 1.1;
   color: var(--primary-color);
@@ -88,6 +88,7 @@
   text-align: center;
   line-height: 55px;
   position: relative;
+  color: #fff;
   overflow: hidden;
   z-index: 1;
   will-change: transform;

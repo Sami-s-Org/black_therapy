@@ -1,27 +1,35 @@
 import React, { useState } from 'react'
 import { notifyError } from '../Toast'
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 
+// Props to notify parent when login is successful
 interface AdminLoginModalProps {
   onLogin: () => void
 }
 
 const AdminLoginModal: React.FC<AdminLoginModalProps> = ({ onLogin }) => {
-  const [username, setUsername] = useState('')
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
 
-  const handleLogin = () => {
-    const adminCredentials = {
-      username: 'admin',
-      password: '123456',
-    }
+  const handleLogin = async () => {
+    const auth = getAuth()
 
-    if (username === adminCredentials.username && password === adminCredentials.password) {
-      localStorage.setItem('isAdmin', 'true')
-      onLogin()
-    } else {
-      notifyError('Invalid username or password')
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password)
+      const user = userCredential.user
+
+      // ✅ Check if logged-in user is admin (by email)
+      if (user.uid === 'n3EWjofKtTVyLubZEZheQeX3bsH2') {
+        localStorage.setItem('isAdmin', 'true')
+        onLogin()
+      } else {
+        notifyError('You are not authorized as admin')
+      }
+    } catch (error) {
+      console.error(error)
+      notifyError('Invalid email or password')
     }
   }
 
@@ -60,22 +68,22 @@ const AdminLoginModal: React.FC<AdminLoginModalProps> = ({ onLogin }) => {
         >
           Admin Login
         </h2>
+
         <input
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          type="email"
+          placeholder="Admin Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           style={{
             width: '100%',
             marginBottom: '12px',
             borderRadius: '4px',
+            padding: '10px',
+            fontSize: '16px',
           }}
         />
-        <div
-          style={{
-            position: 'relative',
-          }}
-        >
+
+        <div style={{ position: 'relative' }}>
           <input
             type={showPassword ? 'text' : 'password'}
             placeholder="Password"
@@ -85,7 +93,9 @@ const AdminLoginModal: React.FC<AdminLoginModalProps> = ({ onLogin }) => {
               width: '100%',
               marginBottom: '12px',
               borderRadius: '4px',
-              paddingRight: '30px',
+              paddingRight: '35px',
+              padding: '10px',
+              fontSize: '16px',
             }}
           />
           <div
@@ -95,23 +105,26 @@ const AdminLoginModal: React.FC<AdminLoginModalProps> = ({ onLogin }) => {
               top: '50%',
               transform: 'translateY(-50%)',
               cursor: 'pointer',
+              fontSize: '18px',
             }}
             onClick={() => setShowPassword(!showPassword)}
           >
             {showPassword ? <FaEyeSlash /> : <FaEye />}
           </div>
         </div>
+
         <button
           onClick={handleLogin}
           style={{
             width: '100%',
-            height: '55px',
+            height: '50px',
             fontSize: '18px',
             cursor: 'pointer',
-            marginTop: '32px',
+            marginTop: '20px',
             color: 'white',
             backgroundColor: '#a88757',
-            border: '2px solid #a88757',
+            border: 'none',
+            borderRadius: '4px',
           }}
         >
           Login

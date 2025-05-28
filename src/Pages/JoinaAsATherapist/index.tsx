@@ -6,9 +6,13 @@ import { collection, addDoc, Timestamp } from 'firebase/firestore'
 import { getFirestore } from 'firebase/firestore'
 import { HiOutlineUpload } from 'react-icons/hi'
 import { notifyError, notifySuccess } from '../../Components/Toast'
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
 
 export default function JoinAsATherapist() {
   const storage = getStorage()
+  const db = getFirestore()
+  const auth = getAuth()
+
   const [imageFileName, setImageFileName] = useState<string | null>(null)
   const [imageUploading, setImageUploading] = useState(false)
   const [modalOpen, setModalOpen] = useState(false)
@@ -23,6 +27,7 @@ export default function JoinAsATherapist() {
     bio: '',
     email: '',
     phone: '',
+    password: '',
   })
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -50,9 +55,7 @@ export default function JoinAsATherapist() {
 
       uploadTask.on(
         'state_changed',
-        () => {
-          setImageUploading(true)
-        },
+        () => setImageUploading(true),
         () => {
           notifyError('Image upload error')
           setImageUploading(false)
@@ -70,14 +73,31 @@ export default function JoinAsATherapist() {
   const handleSave = async () => {
     setLoading(true)
     try {
-      await addDoc(collection(getFirestore(), 'therapists'), {
+      // ✅ Create Auth User
+      const userCredential = await createUserWithEmailAndPassword(auth, therapistData.email, therapistData.password)
+      const userId = userCredential.user.uid
+
+      // ✅ Add Therapist to Firestore
+      await addDoc(collection(db, 'therapists'), {
         ...therapistData,
-        imageUrl: previewImage,
+        userId,
+        imageUrl: previewImage || '',
         createdAt: Timestamp.now(),
         accepted: false,
       })
+
+      // ✅ Add Auth Data to 'users' collection
+      await addDoc(collection(db, 'users'), {
+        uid: userId,
+        email: therapistData.email,
+        role: 'therapist',
+        createdAt: Timestamp.now(),
+      })
+
       notifySuccess('Therapist application submitted successfully!')
       setModalOpen(false)
+
+      // ✅ Reset form
       setTherapistData({
         name: '',
         specialization: '',
@@ -86,11 +106,13 @@ export default function JoinAsATherapist() {
         bio: '',
         email: '',
         phone: '',
+        password: '',
       })
       setPreviewImage(null)
       setImageFileName(null)
-    } catch (error) {
-      notifyError('Error saving therapist data')
+    } catch (error: any) {
+      console.error(error)
+      notifyError(error.message || 'Error saving therapist data')
     } finally {
       setLoading(false)
     }
@@ -158,7 +180,7 @@ export default function JoinAsATherapist() {
 
         <div className={styles.joinButtonWrapper}>
           <button className={styles.joinButton} onClick={() => setModalOpen(true)}>
-            Join Our Network
+            Join Us Today
           </button>
         </div>
       </div>
@@ -166,15 +188,18 @@ export default function JoinAsATherapist() {
       {modalOpen && (
         <div className={styles.modalBackdrop}>
           <div className={styles.modal}>
-            <h2
-              style={{
-                marginBottom: '16px',
-                fontWeight: '400',
-                fontSize: '32px',
-              }}
-            >
-              Join As A Therapist
-            </h2>
+            <h2 className={styles.modalTitle}>Join As A Therapist</h2>
+            <div className={styles.Flxx}>
+              <div className={styles.w100}>
+                <input
+                  name="name"
+                  placeholder="Full Name"
+                  value={therapistData.name}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+            </div>
 
             <div className={styles.Flxx}>
               <div className={styles.w50}>
@@ -185,14 +210,15 @@ export default function JoinAsATherapist() {
                   required
                 >
                   <option value="">Select Specialization</option>
-                  <option value="Therapists">Therapists</option>
+                  <option value="Therapist">Therapist</option>
                 </select>
               </div>
               <div className={styles.w50}>
                 <input
-                  name="name"
-                  placeholder="Full Name"
-                  value={therapistData.name}
+                  name="password"
+                  type="password"
+                  placeholder="Password"
+                  value={therapistData.password}
                   onChange={handleInputChange}
                   required
                 />
@@ -264,7 +290,7 @@ export default function JoinAsATherapist() {
 
             <textarea
               name="bio"
-              placeholder="Professional Bio (Your approach, experience, etc."
+              placeholder="Professional Bio (Your approach, experience, etc.)"
               value={therapistData.bio}
               onChange={handleBioChange}
               required

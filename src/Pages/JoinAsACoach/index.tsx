@@ -23,6 +23,7 @@ export default function JoinAsACoach() {
     bio: '',
     email: '',
     phone: '',
+    password: '',
   })
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -70,11 +71,23 @@ export default function JoinAsACoach() {
   const handleSave = async () => {
     setLoading(true)
     try {
-      await addDoc(collection(getFirestore(), 'coaches'), {
+      const db = getFirestore()
+
+      // Save to coaches collection
+      await addDoc(collection(db, 'coaches'), {
         ...coachData,
         imageUrl: previewImage,
         createdAt: Timestamp.now(),
       })
+
+      // Save to users collection
+      await addDoc(collection(db, 'users'), {
+        email: coachData.email,
+        phone: coachData.phone,
+        role: 'coach',
+        createdAt: Timestamp.now(),
+      })
+
       notifySuccess('Coach added successfully!')
       setModalOpen(false)
     } catch (error) {
@@ -175,7 +188,9 @@ export default function JoinAsACoach() {
             >
               Join As A Coach
             </h2>
-
+            <div className={styles.w100}>
+              <input name="name" placeholder="Full Name" value={coachData.name} onChange={handleInputChange} />
+            </div>
             <div className={styles.Flxx}>
               <div className={styles.w50}>
                 <select name="specialization" value={coachData.specialization} onChange={handleInputChange} required>
@@ -184,7 +199,14 @@ export default function JoinAsACoach() {
                 </select>
               </div>
               <div className={styles.w50}>
-                <input name="name" placeholder="Full Name" value={coachData.name} onChange={handleInputChange} />
+                <input
+                  name="password"
+                  type="password"
+                  placeholder="Password"
+                  value={coachData.password}
+                  onChange={handleInputChange}
+                  required
+                />{' '}
               </div>
             </div>
 

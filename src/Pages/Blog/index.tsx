@@ -117,9 +117,9 @@ const BlogPage = () => {
                 </div>
                 <div className={styles.content}>
                   <h1>{blog.title}</h1>
-                  <p>{blog.excerpt}</p>
+                  <p className={styles.clamptext}>{blog.excerpt}</p>
                   <div className={styles.meta}>
-                    <span>{blog.date}</span> • <span>{blog.readTime}</span>
+                    <span>{blog.date}</span>
                   </div>
                   <div className={styles.tags}>
                     {blog.tags.map((tag, idx) => (
