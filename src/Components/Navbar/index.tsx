@@ -421,7 +421,6 @@ const Navbar: FC = () => {
                   transition={{ duration: 0.3 }}
                 >
                   <p className={styles.userInfo}>{user.email}</p>
-                  <p className={styles.userInfo}>{user.role}</p>
                   <div className={styles.menuSection}>
                     <Link to="/appointmentlist" className={styles.userDropdownItem}>
                       Appointments
