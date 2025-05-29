@@ -45,13 +45,10 @@ const Navbar: FC = () => {
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (firebaseUser) => {
-      console.log('firebaseUser', firebaseUser)
       if (firebaseUser) {
         const userDoc = await getDoc(doc(db, 'users', firebaseUser.uid))
-        console.log('userDoc', userDoc)
         if (userDoc.exists()) {
           const userData = userDoc.data() as User
-          console.log('userData', userData)
           setUser({
             uid: firebaseUser.uid,
             name: userData.name,
@@ -65,6 +62,7 @@ const Navbar: FC = () => {
               uid: firebaseUser.uid,
               name: userData.name,
               email: firebaseUser.email,
+              role: userData.role,
             })
           )
         }
@@ -423,6 +421,7 @@ const Navbar: FC = () => {
                   transition={{ duration: 0.3 }}
                 >
                   <p className={styles.userInfo}>{user.email}</p>
+                  <p className={styles.userInfo}>{user.role}</p>
                   <div className={styles.menuSection}>
                     <Link to="/appointmentlist" className={styles.userDropdownItem}>
                       Appointments

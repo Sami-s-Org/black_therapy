@@ -29,6 +29,7 @@ export default function FindTherapist() {
       return {
         id: doc.id,
         name: data.name || '',
+        email: data.email || '',
         specialization: data.specialization || '',
         location: data.location || '',
         price: data.price || '',

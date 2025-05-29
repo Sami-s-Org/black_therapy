@@ -23,10 +23,8 @@ export default function FindCoach() {
 
   const fetchCoaches = async () => {
     const querySnapshot = await getDocs(collection(db, 'coaches'))
-    console.log('querySnapshot', querySnapshot.docs)
     const coachesData = querySnapshot.docs.map((doc) => {
       const data = doc.data()
-      console.log('data', data)
       return {
         id: doc.id,
         name: data.name || '',
