@@ -7,6 +7,7 @@ import { getFirestore } from 'firebase/firestore'
 const firebaseConfig = {
   apiKey: 'AIzaSyCLLn-e3901uJNhde0kbskoRZddtETPz7A',
   authDomain: 'blacktesting-d3b64.firebaseapp.com',
+  databaseURL: 'https://blacktesting-d3b64-default-rtdb.firebaseio.com',
   projectId: 'blacktesting-d3b64',
   storageBucket: 'blacktesting-d3b64.appspot.com',
   messagingSenderId: '622094469052',

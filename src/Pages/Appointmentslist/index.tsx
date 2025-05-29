@@ -311,7 +311,7 @@ export default function AppointmentList() {
   useEffect(() => {
     const auth = getAuth()
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      console.log('USER', USER)
+      // console.log('USER', USER)
       if (user && user.email && USER.role === 'user') {
         try {
           const q = query(collection(db, 'appointments'), where('userEmail', '==', USER.email))
@@ -320,7 +320,7 @@ export default function AppointmentList() {
             id: doc.id,
             ...(doc.data() as Omit<Appointment, 'id'>),
           }))
-          console.log('fetchedAppointments', fetchedAppointments)
+          // console.log('fetchedAppointments', fetchedAppointments)
           setAppointments(fetchedAppointments)
           setIsLoading(false)
         } catch (error) {
@@ -335,7 +335,7 @@ export default function AppointmentList() {
             id: doc.id,
             ...(doc.data() as Omit<Appointment, 'id'>),
           }))
-          console.log('fetchedAppointments', fetchedAppointments)
+          // console.log('fetchedAppointments', fetchedAppointments)
           setAppointments(fetchedAppointments)
           setIsLoading(false)
         } catch (error) {
@@ -357,7 +357,7 @@ export default function AppointmentList() {
         (value) => typeof value === 'string' && value.toLowerCase().includes(searchTerm.toLowerCase())
       )
     )
-    console.log('filtered', filtered)
+    // console.log('filtered', filtered)
     setFilteredAppointments(filtered)
     setCurrentPage(1)
   }, [searchTerm, appointments])

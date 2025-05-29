@@ -1,10 +1,10 @@
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
-export const notifySuccess = (message: string) => {
+export const notifySuccess = (message: string, autoClose?: number) => {
   toast.success(message, {
     position: 'top-right',
-    autoClose: 3000,
+    autoClose: autoClose || 3000,
     hideProgressBar: true,
     closeOnClick: true,
     pauseOnHover: true,
@@ -14,10 +14,10 @@ export const notifySuccess = (message: string) => {
   })
 }
 
-export const notifyError = (message: string) => {
+export const notifyError = (message: string, autoClose?: number) => {
   toast.error(message, {
     position: 'top-right',
-    autoClose: 3000,
+    autoClose: autoClose || 3000,
     hideProgressBar: true,
     closeOnClick: true,
     pauseOnHover: true,
@@ -27,10 +27,10 @@ export const notifyError = (message: string) => {
   })
 }
 
-export const notifyInfo = (message: string) => {
+export const notifyInfo = (message: string, autoClose?: number) => {
   toast.info(message, {
     position: 'top-right',
-    autoClose: 3000,
+    autoClose: autoClose || 3000,
     hideProgressBar: true,
     closeOnClick: true,
     pauseOnHover: true,
@@ -40,10 +40,10 @@ export const notifyInfo = (message: string) => {
   })
 }
 
-export const notifyWarning = (message: string) => {
+export const notifyWarning = (message: string, autoClose?: number) => {
   toast.warning(message, {
     position: 'top-right',
-    autoClose: 3000,
+    autoClose: autoClose || 3000,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,

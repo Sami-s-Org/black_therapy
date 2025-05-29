@@ -61,7 +61,7 @@ const AppRouter = () => {
           <Route path="/admin/*" element={<AdminPanel />} />
           <Route path="/findTherapist" element={<FindTherapist />} />
           <Route path="/appointmentlist" element={<AppointmentList />} />
-          <Route path="/chat" element={<Chatpage />} />
+          <Route path="/chat/:appointmentId" element={<Chatpage />} />
         </Routes>
       </Layout>
     </Router>
