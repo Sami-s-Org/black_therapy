@@ -15,6 +15,8 @@ import {
 } from 'react-icons/fa'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
+import { ref, onValue } from 'firebase/database'
+import { realtimeDB } from '../../Share/FireBase'
 
 type Appointment = {
   id: string
@@ -206,25 +208,71 @@ interface AppointmentTableProps {
   onStatusUpdate?: (appointmentId: string, newStatus: string) => Promise<void>
 }
 
-const UserAppointmentTable = ({ appointments, userRole }: AppointmentTableProps) => (
-  <div className={styles.tableWrapper}>
-    <table className={styles.table}>
-      <thead>
-        <tr>
-          <th>Therapist/Coach</th>
-          <th>Date</th>
-          <th>Time</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        {appointments.map((appointment) => (
-          <AppointmentRow key={appointment.id} appointment={appointment} userRole={userRole} />
-        ))}
-      </tbody>
-    </table>
-  </div>
-)
+const UserAppointmentTable = ({ appointments }: AppointmentTableProps) => {
+  const [chatInitiated, setChatInitiated] = useState<{ [key: string]: boolean }>({})
+
+  useEffect(() => {
+    // Check if chat is initiated for each appointment
+    appointments.forEach((appointment) => {
+      const chatRef = ref(realtimeDB, `chats/${appointment.id}/messages`)
+      onValue(chatRef, (snapshot) => {
+        const hasMessages = snapshot.exists()
+        setChatInitiated((prev) => ({
+          ...prev,
+          [appointment.id]: hasMessages,
+        }))
+      })
+    })
+  }, [appointments])
+
+  return (
+    <div className={styles.tableWrapper}>
+      <table className={styles.table}>
+        <thead>
+          <tr>
+            <th>Therapist/Coach</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {appointments.map((appointment) => (
+            <tr key={appointment.id}>
+              <td style={{ color: '#131313' }}>{appointment.therapistName}</td>
+              <td style={{ color: '#131313' }}>{formatDate(appointment.appointmentDate)}</td>
+              <td style={{ color: '#131313' }}>{formatTime(appointment.appointmentTime)}</td>
+              <td>
+                <span
+                  className={styles.statusBadge}
+                  style={{
+                    backgroundColor: getStatusColor(appointment.status),
+                  }}
+                >
+                  {appointment.status || 'Pending'}
+                </span>
+              </td>
+              <td className={styles.actionCell}>
+                <div className={styles.actionMenuContainer}>
+                  {chatInitiated[appointment.id] && (
+                    <Link
+                      to={`/chat/${appointment.id}`}
+                      className={`${styles.actionButton} ${styles.accept}`}
+                      style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', textDecoration: 'none' }}
+                    >
+                      <FaComments />
+                    </Link>
+                  )}
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )
+}
 
 const TherapistAppointmentTable = ({ appointments, userRole, onStatusUpdate }: AppointmentTableProps) => (
   <div className={styles.tableWrapper}>

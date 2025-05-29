@@ -545,6 +545,27 @@ select {
   background-color: #FEF2F2;
 }
 
+.actionMenuItem.chat {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #3B82F6;
+  background-color: #EBF5FF;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.actionMenuItem.chat:hover {
+  background-color: #DBEAFE;
+  transform: translateY(-1px);
+}
+
 .actionMenuOverlay {
   position: fixed;
   inset: 0;
