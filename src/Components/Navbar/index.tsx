@@ -422,26 +422,29 @@ const Navbar: FC = () => {
                   exit={{ opacity: 0, y: -10 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <Link to="/appointmentlist" className={styles.userDropdownItem}>
-                    Appointments
-                  </Link>
-                  <Link to="/chat" className={styles.userDropdownItem}>
-                    Chat
-                  </Link>
-                  <button
-                    onClick={handleLogout}
-                    className={styles.userDropdownItem}
-                    style={{
-                      display: 'flex',
-                      border: 'none',
-                      width: '100%',
-                      gap: '10px',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}
-                  >
-                    <FaSignOutAlt /> Logout
-                  </button>
+                  <p className={styles.userInfo}>{user.email}</p>
+                  <div className={styles.menuSection}>
+                    <Link to="/appointmentlist" className={styles.userDropdownItem}>
+                      Appointments
+                    </Link>
+                    <Link to="/chat" className={styles.userDropdownItem}>
+                      Chat
+                    </Link>
+                    <button
+                      onClick={handleLogout}
+                      className={styles.userDropdownItem}
+                      style={{
+                        display: 'flex',
+                        border: 'none',
+                        width: '100%',
+                        gap: '10px',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      <FaSignOutAlt /> Logout
+                    </button>
+                  </div>
                 </motion.div>
               )}
             </AnimatePresence>

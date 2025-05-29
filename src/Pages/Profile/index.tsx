@@ -102,6 +102,7 @@ export default function Profile() {
       appointment_date: data.appointmentDate,
       appointment_time: data.appointmentTime,
     }
+    console.log('professionalEmailTemplate', professionalEmailTemplate)
 
     emailjs
       .send(
@@ -128,10 +129,10 @@ export default function Profile() {
 
   const resetForm = () => {
     setAppointmentData({
-      userName: '',
-      userEmail: '',
-      userPhone: '',
-      userLocation: '',
+      userName: user?.name || '',
+      userEmail: user?.email || '',
+      userPhone: user?.phone || '',
+      userLocation: user?.location || '',
       therapistId: state?.id || '',
       therapistName: state?.name || '',
       therapistSpecialization: state?.specialization || '',

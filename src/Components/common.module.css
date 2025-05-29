@@ -586,6 +586,7 @@
   text-decoration: none;
   text-align: center;
   color: #333;
+  border-bottom: 1px solid #a8875730;
 }
 
 .userDropdownItem:hover {
@@ -607,4 +608,19 @@
   cursor: pointer;
   margin-left: auto;
   margin-right: 1rem;
+}
+
+.menuSection {
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+.userInfo {
+  font-size: 14px;
+  color: #131313;
+  font-family: 'Derivia Regular';
+  font-weight: 900;
+  letter-spacing: 2px;
+  padding: 15px 20px;
 }
