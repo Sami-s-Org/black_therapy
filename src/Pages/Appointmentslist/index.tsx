@@ -4,6 +4,7 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import { collection, query, where, getDocs } from 'firebase/firestore'
 import { db } from '../../Share/FireBase'
 import styles from './appointmentlist.module.css'
+import { FaLongArrowAltLeft, FaLongArrowAltRight } from 'react-icons/fa'
 
 type Appointment = {
   id: string
@@ -74,56 +75,55 @@ export default function AppointmentList() {
           />
         </div>
 
-        <table className={styles.table}>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Date</th>
-              <th>Time</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {currentItems.length > 0 ? (
-              currentItems.map((item) => (
-                <tr key={item.id}>
-                  <td>{item.name}</td>
-                  <td>{item.date}</td>
-                  <td>{item.time}</td>
-                  <td>{item.status}</td>
+        {currentItems.length > 0 ? (
+          <>
+            <table className={styles.table}>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Date</th>
+                  <th>Time</th>
+                  <th>Status</th>
                 </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan={4} className={styles.noData}>
-                  No appointments found.
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+              </thead>
+              <tbody>
+                {currentItems.map((item) => (
+                  <tr key={item.id}>
+                    <td>{item.name}</td>
+                    <td>{item.date}</td>
+                    <td>{item.time}</td>
+                    <td>{item.status}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <div className={styles.PaginationContainer}>
+              <button
+                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                disabled={currentPage === 1}
+                className={`${styles.PaginationBtn} ${currentPage === 1 ? styles.DisabledBtn : ''}`}
+              >
+                <FaLongArrowAltLeft /> Prev
+              </button>
 
-        <div className={styles.PaginationContainer}>
-          <button
-            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-            disabled={currentPage === 1}
-            className={`${styles.PaginationBtn} ${currentPage === 1 ? styles.DisabledBtn : ''}`}
-          >
-            ⬅ Prev
-          </button>
+              <span className={styles.PaginationText}>
+                Page {currentPage} of {totalPages}
+              </span>
 
-          <span className={styles.PaginationText}>
-            Page {currentPage} of {totalPages}
-          </span>
-
-          <button
-            onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
-            disabled={currentPage === totalPages}
-            className={`${styles.PaginationBtn} ${currentPage === totalPages ? styles.DisabledBtn : ''}`}
-          >
-            Next ➡
-          </button>
-        </div>
+              <button
+                onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+                disabled={currentPage === totalPages}
+                className={`${styles.PaginationBtn} ${currentPage === totalPages ? styles.DisabledBtn : ''}`}
+              >
+                Next <FaLongArrowAltRight />
+              </button>
+            </div>
+          </>
+        ) : (
+          <div className={styles.noData}>
+            <p className={styles.noDataText}>No appointments found.</p>
+          </div>
+        )}
       </div>
     </div>
   )

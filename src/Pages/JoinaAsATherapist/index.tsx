@@ -2,16 +2,16 @@ import React, { useState, useEffect } from 'react'
 import styles from './joinasaTherapist.module.css'
 import HeaderBar from '../../Components/Headbar'
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage'
-import { collection, addDoc, Timestamp } from 'firebase/firestore'
+import { Timestamp, doc, setDoc } from 'firebase/firestore'
 import { getFirestore } from 'firebase/firestore'
 import { HiOutlineUpload } from 'react-icons/hi'
 import { notifyError, notifySuccess } from '../../Components/Toast'
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
+import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { auth } from '../../Share/FireBase'
 
 export default function JoinAsATherapist() {
   const storage = getStorage()
   const db = getFirestore()
-  const auth = getAuth()
 
   const [imageFileName, setImageFileName] = useState<string | null>(null)
   const [imageUploading, setImageUploading] = useState(false)
@@ -51,7 +51,8 @@ export default function JoinAsATherapist() {
     if (file) {
       setImageFileName(file.name)
       const storageRef = ref(storage, `therapists/${file.name}`)
-      const uploadTask = uploadBytesResumable(storageRef, file)
+      const blob = new Blob([file], { type: file.type })
+      const uploadTask = uploadBytesResumable(storageRef, blob)
 
       uploadTask.on(
         'state_changed',
@@ -78,7 +79,7 @@ export default function JoinAsATherapist() {
       const userId = userCredential.user.uid
 
       // ✅ Add Therapist to Firestore
-      await addDoc(collection(db, 'therapists'), {
+      await setDoc(doc(db, 'therapists', userId), {
         ...therapistData,
         userId,
         imageUrl: previewImage || '',
@@ -87,9 +88,10 @@ export default function JoinAsATherapist() {
       })
 
       // ✅ Add Auth Data to 'users' collection
-      await addDoc(collection(db, 'users'), {
-        uid: userId,
+      await setDoc(doc(db, 'users', userId), {
+        name: therapistData.name,
         email: therapistData.email,
+        phone: therapistData.phone,
         role: 'therapist',
         createdAt: Timestamp.now(),
       })
@@ -110,6 +112,7 @@ export default function JoinAsATherapist() {
       })
       setPreviewImage(null)
       setImageFileName(null)
+      window.location.reload()
     } catch (error: any) {
       console.error(error)
       notifyError(error.message || 'Error saving therapist data')

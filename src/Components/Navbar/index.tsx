@@ -28,11 +28,13 @@ const Navbar: FC = () => {
   const [loginForm, setLoginForm] = useState({ email: '', password: '' })
   const [registerForm, setRegisterForm] = useState({ name: '', email: '', phone: '', password: '' })
   const dropdownRef = useRef<HTMLDivElement>(null)
+  const [userDropdownOpen, setUserDropdownOpen] = useState(false)
   const navigate = useNavigate()
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setUserDropdownOpen(false)
         setActiveDropdown('')
         setMenuOpen(false)
       }
@@ -43,10 +45,13 @@ const Navbar: FC = () => {
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (firebaseUser) => {
+      console.log('firebaseUser', firebaseUser)
       if (firebaseUser) {
         const userDoc = await getDoc(doc(db, 'users', firebaseUser.uid))
+        console.log('userDoc', userDoc)
         if (userDoc.exists()) {
           const userData = userDoc.data() as User
+          console.log('userData', userData)
           setUser({
             uid: firebaseUser.uid,
             name: userData.name,
@@ -338,34 +343,22 @@ const Navbar: FC = () => {
                     transition={{ duration: 0.3 }}
                   >
                     <li>
-                      <Link to="/joinAsATherapist" onClick={() => navigateTo('/joinAsATherapist')}>
-                        Join As A Therapist
-                      </Link>
+                      <Link to="/joinAsATherapist">Join As A Therapist</Link>
                     </li>
                     <li>
-                      <Link to="/joinAsACoach" onClick={() => navigateTo('/joinAsACoach')}>
-                        Join As A Coach
-                      </Link>
+                      <Link to="/joinAsACoach">Join As A Coach</Link>
                     </li>
                     <li>
-                      <Link to="/ourTeam" onClick={() => navigateTo('/ourTeam')}>
-                        Meet Our Team
-                      </Link>
+                      <Link to="/ourTeam">Meet Our Team</Link>
                     </li>
                     <li>
-                      <Link to="/boardMembers" onClick={() => navigateTo('/boardMembers')}>
-                        Board Members
-                      </Link>
+                      <Link to="/boardMembers">Board Members</Link>
                     </li>
                     <li>
-                      <Link to="/termsOfUse" onClick={() => navigateTo('/termsOfUse')}>
-                        Terms of Use
-                      </Link>
+                      <Link to="/termsOfUse">Terms of Use</Link>
                     </li>
                     <li>
-                      <Link to="/privacyPolicy" onClick={() => navigateTo('/privacyPolicy')}>
-                        Privacy Policy
-                      </Link>
+                      <Link to="/privacyPolicy">Privacy Policy</Link>
                     </li>
                   </motion.ul>
                 )}
@@ -390,19 +383,13 @@ const Navbar: FC = () => {
                     transition={{ duration: 0.3 }}
                   >
                     <li>
-                      <Link to="/blog" onClick={() => navigateTo('/blog')}>
-                        Blog
-                      </Link>
+                      <Link to="/blog">Blog</Link>
                     </li>
                     <li>
-                      <Link to="/contactUs" onClick={() => navigateTo('/contactUs')}>
-                        Contact Us
-                      </Link>
+                      <Link to="/contactUs">Contact Us</Link>
                     </li>
                     <li>
-                      <Link to="/faq" onClick={() => navigateTo('/faq')}>
-                        FAQ
-                      </Link>
+                      <Link to="/faq">FAQ</Link>
                     </li>
                   </motion.ul>
                 )}
@@ -423,35 +410,41 @@ const Navbar: FC = () => {
 
         {user ? (
           <div className={styles.userDropdown}>
-            <button className={styles.userButton}>
-              <FaUser /> {user.name.split(' ')[0]}
+            <button className={styles.userButton} onClick={() => setUserDropdownOpen(!userDropdownOpen)}>
+              <FaUser /> {user.name}
             </button>
-            <div className={styles.userDropdownMenu}>
-              <Link
-                to="/appointmentlist"
-                className={styles.userDropdownItem}
-                onClick={() => navigateTo('/appointmentlist')}
-              >
-                Appointments
-              </Link>
-              <Link to="/chat" className={styles.userDropdownItem} onClick={() => navigateTo('/chat')}>
-                Chat
-              </Link>
-              <button
-                onClick={handleLogout}
-                className={styles.userDropdownItem}
-                style={{
-                  display: 'flex',
-                  border: 'none',
-                  width: '100%',
-                  gap: '10px',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
-                <FaSignOutAlt /> Logout
-              </button>
-            </div>
+            <AnimatePresence>
+              {userDropdownOpen && (
+                <motion.div
+                  className={styles.userDropdownMenu}
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <Link to="/appointmentlist" className={styles.userDropdownItem}>
+                    Appointments
+                  </Link>
+                  <Link to="/chat" className={styles.userDropdownItem}>
+                    Chat
+                  </Link>
+                  <button
+                    onClick={handleLogout}
+                    className={styles.userDropdownItem}
+                    style={{
+                      display: 'flex',
+                      border: 'none',
+                      width: '100%',
+                      gap: '10px',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    <FaSignOutAlt /> Logout
+                  </button>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         ) : (
           <button className={styles.loginButton} onClick={() => setLoginOpen(true)}>
@@ -459,7 +452,7 @@ const Navbar: FC = () => {
           </button>
         )}
 
-        <Link to="/donate" className={styles.donate} onClick={() => navigateTo('/donate')}>
+        <Link to="/donate" className={styles.donate}>
           <p>❤️ Donate</p>
         </Link>
 

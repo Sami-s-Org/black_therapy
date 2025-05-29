@@ -11,16 +11,18 @@ import HeaderBar from '../../Components/Headbar'
 import avataar from '../../assets/download.jpeg'
 Modal.setAppElement('#root')
 
+const user = JSON.parse(localStorage.getItem('user') || '{}')
+
 export default function Profile() {
   const { state } = useLocation()
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [isloading, setisLoading] = useState(false)
 
   const [appointmentData, setAppointmentData] = useState({
-    userName: '',
-    userEmail: '',
-    userPhone: '',
-    userLocation: '',
+    userName: user?.name || '',
+    userEmail: user?.email || '',
+    userPhone: user?.phone || '',
+    userLocation: user?.location || '',
     therapistId: state?.id || '',
     therapistName: state?.name || '',
     therapistSpecialization: state?.specialization || '',

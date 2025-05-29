@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import styles from './joinCoach.module.css'
 import HeaderBar from '../../Components/Headbar'
-import { getFirestore } from 'firebase/firestore'
+import { doc, setDoc } from 'firebase/firestore'
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage'
-import { collection, addDoc, Timestamp } from 'firebase/firestore'
+import { Timestamp } from 'firebase/firestore'
 import { HiOutlineUpload } from 'react-icons/hi'
 import { notifyError, notifySuccess } from '../../Components/Toast'
+import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { auth, db } from '../../Share/FireBase'
 
 export default function JoinAsACoach() {
   const storage = getStorage()
@@ -47,7 +49,8 @@ export default function JoinAsACoach() {
     if (file) {
       setImageFileName(file.name)
       const storageRef = ref(storage, `coaches/${file.name}`)
-      const uploadTask = uploadBytesResumable(storageRef, file)
+      const blob = new Blob([file], { type: file.type })
+      const uploadTask = uploadBytesResumable(storageRef, blob)
 
       uploadTask.on(
         'state_changed',
@@ -71,17 +74,21 @@ export default function JoinAsACoach() {
   const handleSave = async () => {
     setLoading(true)
     try {
-      const db = getFirestore()
+      const userCredential = await createUserWithEmailAndPassword(auth, coachData.email, coachData.password)
+      const userId = userCredential.user.uid
 
-      // Save to coaches collection
-      await addDoc(collection(db, 'coaches'), {
+      // ✅ Add Therapist to Firestore
+      await setDoc(doc(db, 'coaches', userId), {
         ...coachData,
-        imageUrl: previewImage,
+        userId,
+        imageUrl: previewImage || '',
         createdAt: Timestamp.now(),
+        accepted: false,
       })
 
-      // Save to users collection
-      await addDoc(collection(db, 'users'), {
+      // ✅ Add Auth Data to 'users' collection
+      await setDoc(doc(db, 'users', userId), {
+        name: coachData.name,
         email: coachData.email,
         phone: coachData.phone,
         role: 'coach',
@@ -90,6 +97,7 @@ export default function JoinAsACoach() {
 
       notifySuccess('Coach added successfully!')
       setModalOpen(false)
+      window.location.reload()
     } catch (error) {
       notifyError('Error saving coach data')
     } finally {
