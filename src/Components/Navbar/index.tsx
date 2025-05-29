@@ -425,9 +425,6 @@ const Navbar: FC = () => {
                     <Link to="/appointmentlist" className={styles.userDropdownItem}>
                       Appointments
                     </Link>
-                    <Link to="/chat" className={styles.userDropdownItem}>
-                      Chat
-                    </Link>
                     <button
                       onClick={handleLogout}
                       className={styles.userDropdownItem}
