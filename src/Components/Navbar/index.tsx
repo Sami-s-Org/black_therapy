@@ -149,6 +149,7 @@ const Navbar: FC = () => {
   const handleLogout = async () => {
     try {
       await signOut(auth)
+      localStorage.removeItem('user')
       notifySuccess('Logged out successfully')
       navigate('/')
     } catch (error) {
@@ -424,6 +425,9 @@ const Navbar: FC = () => {
                   <div className={styles.menuSection}>
                     <Link to="/appointmentlist" className={styles.userDropdownItem}>
                       Appointments
+                    </Link>
+                    <Link to="/myprofile" className={styles.userDropdownItem}>
+                      My Profile
                     </Link>
                     <button
                       onClick={handleLogout}

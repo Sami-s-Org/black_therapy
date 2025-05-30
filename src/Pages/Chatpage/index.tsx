@@ -58,6 +58,7 @@ export default function Chatpage() {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (!user) {
         // If user is not authenticated, redirect to home page
+        notifyError('You must be logged in to access this page')
         navigate('/')
         return
       }
