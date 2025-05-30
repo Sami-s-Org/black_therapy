@@ -184,7 +184,7 @@ export default function MyProfile() {
 
       // Basic user data that goes to 'users' collection
       const userRef = doc(db, 'users', user.uid)
-      const basicUserData: Record<string, string> = {
+      const basicUserData: Record<string, any> = {
         name,
         phone,
       }
@@ -207,11 +207,15 @@ export default function MyProfile() {
           location: string
           price: string
           bio: string
+          phone: string
+          name: string
           imageUrl?: string
         } = {
           location,
           price,
           bio,
+          phone,
+          name,
         }
 
         // Handle image upload if there's a new image
