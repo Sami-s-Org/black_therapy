@@ -470,7 +470,7 @@ select {
 .actionMenuContainer {
   position: absolute;
   top: 0;
-  right: 0;
+  left: 0;
   z-index: 1000;
   display: flex;
   width: 100%;
@@ -481,8 +481,8 @@ select {
 
 .actionMenu {
   position: absolute;
-  top: 100%;
-  right: 0;
+  top: 0;
+  right: 100%;
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
