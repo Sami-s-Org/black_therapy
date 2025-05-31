@@ -150,6 +150,7 @@ const Navbar: FC = () => {
     try {
       await signOut(auth)
       localStorage.removeItem('user')
+      window.location.reload()
       notifySuccess('Logged out successfully')
       navigate('/')
     } catch (error) {
