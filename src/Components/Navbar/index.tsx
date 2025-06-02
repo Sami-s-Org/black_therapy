@@ -5,9 +5,10 @@ import { FaAngleDown, FaBars, FaTimes, FaUser, FaSignOutAlt } from 'react-icons/
 import logo from '../../assets/Black-Yellow-Modern-Digital-Marketing-Facebook-Cover-5.png'
 import { useNavigate, Link } from 'react-router-dom'
 import { auth, db } from '../../Share/FireBase'
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth'
-import { doc, setDoc, getDoc } from 'firebase/firestore'
-import { notifyError, notifySuccess } from '../Toast'
+import { signOut } from 'firebase/auth'
+import { doc, getDoc } from 'firebase/firestore'
+import { notifySuccess, notifyError } from '../Toast'
+import AuthModal from '../AuthModels'
 
 interface User {
   uid: string
@@ -22,11 +23,9 @@ const Navbar: FC = () => {
   const [menuOpen, setMenuOpen] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState<string>('')
   const [activeLink, setActiveLink] = useState<string>('')
-  const [loginOpen, setLoginOpen] = useState(false)
-  const [registerOpen, setRegisterOpen] = useState(false)
+  const [authModalOpen, setAuthModalOpen] = useState(false)
+  const [authModalType, setAuthModalType] = useState<'login' | 'register'>('login')
   const [user, setUser] = useState<User | null>(null)
-  const [loginForm, setLoginForm] = useState({ email: '', password: '' })
-  const [registerForm, setRegisterForm] = useState({ name: '', email: '', phone: '', password: '' })
   const dropdownRef = useRef<HTMLDivElement>(null)
   const [userDropdownOpen, setUserDropdownOpen] = useState(false)
   const navigate = useNavigate()
@@ -86,66 +85,6 @@ const Navbar: FC = () => {
     setActiveDropdown(activeDropdown === name ? '' : name)
   }
 
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault()
-    try {
-      await signInWithEmailAndPassword(auth, loginForm.email, loginForm.password)
-      notifySuccess('Login successful!')
-      setLoginOpen(false)
-      setLoginForm({ email: '', password: '' })
-    } catch (error: any) {
-      console.error('Login error:', error)
-
-      switch (error.code) {
-        case 'auth/invalid-email':
-          notifyError('The email address is not valid.')
-          break
-        case 'auth/user-not-found':
-          notifyError('No user found with this email.')
-          break
-        case 'auth/wrong-password':
-          notifyError('Invalid password. Please try again.')
-          break
-        case 'auth/too-many-requests':
-          notifyError('Too many failed attempts. Please try again later.')
-          break
-        default:
-          notifyError('Login failed. Please check your credentials.')
-      }
-    }
-  }
-
-  const handleRegister = async (e: React.FormEvent) => {
-    e.preventDefault()
-    try {
-      const userCredential = await createUserWithEmailAndPassword(auth, registerForm.email, registerForm.password)
-
-      await setDoc(doc(db, 'users', userCredential.user.uid), {
-        name: registerForm.name,
-        email: registerForm.email,
-        phone: registerForm.phone,
-        role: 'user',
-        createdAt: new Date(),
-      })
-
-      notifySuccess('Registration successful! You are now logged in.')
-      setRegisterOpen(false)
-      setRegisterForm({ name: '', email: '', phone: '', password: '' })
-    } catch (error: any) {
-      console.error('Registration error:', error)
-
-      if (error.code === 'auth/email-already-in-use') {
-        notifyError('This email is already registered. Please use a different email.')
-      } else if (error.code === 'auth/invalid-email') {
-        notifyError('The email address is not valid.')
-      } else if (error.code === 'auth/weak-password') {
-        notifyError('Password is too weak. Please choose a stronger password.')
-      } else {
-        notifyError('Registration failed. Please try again.')
-      }
-    }
-  }
-
   const handleLogout = async () => {
     try {
       await signOut(auth)
@@ -159,137 +98,23 @@ const Navbar: FC = () => {
     }
   }
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
-    setLoginForm((prev) => ({ ...prev, [name]: value }))
+  const openAuthModal = (type: 'login' | 'register') => {
+    setAuthModalType(type)
+    setAuthModalOpen(true)
   }
 
-  const handleRegisterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
-    setRegisterForm((prev) => ({ ...prev, [name]: value }))
+  const closeAuthModal = () => {
+    setAuthModalOpen(false)
+  }
+
+  const switchAuthModal = () => {
+    setAuthModalType(authModalType === 'login' ? 'register' : 'login')
   }
 
   return (
     <header className={styles.header} ref={dropdownRef}>
-      {/* Login Modal */}
       <AnimatePresence>
-        {loginOpen && (
-          <motion.div
-            className={styles.modalOverlay}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setLoginOpen(false)}
-          >
-            <motion.div
-              className={styles.modal}
-              initial={{ y: -50, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: -50, opacity: 0 }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <FaTimes className={styles.closeModal} onClick={() => setLoginOpen(false)} />
-              <h2 className={styles.modelheading}>Login</h2>
-              <form onSubmit={handleLogin}>
-                <div className={styles.formGroup}>
-                  <label>Email</label>
-                  <input type="email" name="email" value={loginForm.email} onChange={handleInputChange} required />
-                </div>
-                <div className={styles.formGroup}>
-                  <label>Password</label>
-                  <input
-                    type="password"
-                    name="password"
-                    value={loginForm.password}
-                    onChange={handleInputChange}
-                    required
-                  />
-                </div>
-                <button type="submit" className={styles.submitButton}>
-                  Login
-                </button>
-              </form>
-              <p className={styles.switchFormText}>
-                Don't have an account?{' '}
-                <span
-                  onClick={() => {
-                    setLoginOpen(false)
-                    setRegisterOpen(true)
-                  }}
-                >
-                  Register
-                </span>
-              </p>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      <AnimatePresence>
-        {registerOpen && (
-          <motion.div
-            className={styles.modalOverlay}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setRegisterOpen(false)}
-          >
-            <motion.div
-              className={styles.modal}
-              initial={{ y: -50, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: -50, opacity: 0 }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <FaTimes className={styles.closeModal} onClick={() => setRegisterOpen(false)} />
-              <h2 className={styles.modelheading}>Register</h2>
-              <form onSubmit={handleRegister}>
-                <div className={styles.formGroup}>
-                  <label>Full Name</label>
-                  <input type="text" name="name" value={registerForm.name} onChange={handleRegisterChange} required />
-                </div>
-                <div className={styles.formGroup}>
-                  <label>Email</label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={registerForm.email}
-                    onChange={handleRegisterChange}
-                    required
-                  />
-                </div>
-                <div className={styles.formGroup}>
-                  <label>Phone Number</label>
-                  <input type="tel" name="phone" value={registerForm.phone} onChange={handleRegisterChange} required />
-                </div>
-                <div className={styles.formGroup}>
-                  <label>Password</label>
-                  <input
-                    type="password"
-                    name="password"
-                    value={registerForm.password}
-                    onChange={handleRegisterChange}
-                    required
-                  />
-                </div>
-                <button type="submit" className={styles.submitButton}>
-                  Register
-                </button>
-              </form>
-              <p className={styles.switchFormText}>
-                Already have an account?{' '}
-                <span
-                  onClick={() => {
-                    setRegisterOpen(false)
-                    setLoginOpen(true)
-                  }}
-                >
-                  Login
-                </span>
-              </p>
-            </motion.div>
-          </motion.div>
-        )}
+        {authModalOpen && <AuthModal type={authModalType} onClose={closeAuthModal} onSwitch={switchAuthModal} />}
       </AnimatePresence>
 
       <div className={styles.container}>
@@ -450,7 +275,7 @@ const Navbar: FC = () => {
             </AnimatePresence>
           </div>
         ) : (
-          <button className={styles.loginButton} onClick={() => setLoginOpen(true)}>
+          <button className={styles.loginButton} onClick={() => openAuthModal('login')}>
             Login
           </button>
         )}

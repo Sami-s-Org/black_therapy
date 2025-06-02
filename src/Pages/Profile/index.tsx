@@ -3,26 +3,30 @@ import styles from './profile.module.css'
 import { useLocation } from 'react-router-dom'
 import Modal from 'react-modal'
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
-import { db } from '../../Share/FireBase/index'
+import { db, auth } from '../../Share/FireBase/index'
 import emailjs from 'emailjs-com'
 import { notifyError, notifySuccess } from '../../Components/Toast'
 import RingLoader from '../../Components/RingLoader'
 import HeaderBar from '../../Components/Headbar'
 import avataar from '../../assets/download.jpeg'
-Modal.setAppElement('#root')
+import AuthModal from '../../Components/AuthModels'
 
-const user = JSON.parse(localStorage.getItem('user') || '{}')
+Modal.setAppElement('#root')
 
 export default function Profile() {
   const { state } = useLocation()
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [isloading, setisLoading] = useState(false)
+  const [showAuthModal, setShowAuthModal] = useState(false)
+  const [authModalType, setAuthModalType] = useState<'login' | 'register'>('login')
+  const [user, setUser] = useState<any>(null)
+  const [bookingIntent, setBookingIntent] = useState(false)
 
   const [appointmentData, setAppointmentData] = useState({
-    userName: user?.name || '',
-    userEmail: user?.email || '',
-    userPhone: user?.phone || '',
-    userLocation: user?.location || '',
+    userName: '',
+    userEmail: '',
+    userPhone: '',
+    userLocation: '',
     therapistId: state?.id || '',
     therapistName: state?.name || '',
     therapistSpecialization: state?.specialization || '',
@@ -39,6 +43,43 @@ export default function Profile() {
       ...prev,
       [name]: value,
     }))
+  }
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user?.email) {
+        const userData = JSON.parse(localStorage.getItem('user') || '{}')
+        setUser(userData)
+        setAppointmentData((prev) => ({
+          ...prev,
+          userName: userData?.name || '',
+          userEmail: userData?.email || '',
+          userPhone: userData?.phone || '',
+          userLocation: userData?.location || '',
+        }))
+
+        // If user was trying to book before logging in
+        if (bookingIntent) {
+          setModalIsOpen(true)
+          setBookingIntent(false)
+        }
+      } else {
+        setUser(null)
+      }
+    })
+
+    return () => unsubscribe()
+  }, [bookingIntent])
+
+  const handleBookAppointment = () => {
+    if (user) {
+      // User is logged in - show booking modal
+      setModalIsOpen(true)
+    } else {
+      // User not logged in - show auth modal and remember booking intent
+      setBookingIntent(true)
+      setAuthModalType('login')
+      setShowAuthModal(true)
+    }
   }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -150,7 +191,9 @@ export default function Profile() {
       <div className={styles.container}>
         <div className={styles.card}>
           <img src={state?.image || avataar} alt="Coach Profile" className={styles.avatar} />
-          <h2 className={styles.name}>{state?.name}</h2>
+          <h2 style={{ textTransform: 'capitalize' }} className={styles.name}>
+            {state?.name}
+          </h2>
           <p className={styles.field}>
             <strong>Specialization:</strong> {state?.specialization}
           </p>
@@ -161,7 +204,7 @@ export default function Profile() {
             <strong>Pricing:</strong> {state?.price}
           </p>
           <p className={styles.bio}>{state?.bio}</p>
-          <button className={styles.button} onClick={() => setModalIsOpen(true)}>
+          <button className={styles.buttonBook} onClick={handleBookAppointment}>
             {isloading ? <RingLoader size={20} color="#0000000" /> : '📅 Book Appointment'}
           </button>
         </div>
@@ -188,6 +231,7 @@ export default function Profile() {
                     value={appointmentData.userName}
                     onChange={handleInputChange}
                     required
+                    disabled
                   />
                 </div>
 
@@ -199,6 +243,7 @@ export default function Profile() {
                     value={appointmentData.userEmail}
                     onChange={handleInputChange}
                     required
+                    disabled
                   />
                 </div>
 
@@ -232,6 +277,7 @@ export default function Profile() {
                     value={appointmentData.appointmentDate}
                     onChange={handleInputChange}
                     required
+                    min={new Date().toISOString().split('T')[0]}
                   />
                 </div>
 
@@ -243,6 +289,11 @@ export default function Profile() {
                     value={appointmentData.appointmentTime}
                     onChange={handleInputChange}
                     required
+                    min={
+                      appointmentData.appointmentDate === new Date().toISOString().split('T')[0]
+                        ? new Date().toTimeString().split(' ')[0].slice(0, 5)
+                        : undefined
+                    }
                   />
                 </div>
 
@@ -257,6 +308,19 @@ export default function Profile() {
               </form>
             </div>
           </div>
+        )}
+        {showAuthModal && (
+          <AuthModal
+            type={authModalType}
+            onClose={() => setShowAuthModal(false)}
+            onSwitch={() => setAuthModalType((prev) => (prev === 'login' ? 'register' : 'login'))}
+            onLoginSuccess={() => {
+              setShowAuthModal(false)
+              if (bookingIntent) {
+                setModalIsOpen(true)
+              }
+            }}
+          />
         )}
       </div>
     </>
