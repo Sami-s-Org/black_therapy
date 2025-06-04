@@ -89,9 +89,8 @@ const Navbar: FC = () => {
     try {
       await signOut(auth)
       localStorage.removeItem('user')
-      window.location.reload()
       notifySuccess('Logged out successfully')
-      navigate('/')
+      navigate('/') // Navigates to home
     } catch (error) {
       console.error('Logout error:', error)
       notifyError('Logout failed. Please try again.')

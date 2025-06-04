@@ -79,7 +79,9 @@ strong {
   line-height: 1.6;
   margin: 1.5rem 0 2rem;
 }
-
+button:disabled {
+  background-color: #606060 !important;
+}
 /* Button */
 .buttonBook {
   background-color: #a88757;

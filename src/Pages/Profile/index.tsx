@@ -15,6 +15,13 @@ Modal.setAppElement('#root')
 
 export default function Profile() {
   const { state } = useLocation()
+
+  useEffect(() => {
+    if (state) {
+      localStorage.setItem('myData', JSON.stringify(state))
+    }
+  }, [state])
+
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [isloading, setisLoading] = useState(false)
   const [showAuthModal, setShowAuthModal] = useState(false)
@@ -45,8 +52,8 @@ export default function Profile() {
     }))
   }
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user?.email) {
+    const unsubscribe = auth.onAuthStateChanged((firebaseUser) => {
+      if (firebaseUser) {
         const userData = JSON.parse(localStorage.getItem('user') || '{}')
         setUser(userData)
         setAppointmentData((prev) => ({
@@ -56,8 +63,6 @@ export default function Profile() {
           userPhone: userData?.phone || '',
           userLocation: userData?.location || '',
         }))
-
-        // If user was trying to book before logging in
         if (bookingIntent) {
           setModalIsOpen(true)
           setBookingIntent(false)
@@ -68,18 +73,36 @@ export default function Profile() {
     })
 
     return () => unsubscribe()
-  }, [bookingIntent])
+  }, [])
 
   const handleBookAppointment = () => {
     if (user) {
-      // User is logged in - show booking modal
       setModalIsOpen(true)
     } else {
-      // User not logged in - show auth modal and remember booking intent
       setBookingIntent(true)
       setAuthModalType('login')
       setShowAuthModal(true)
     }
+  }
+  const prefillUserData = (firebaseUser: any) => {
+    if (!firebaseUser) return
+
+    const userData = JSON.parse(localStorage.getItem('user') || '{}')
+
+    const name = userData?.name || firebaseUser.displayName || ''
+    const email = firebaseUser.email || ''
+    const phone = userData?.phone || ''
+    const location = userData?.location || ''
+
+    setUser({ name, email, phone, location })
+
+    setAppointmentData((prev) => ({
+      ...prev,
+      userName: name,
+      userEmail: email,
+      userPhone: phone,
+      userLocation: location,
+    }))
   }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -109,9 +132,23 @@ export default function Profile() {
   useEffect(() => {
     window.scrollTo(0, 0)
   })
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((firebaseUser) => {
+      if (firebaseUser) {
+        prefillUserData(firebaseUser)
+
+        if (bookingIntent) {
+          setModalIsOpen(true)
+          setBookingIntent(false)
+        }
+      } else {
+        setUser(null)
+      }
+    })
+    return () => unsubscribe()
+  }, [bookingIntent])
 
   const sendAppointmentEmails = (data: any) => {
-    // User email template data
     const userEmailTemplate = {
       user_name: data.userName,
       user_email: data.userEmail,
@@ -231,7 +268,6 @@ export default function Profile() {
                     value={appointmentData.userName}
                     onChange={handleInputChange}
                     required
-                    disabled
                   />
                 </div>
 
@@ -314,10 +350,18 @@ export default function Profile() {
             type={authModalType}
             onClose={() => setShowAuthModal(false)}
             onSwitch={() => setAuthModalType((prev) => (prev === 'login' ? 'register' : 'login'))}
-            onLoginSuccess={() => {
+            onLoginSuccess={(userData) => {
               setShowAuthModal(false)
+              setUser(userData)
+              setAppointmentData((prev) => ({
+                ...prev,
+                userName: userData.name || '',
+                userEmail: userData.email || '',
+                userPhone: userData.phone || '',
+              }))
               if (bookingIntent) {
                 setModalIsOpen(true)
+                setBookingIntent(false)
               }
             }}
           />

@@ -3,15 +3,23 @@ import { motion } from 'framer-motion'
 import { FaTimes } from 'react-icons/fa'
 import { auth, db } from '../../Share/FireBase'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
-import { doc, setDoc } from 'firebase/firestore'
-import { notifyError, notifySuccess } from '../Toast'
+import { doc, setDoc, getDoc } from 'firebase/firestore' // Make sure getDoc is imported
+import { notifySuccess } from '../Toast'
 import styles from '../common.module.css'
+
+interface UserData {
+  name: string
+  email: string
+  phone: string
+  uid: string
+  location?: string // Made optional with ?
+}
 
 interface AuthModalProps {
   type: 'login' | 'register'
   onClose: () => void
   onSwitch: () => void
-  onLoginSuccess?: () => void // Added optional onLoginSuccess prop
+  onLoginSuccess?: (userData: UserData) => void
 }
 
 const AuthModal: FC<AuthModalProps> = ({ type, onClose, onSwitch, onLoginSuccess }) => {
@@ -23,32 +31,33 @@ const AuthModal: FC<AuthModalProps> = ({ type, onClose, onSwitch, onLoginSuccess
     e.preventDefault()
     setIsLoading(true)
     try {
-      await signInWithEmailAndPassword(auth, loginForm.email, loginForm.password)
+      const userCredential = await signInWithEmailAndPassword(auth, loginForm.email, loginForm.password)
+      const user = userCredential.user
+
+      const userDocRef = doc(db, 'users', user.uid)
+      const userDoc = await getDoc(userDocRef)
+
+      if (!userDoc.exists()) {
+        throw new Error('User document not found')
+      }
+
+      const userData = userDoc.data() as UserData
+
       notifySuccess('Login successful!')
-      onClose()
       setLoginForm({ email: '', password: '' })
-      // Call onLoginSuccess if provided
+
       if (onLoginSuccess) {
-        onLoginSuccess()
+        onLoginSuccess({
+          name: userData.name || '',
+          email: user.email || '',
+          phone: userData.phone || '',
+          uid: user.uid,
+          location: userData.location || '',
+        })
       }
+
+      onClose()
     } catch (error: any) {
-      console.error('Login error:', error)
-      switch (error.code) {
-        case 'auth/invalid-email':
-          notifyError('The email address is not valid.')
-          break
-        case 'auth/user-not-found':
-          notifyError('No user found with this email.')
-          break
-        case 'auth/wrong-password':
-          notifyError('Invalid password. Please try again.')
-          break
-        case 'auth/too-many-requests':
-          notifyError('Too many failed attempts. Please try again later.')
-          break
-        default:
-          notifyError('Login failed. Please check your credentials.')
-      }
     } finally {
       setIsLoading(false)
     }
@@ -59,33 +68,35 @@ const AuthModal: FC<AuthModalProps> = ({ type, onClose, onSwitch, onLoginSuccess
     setIsLoading(true)
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, registerForm.email, registerForm.password)
+      const user = userCredential.user
 
-      await setDoc(doc(db, 'users', userCredential.user.uid), {
+      const userData = {
         name: registerForm.name,
         email: registerForm.email,
         phone: registerForm.phone,
         role: 'user',
         createdAt: new Date(),
-      })
+        location: '', // Initialize location
+      }
+
+      await setDoc(doc(db, 'users', user.uid), userData)
 
       notifySuccess('Registration successful! You are now logged in.')
-      onClose()
       setRegisterForm({ name: '', email: '', phone: '', password: '' })
-      // Call onLoginSuccess after registration too
+
       if (onLoginSuccess) {
-        onLoginSuccess()
+        onLoginSuccess({
+          name: registerForm.name,
+          email: registerForm.email,
+          phone: registerForm.phone,
+          uid: user.uid,
+          location: '', // Include location
+        })
       }
+
+      onClose()
     } catch (error: any) {
-      console.error('Registration error:', error)
-      if (error.code === 'auth/email-already-in-use') {
-        notifyError('This email is already registered. Please use a different email.')
-      } else if (error.code === 'auth/invalid-email') {
-        notifyError('The email address is not valid.')
-      } else if (error.code === 'auth/weak-password') {
-        notifyError('Password is too weak. Please choose a stronger password.')
-      } else {
-        notifyError('Registration failed. Please try again.')
-      }
+      // ... [keep your existing error handling]
     } finally {
       setIsLoading(false)
     }
