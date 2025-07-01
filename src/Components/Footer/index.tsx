@@ -2,15 +2,35 @@ import { useNavigate } from 'react-router-dom'
 import styles from '../common.module.css'
 
 import logo from '../../assets/Black-Yellow-Modern-Digital-Marketing-Facebook-Cover-5.png'
+import { useState } from 'react'
+import AuthModal from '../AuthModels'
+import { AnimatePresence } from 'framer-motion'
 const Footer = () => {
+  const [authModalOpen, setAuthModalOpen] = useState(false)
+  const [authModalType, setAuthModalType] = useState<'login' | 'register'>('login')
+
   const navigate = useNavigate()
 
   const handleNavigation = (path: string) => {
     navigate(path)
   }
+  const openAuthModal = (type: 'login' | 'register') => {
+    setAuthModalType(type)
+    setAuthModalOpen(true)
+  }
 
+  const closeAuthModal = () => {
+    setAuthModalOpen(false)
+  }
+
+  const switchAuthModal = () => {
+    setAuthModalType(authModalType === 'login' ? 'register' : 'login')
+  }
   return (
     <>
+      <AnimatePresence>
+        {authModalOpen && <AuthModal type={authModalType} onClose={closeAuthModal} onSwitch={switchAuthModal} />}
+      </AnimatePresence>
       <div className={styles.footer}>
         <div className={styles.footerTop}>
           <div className={styles.w50}>
@@ -41,9 +61,10 @@ const Footer = () => {
           <div className={styles.column}>
             <h2>Quick Links</h2>
             <ul>
-              <li onClick={() => handleNavigation('/')}>Find a Therapist</li>
-              <li onClick={() => handleNavigation('/findCoach')}>Find a Coach</li>
+              <li onClick={() => openAuthModal('login')}>Therapist Sign/Log In</li>
+              <li onClick={() => openAuthModal('login')}>Coach Sign/Log In</li>
               <li onClick={() => handleNavigation('/blog')}>Blog</li>
+
               <li onClick={() => handleNavigation('/store')}>Store</li>
               <li onClick={() => handleNavigation('/donate')}>Donate</li>
             </ul>

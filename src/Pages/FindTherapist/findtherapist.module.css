@@ -39,7 +39,9 @@
 .section {
   margin-top: 3rem;
 }
-
+.center {
+  text-align: start !important;
+}
 .section h2 {
   font-size: 1.5rem;
   color: #131313;

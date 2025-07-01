@@ -155,7 +155,7 @@ const Navbar: FC = () => {
                 onClick={() => toggleDropdown('about')}
                 className={`${styles.navLink} ${activeDropdown === 'about' ? styles.active : ''}`}
               >
-                <p>About</p> <FaAngleDown style={{ marginTop: '2px' }} />
+                <p>Our Why</p> <FaAngleDown style={{ marginTop: '2px' }} />
               </span>
               <AnimatePresence>
                 {activeDropdown === 'about' && (
@@ -170,7 +170,7 @@ const Navbar: FC = () => {
                       <Link to="/joinAsATherapist">Join As A Therapist</Link>
                     </li>
                     <li>
-                      <Link to="/joinAsACoach">Join As A Coach</Link>
+                      <Link to="/joinAsACoach"> Find a Coach</Link>
                     </li>
                     <li>
                       <Link to="/ourTeam">Meet Our Team</Link>
@@ -195,7 +195,7 @@ const Navbar: FC = () => {
                 onClick={() => toggleDropdown('resources')}
                 className={`${styles.navLink} ${activeDropdown === 'resources' ? styles.active : ''}`}
               >
-                <p> Resources</p> <FaAngleDown style={{ marginTop: '2px' }} />
+                <p>Healing Resources</p> <FaAngleDown style={{ marginTop: '2px' }} />
               </span>
               <AnimatePresence>
                 {activeDropdown === 'resources' && (
@@ -207,14 +207,24 @@ const Navbar: FC = () => {
                     transition={{ duration: 0.3 }}
                   >
                     <li>
+                      <Link to="/findTherapist"> Find a Therapist</Link>
+                    </li>
+                    <li>
+                      <Link to="/findCoach"> Find a Coach</Link>
+                    </li>
+
+                    <li>
                       <Link to="/blog">Blog</Link>
+                    </li>
+                    <li>
+                      <Link to="/kingTable">King's Table</Link>
                     </li>
                     <li>
                       <Link to="/contactUs">Contact Us</Link>
                     </li>
-                    <li>
+                    {/* <li>
                       <Link to="/faq">FAQ</Link>
-                    </li>
+                    </li> */}
                   </motion.ul>
                 )}
               </AnimatePresence>
@@ -275,13 +285,16 @@ const Navbar: FC = () => {
           </div>
         ) : (
           <button className={styles.loginButton} onClick={() => openAuthModal('login')}>
-            Login
+            Join
           </button>
         )}
 
         <Link to="/donate" className={styles.donate}>
-          <p>❤️ Donate</p>
+          <p> Donate</p>
         </Link>
+        <button className={styles.loginButton} onClick={() => openAuthModal('register')}>
+          Sign Up
+        </button>
 
         <div className={styles.menuIcon} onClick={() => setMenuOpen(!menuOpen)}>
           {menuOpen ? <FaTimes /> : <FaBars />}

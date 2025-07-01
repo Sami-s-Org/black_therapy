@@ -12,15 +12,15 @@ const AdminLoginModal: React.FC<AdminLoginModalProps> = ({ onLogin }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   const handleLogin = async () => {
     const auth = getAuth()
-
+    setLoading(true)
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password)
       const user = userCredential.user
 
-      // ✅ Check if logged-in user is admin (by email)
       if (user.uid === 'n3EWjofKtTVyLubZEZheQeX3bsH2') {
         localStorage.setItem('isAdmin', 'true')
         onLogin()
@@ -30,6 +30,8 @@ const AdminLoginModal: React.FC<AdminLoginModalProps> = ({ onLogin }) => {
     } catch (error) {
       console.error(error)
       notifyError('Invalid email or password')
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -115,6 +117,7 @@ const AdminLoginModal: React.FC<AdminLoginModalProps> = ({ onLogin }) => {
 
         <button
           onClick={handleLogin}
+          disabled={loading}
           style={{
             width: '100%',
             height: '50px',
@@ -127,7 +130,7 @@ const AdminLoginModal: React.FC<AdminLoginModalProps> = ({ onLogin }) => {
             borderRadius: '4px',
           }}
         >
-          Login
+          {loading ? 'Loading...' : 'Login'}
         </button>
       </div>
     </div>

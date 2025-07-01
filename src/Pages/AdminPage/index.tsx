@@ -8,6 +8,7 @@ import AdminCoaches from './AdminCoaches'
 import AdminTherapists from './Admintherapist'
 import AdminAppoinments from './AdminAppoints'
 import AdminLoginModal from '../../Components/AdminLogin'
+import AdminResource from './AdminResource'
 
 export default function AdminPanel() {
   const [showLogin, setShowLogin] = useState(false)
@@ -80,6 +81,14 @@ export default function AdminPanel() {
               element={
                 <ProtectedRoute>
                   <AdminAppoinments />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/resources"
+              element={
+                <ProtectedRoute>
+                  <AdminResource />
                 </ProtectedRoute>
               }
             />

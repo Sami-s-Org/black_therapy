@@ -31,9 +31,8 @@
 
 .container {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  max-width: 1280px;
+  max-width: 1540px;
   gap: 50px;
   margin: auto;
   padding: 1rem 0rem;
@@ -169,7 +168,7 @@
 
 .donate {
   background: #a88757;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   color: #fff;
   cursor: pointer;
   width: 140px;
@@ -181,7 +180,6 @@
 }
 
 .donate > p {
-  font-family: 'Derivia Regular';
   font-size: 16px;
   line-height: 20px;
   cursor: pointer;
@@ -601,14 +599,13 @@
   border: 1px solid #a88757;
   background-color: #a88757;
   color: white;
-  font-size: 18px;
+  letter-spacing: 1px;
+  font-size: 16px;
   font-weight: bold;
   width: 120px;
   height: 55px;
   border-radius: 0px;
   cursor: pointer;
-  margin-left: auto;
-  margin-right: 1rem;
 }
 
 .menuSection {

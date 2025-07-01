@@ -50,7 +50,7 @@
   font-weight: bold;
   margin-bottom: clamp(1rem, 2vw, 1.5rem);
   line-height: 1.2;
-  color: var(--primary-dark);
+  color: white;
 }
 
 * {
@@ -67,11 +67,11 @@
   font-family: 'Derivia Regular';
   margin-bottom: clamp(1.5rem, 3vw, 2rem);
   line-height: 1.1;
-  color: var(--primary-color);
+  color: white;
 }
 
 .ctaButton {
-  background: linear-gradient(135deg, #a88757, #8c6e43);
+  background: #ffdb58;
   color: var(--text-dark);
   padding: 0 2rem;
   height: 55px;

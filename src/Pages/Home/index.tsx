@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import styles from './home.module.css'
 import MianSlider from '../../Components/MianSlider'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import HomeSlider from '../../Components/HomeSilder'
 import Testimonials from '../../Components/Testimonial'
@@ -9,6 +9,7 @@ import AuthModal from '../../Components/ModelAuth'
 import Reverence from '../../assets/wmremove-transformed111.jpeg'
 import Support from '../../assets/757b6fea-2487-4fd0-9a62-a4baec514e7b.jpeg'
 import Therapist from '../../assets/dfb58278-4ea5-44e3-bbfd-79dc456ff3b8.jpeg'
+import LiveTicker from '../../Components/LiveTracker'
 
 // Standardized animation variants
 const standardTransition = {
@@ -78,8 +79,7 @@ const cards = [
   {
     title: 'Free Help',
     desc: 'Apply for sponsored therapy sessions, thanks to our donors.',
-    image:
-      'https://bostonglobe-prod.cdn.arcpublishing.com/resizer/v2/DQTVFL3D7ZCSDEE2HNGOOY7T3I.jpg?auth=492ba5b949629887ff5935861ac3dc3d0de35d3d33a0396c462dc7c051e4b983&width=1440',
+    image: 'https://t3.ftcdn.net/jpg/03/38/55/48/360_F_338554860_bZNpmpwOqfJp1YG4Q9B1ckrLYyFlPhCr.jpg',
     button: 'Apply',
   },
   {
@@ -122,6 +122,11 @@ const supportOptions = [
     desc: 'Compassionate, trauma-sensitive care.',
   },
   { title: 'Coaching', link: '/coaches', desc: 'Guidance toward personal growth and success.' },
+  {
+    title: 'Grief & Loss Support',
+    link: '/coaches',
+    desc: 'Gentle guidance to help you navigate sorrow, honor your losses, and move toward hope and restoration',
+  },
 ]
 
 // Values data
@@ -138,9 +143,16 @@ export default function Home() {
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
-
+  const navigate = useNavigate()
+  const handleGotoTerapist = () => {
+    navigate('/findTherapist')
+  }
+  // const handleGotoCoaches = () => {
+  //   navigate('/findCoach')
+  // }
   return (
     <>
+      <LiveTicker />
       {showModal && <AuthModal closeModal={() => setShowModal(false)} />}
 
       {/* Main Slider/Banner */}
@@ -457,7 +469,7 @@ export default function Home() {
             transition={{ delay: 0.3 }}
           >
             <motion.button
-              onClick={() => setShowModal(true)}
+              onClick={handleGotoTerapist}
               className={styles.ctaButton}
               whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
             >
@@ -469,7 +481,7 @@ export default function Home() {
       </section>
 
       {/* Featured Coaches Section */}
-      <section className={styles.featuredSection}>
+      {/* <section className={styles.featuredSection}>
         <div className={styles.sectionShape}></div>
         <div className={styles.wrapper}>
           <motion.div
@@ -501,7 +513,7 @@ export default function Home() {
             transition={{ delay: 0.3 }}
           >
             <motion.button
-              onClick={() => setShowModal(true)}
+              onClick={handleGotoCoaches}
               className={styles.ctaButton}
               whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
             >
@@ -510,7 +522,7 @@ export default function Home() {
           </motion.div>
         </div>
         <div className={styles.sectionShape}></div>
-      </section>
+      </section> */}
 
       {/* Testimonials Section */}
       <section className={styles.testimonialsSection}>

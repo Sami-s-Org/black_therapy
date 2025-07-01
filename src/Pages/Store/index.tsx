@@ -8,6 +8,16 @@ export default function Store() {
   return (
     <div className={styles.storeContainer}>
       <div className={styles.banner}>
+        <video autoPlay loop muted playsInline className={styles.bannerVideo}>
+          <source
+            src="https://media.istockphoto.com/id/469267480/video/happy-healthy-athlete-appeciating-the-sun-while-on-a-run.mp4?s=mp4-640x640-is&k=20&c=UzM-ooJS19rJbSAvszJ5BTmZS2R80qaVzxyvw9jCwL0="
+            type="video/mp4"
+          />
+          Your browser does not support the video tag.
+        </video>
+
+        <div className={styles.videoOverlay}></div>
+
         <div className={styles.bannerContent}>
           <h1 className={styles.bannerTitle}>What you wear can tell the story of hope.</h1>
           <p className={styles.bannerSubtitle}>

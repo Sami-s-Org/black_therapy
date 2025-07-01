@@ -129,7 +129,7 @@ export default function JoinAsATherapist() {
     <>
       <HeaderBar heading="Join As A Therapist" />
       <div className={styles.container}>
-        <h1 className={styles.heroTitle}>Heal. Support. Transform Lives.</h1>
+        <h1 className={styles.heroTitle}>Heal Support Transform Lives.</h1>
         <p className={styles.intro}>
           Black men deserve culturally competent mental health support from professionals who understand their unique
           experiences. You can be the therapist who makes a difference.
