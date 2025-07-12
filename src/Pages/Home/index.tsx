@@ -204,9 +204,6 @@ export default function Home() {
 
       {/* Hero Section */}
       <section className={styles.heroContainer}>
-        <p className={styles.sectionHeading} style={{ margin: '40px 0' }}>
-          The Need for Therapy Access for Black Men and Boys
-        </p>
         <div className={styles.banner2}>
           <div className={styles.overlay}>
             <motion.div variants={fadeUpVariant} initial="hidden" animate="visible" transition={{ duration: 0.8 }}>
@@ -240,39 +237,75 @@ export default function Home() {
                 Find a Coach
               </motion.button>
             </div>
-            <motion.div
-              className={styles.cardWrapper}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.3 }}
-              variants={{
-                hidden: { opacity: 0, y: 30 },
-                visible: {
-                  opacity: 1,
-                  y: 0,
-                  transition: { duration: 0.8, staggerChildren: 0.2 },
-                },
-              }}
-            >
-              {[
-                '1 in 3 Black men who need mental health support will never receive it due to cost, stigma, and accessibility issues.',
-                '63% of Black men believe that discussing mental health is seen as a sign of weakness in their communities.',
-                'Only 4% of U.S. therapists are Black, making culturally competent care difficult to find.',
-                'Black men are 20% more likely to experience major depression but are significantly less likely to receive care.',
-                'Suicide rates among Black youth have risen by 78% in the last two decades.',
-              ].map((fact, index) => (
-                <motion.div
-                  key={index}
-                  className={styles.factCard}
-                  variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
-                  whileHover={{ scale: 1.02 }}
-                >
-                  {fact}
-                </motion.div>
-              ))}
-            </motion.div>
           </div>
         </div>
+      </section>
+
+      {/* numbers section */}
+      <section className={styles.numbersSection}>
+        <div className={styles.sectionShape}></div>
+        <div className={styles.wrapper}>
+          <motion.div
+            variants={fadeUpVariant}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-100px' }}
+          >
+            <p className={styles.sectionHeading} style={{ margin: '40px 0' }}>
+              The Need for Therapy Access for Black Men and Boys
+            </p>
+          </motion.div>
+
+          <motion.div
+            className={styles.cardWrapper}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={{
+              hidden: { opacity: 0, y: 30 },
+              visible: {
+                opacity: 1,
+                y: 0,
+                transition: { duration: 0.8, staggerChildren: 0.2 },
+              },
+            }}
+          >
+            {[
+              {
+                number: '1 in 3',
+                text: 'Black men who need mental health support will never receive it due to cost, stigma, and accessibility issues.',
+              },
+              {
+                number: '63%',
+                text: 'of Black men believe that discussing mental health is seen as a sign of weakness in their communities.',
+              },
+              {
+                number: '4%',
+                text: 'Only 4% of U.S. therapists are Black, making culturally competent care difficult to find.',
+              },
+              {
+                number: '20%',
+                text: 'Black men are 20% more likely to experience major depression but are significantly less likely to receive care.',
+              },
+              {
+                number: '78%',
+                text: 'Suicide rates among Black youth have risen by 78% in the last two decades.',
+              },
+            ].map((fact, index) => (
+              <motion.div
+                key={index}
+                className={styles.factCard}
+                variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
+                whileHover={{ scale: 1.05, y: -10 }}
+                transition={{ duration: 0.3 }}
+              >
+                <div className={styles.factNumber}>{fact.number}</div>
+                <div className={styles.factText}>{fact.text}</div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+        <div className={styles.sectionShape}></div>
       </section>
 
       {/* Values Section */}
