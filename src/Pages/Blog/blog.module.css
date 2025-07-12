@@ -7,14 +7,17 @@
   display: flex;
   gap: 24px;
 }
+
 .Wrapper {
   background-color: #f5f5f5;
   padding: 40px 0;
 }
+
 .heroContainer > h1 {
   font-family: 'Derivia Regular';
   color: #a88757;
 }
+
 .card {
   width: calc(33% - 16px);
   background: white;
@@ -25,9 +28,10 @@
   position: relative;
 }
 
+/* 
 .imageWrapper {
   height: 200px;
-}
+} */
 
 .image {
   width: 100%;
@@ -91,77 +95,99 @@
   transform: scale(1.05);
   background-color: #a88757;
 }
+
 @media (min-width: 320px) and (max-width: 480px) {
   .termsContainer {
     width: 100%;
     padding: 20px;
   }
+
   .readMore {
     width: 100%;
   }
+
   .searchBarContainer {
     padding: 20px;
   }
+
   .imageWrapper {
     height: auto;
     overflow: hidden;
   }
+
   .tags {
     margin-top: 10px;
   }
+
   .heroContainer {
     padding: 20px;
   }
+
   .content {
     padding: 20px !important;
   }
+
   .container {
     margin: 40px 20px !important;
     padding: 20px !important;
   }
+
   .content h1 {
     font-size: 24px !important;
   }
+
   .backBtn {
     width: 100%;
   }
+
   .Wrapper {
     padding: 40px 20px;
   }
+
   .heroContainer {
     flex-wrap: wrap;
   }
+
   .card {
     width: 100%;
   }
 }
+
 @media (min-width: 481px) and (max-width: 768px) {
   .heroContainer {
     flex-wrap: wrap;
   }
+
   .card {
     width: 100%;
   }
+
   .Wrapper {
     padding: 40px 20px;
   }
+
   .heroContainer {
     padding: 40px;
   }
+
   .container {
     margin: 40px 20px !important;
   }
+
   .content {
     padding: 30px !important;
   }
+
   .content h1 {
     font-size: 28px !important;
   }
 }
+
 @media (min-width: 769px) and (max-width: 1024px) {
   .heroContainer {
     padding: 40px;
   }
+
   .content h1 {
     font-size: 32px;
   }
@@ -170,6 +196,7 @@
     padding: 40px !important;
   }
 }
+
 .container {
   max-width: 900px;
   margin: 40px auto;
@@ -183,16 +210,19 @@
 
 .imageWrapper img {
   width: 100%;
-  height: 200px;
+  /* height: 300px; */
   border-radius: 8px 8px 0 0;
 }
+
 .clamptext {
   display: -webkit-box;
-  -webkit-line-clamp: 3; /* Number of lines to show */
+  -webkit-line-clamp: 3;
+  /* Number of lines to show */
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
 .meta {
   font-size: 0.9rem;
   color: #7d7d7d;
@@ -228,6 +258,7 @@
   text-align: center;
   padding: 2rem;
 }
+
 .PaginationBtn {
   background-color: #a88757;
   border: 1px solid #a88757;
@@ -236,6 +267,7 @@
   color: #fff;
   border-radius: 4px;
 }
+
 .PaginationContainer {
   display: flex;
   justify-content: end;
@@ -244,12 +276,14 @@
   max-width: 1280px;
   margin: 24px auto;
 }
+
 .searchBarContainer {
   display: flex;
   justify-content: end;
   max-width: 1280px;
   margin: 0 auto;
 }
+
 .searchBar {
   border-radius: 8px;
   width: 300px;
