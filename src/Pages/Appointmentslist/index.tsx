@@ -108,8 +108,8 @@ const AppointmentRow = ({ appointment, userRole, onStatusUpdate }: AppointmentRo
       scale: 0.95,
       y: -10,
       transition: {
-        duration: 0.15,
-        ease: 'easeInOut',
+        duration: 0.3,
+        ease: 'easeInOut' as const, // ✅ correct cast
       },
     },
     visible: {
@@ -118,7 +118,7 @@ const AppointmentRow = ({ appointment, userRole, onStatusUpdate }: AppointmentRo
       y: 0,
       transition: {
         duration: 0.2,
-        ease: 'easeOut',
+        ease: 'easeOut' as const, // ✅ needs cast too
       },
     },
   }
