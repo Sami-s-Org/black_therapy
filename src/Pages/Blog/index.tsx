@@ -76,12 +76,6 @@ const BlogPage = () => {
 
   const totalPages = Math.ceil(filteredBlogs.length / blogsPerPage)
 
-  // @ts-ignore
-  const handlePageChange = (pageNumber: number) => {
-    setCurrentPage(pageNumber)
-    window.scrollTo(0, 0)
-  }
-
   return (
     <div>
       <HeaderBar heading="Blogs" />

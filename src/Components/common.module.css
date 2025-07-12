@@ -11,7 +11,10 @@
   font-family: 'Derivia Regular';
   transition: background-color 0.3s ease, color 0.3s ease;
 }
-
+input:focus {
+  border: none;
+  outline: none;
+}
 .home {
   cursor: pointer;
   font-family: 'Derivia Regular';
@@ -33,7 +36,8 @@
   display: flex;
   align-items: center;
   max-width: 1540px;
-  gap: 50px;
+  gap: 100px;
+  width: 100%;
   margin: auto;
   padding: 1rem 0rem;
 }
@@ -197,8 +201,13 @@
   cursor: pointer;
   color: white;
 }
-
+.ml40 {
+  padding-left: 50px;
+}
 @media screen and (max-width: 510px) {
+  .ml40 {
+    padding-left: 0px;
+  }
   .column {
     width: 100%;
     text-align: center;
@@ -264,7 +273,7 @@
   }
 
   .container {
-    gap: auto;
+    gap: 40px;
     margin: 0;
     width: 90%;
     padding: 1.5rem;
@@ -602,7 +611,7 @@
   letter-spacing: 1px;
   font-size: 16px;
   font-weight: bold;
-  width: 120px;
+  width: 160px;
   height: 55px;
   border-radius: 0px;
   cursor: pointer;

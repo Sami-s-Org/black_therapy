@@ -10,7 +10,7 @@
   color: #a88757;
   font-family: 'Derivia Regular';
   margin-bottom: 1rem;
-  text-align: center;
+  text-align: start;
 }
 
 .intro {
@@ -44,15 +44,24 @@
 }
 .section h2 {
   font-size: 1.5rem;
-  color: #131313;
+  text-align: start;
+  color: #131313 !important;
   margin-bottom: 1rem;
+}
+.whyTherapy {
+  text-align: start !important;
 }
 
 .list {
   list-style: none;
+  text-align: start !important;
   padding-left: 0;
-  color: #7d7d7d;
+  align-items: start !important;
+  color: #131313;
   line-height: 1.7;
+}
+.list > li {
+  text-align: start !important;
 }
 
 .featured {
@@ -64,13 +73,13 @@
   font-weight: normal;
   font-weight: normal;
   margin-bottom: 1.5rem;
-  color: #131313;
+  color: #a88757 !important;
 }
 
 .therapistGrid {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: start;
   gap: 24px;
   padding: 8px;
 }
@@ -135,7 +144,7 @@ strong {
   .title {
     font-size: 1.5rem;
     font-weight: 700;
-    color: #a88757;
+    color: #a88757 !important;
     font-family: 'Derivia Regular';
     margin-bottom: 1rem;
   }

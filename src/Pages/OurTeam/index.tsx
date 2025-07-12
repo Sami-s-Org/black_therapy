@@ -24,11 +24,11 @@ export default function OurTeam() {
                 </div>
                 <div className={styles.textContainer}>
                   <h2>Benjamin Calixte</h2>
-                  <h3>Founder of Therapy for Black Men</h3>
-                  <p>
+                  <h3 style={{ textAlign: 'start' }}>Founder of Therapy for Black Men</h3>
+                  <p style={{ textAlign: 'start' }}>
                     "Our team is committed to helping improve our men's overall well-being and mental health as well as
                     preventing the suffering that occurs when wounds are unaddressed. Our boys and men deserve better."
-                    <br /> <p className={styles.auther}>— Benjamin Calixte</p>
+                    <br /> <p className={styles.auther}> Benjamin Calixte</p>
                   </p>{' '}
                   <br />
                   <div className={styles.email}>
@@ -47,7 +47,7 @@ export default function OurTeam() {
                   what it truly means to nurture potential and inspired me to extend that care beyond my own family
                 </p>
                 <p>
-                  My father instilled in my brothers and me a passion for sports—a foundation that introduced me to
+                  My father instilled in my brothers and me a passion for sports a foundation that introduced me to
                   discipline, resilience, and teamwork. Whether it was basketball, football, baseball, or track, these
                   experiences fueled my growth and became a cornerstone of my identity. Coaching naturally followed,
                   allowing me to guide others toward their best selves.
@@ -56,7 +56,7 @@ export default function OurTeam() {
                   Through fatherhood and coaching, I witnessed firsthand the transformative power of genuine support in
                   shaping mental and emotional well-being. This realization became my calling: to create a space where
                   Black men could find the care and guidance they need to thrive. Together with my wife, Vladimire, we
-                  built TherapyForBlackMen.org—a platform to educate, inspire, and empower Black men every single day.
+                  built TherapyForBlackMen.org a platform to educate, inspire, and empower Black men every single day.
                 </p>
                 <h3>Championing Mental Wellness for Black Men</h3>
                 <p>
@@ -90,14 +90,14 @@ export default function OurTeam() {
                 <h3>A Life Rooted in Love and Purpose</h3>
                 <p>
                   When I’m not coaching or advocating, you’ll often find me reading, writing, or coaching my children in
-                  track and field. I’m proud to have been married to my incredible wife, Vladimire, for 20 years, and
+                  track and field. I’m proud to have been married to my incredible wife, Vladimire, for 21 years, and
                   together we’ve built a family centered on love and growth.
                 </p>
                 <h3>Why This Work Matters</h3>
                 <p>
                   Our mission is simple but vital: to improve the mental health and overall well-being of Black men and
                   boys, breaking the cycles of unaddressed wounds and generational pain. We are here to say that Black
-                  men deserve better—because healing isn’t just an option, it’s a right.
+                  men deserve better because healing isn’t just an option, it’s a right.
                 </p>
               </div>
             </div>
@@ -109,12 +109,12 @@ export default function OurTeam() {
                   <img src={Vladimire} alt="Vladimire Calixte" />
                 </div>
                 <div className={styles.textContainer}>
-                  <h2>Vladimire Calixte</h2>
-                  <h3>Founder of Therapy for Black Men</h3>
-                  <p>
+                  <h2 style={{ textAlign: 'start' }}>Vladimire Calixte</h2>
+                  <h3 style={{ textAlign: 'start' }}>Founder of Therapy for Black Men</h3>
+                  <p style={{ textAlign: 'start' }}>
                     "Your healing matters because healing is a destiny decision."
                     <br />
-                    <p className={styles.auther}>— Vladimire Calixte</p>
+                    <p className={styles.auther}> Vladimire Calixte</p>
                   </p>
                   <br />
 
@@ -152,15 +152,15 @@ export default function OurTeam() {
                 <p>
                   As a therapist, I have the privilege of witnessing the courage Black men bring into the therapy space.
                   Each story they share is an act of bravery, a defiance of the harmful stereotypes that seek to silence
-                  them. I started TherapyForBlackMen.org to create a sanctuary—a place where men of color could access
+                  them. I started TherapyForBlackMen.org to create a sanctuary a place where men of color could access
                   the tools, support, and community needed to reclaim their strength and rewrite their narratives.
                 </p>
 
                 <h3>About Vladimire Calixte</h3>
                 <p>
                   I am proud to bring both lived experience and professional expertise to this mission. Over the last 20
-                  years, I’ve worked with individuals, couples, and families from all walks of life—including
-                  celebrities, politicians, and professional athletes—helping them overcome addiction, depression,
+                  years, I’ve worked with individuals, couples, and families from all walks of life including
+                  celebrities, politicians, and professional athletes helping them overcome addiction, depression,
                   anxiety, trauma, and more.
                 </p>
                 <div className={styles.list}>
@@ -184,8 +184,8 @@ export default function OurTeam() {
                 <h3>My Commitment to You</h3>
                 <p>
                   Through TherapyForBlackMen.org, my mission is clear: to ensure that no Black man has to navigate his
-                  healing journey alone. Together, we can challenge the myths, break the stigmas, and embrace the
-                  truth—that strength is found in vulnerability, and healing is your birthright.
+                  healing journey alone. Together, we can challenge the myths, break the stigmas, and embrace the truth
+                  that strength is found in vulnerability, and healing is your birthright.
                 </p>
               </div>
             </div>
@@ -198,12 +198,12 @@ export default function OurTeam() {
                 </div>
                 <div className={styles.textContainer}>
                   <h2>Sacheen Sawney</h2>
-                  <h3>Virtual Care Executive Manager</h3>
-                  <p>
+                  <h3 style={{ textAlign: 'start' }}>Virtual Care Executive Manager</h3>
+                  <p style={{ textAlign: 'start' }}>
                     "Healing is a collective effort. Together, we can create a world where Black men feel seen,
                     supported, and empowered to thrive."
                     <br />
-                    <p className={styles.auther}>— Sacheen Sawney</p>
+                    <p className={styles.auther}> Sacheen Sawney</p>
                   </p>
                   <br />
 
@@ -246,7 +246,7 @@ export default function OurTeam() {
                   and emotional insight to bridge the gap between the community and the transformative power of therapy.
                 </p>
                 <p>
-                  Her work is not just a career—it is a calling to guide men of color toward a life of wholeness,
+                  Her work is not just a career it is a calling to guide men of color toward a life of wholeness,
                   strength, and self-discovery.
                 </p>
               </div>
@@ -260,11 +260,11 @@ export default function OurTeam() {
                 </div>
                 <div className={styles.textContainer}>
                   <h2>Sabrina Lamour</h2>
-                  <h3>Celebrity Photographer for Therapy for Black Men</h3>
-                  <p>
-                    "Through the lens, I don’t just capture moments—I uncover stories, emotions, and the essence of who
+                  <h3 style={{ textAlign: 'start' }}>Celebrity Photographer for Therapy for Black Men</h3>
+                  <p style={{ textAlign: 'start' }}>
+                    "Through the lens, I don’t just capture moments I uncover stories, emotions, and the essence of who
                     we are." <br />
-                    <p className={styles.auther}>— Sabrina Lamour</p>
+                    <p className={styles.auther}> Sabrina Lamour</p>
                   </p>
                   <br />
 
@@ -304,7 +304,7 @@ export default function OurTeam() {
                   </ul>
                 </div>
                 <p>
-                  Sabrina’s work is more than just photography—it’s a reflection of her passion for human connection and
+                  Sabrina’s work is more than just photography it’s a reflection of her passion for human connection and
                   storytelling. Her artistry bridges cultures, celebrates diversity, and amplifies voices that often go
                   unheard. Whether she’s behind the scenes of a high-profile event or on a mission to document everyday
                   resilience, Sabrina brings authenticity, care, and a profound respect for her craft and her subjects.
@@ -318,7 +318,7 @@ export default function OurTeam() {
                 <p>
                   Through her photography, Sabrina continues to redefine what it means to see, to understand, and to
                   connect. As the Celebrity Photographer for Therapy for Black Men, she captures the essence of the
-                  movement—men standing in their truth, breaking barriers, and embracing healing.
+                  movement men standing in their truth, breaking barriers, and embracing healing.
                 </p>
               </div>
             </div>

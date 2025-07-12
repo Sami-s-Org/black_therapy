@@ -1,11 +1,8 @@
-import React from "react";
-import Carousel from "react-multi-carousel";
-import classNames from "classnames";
-import "react-multi-carousel/lib/styles.css";
-import style from "./homeslider.module.css";
-import Avatar from "../../assets/download.jpeg";
-
-import { Laptop } from "@mui/icons-material";
+import React from 'react'
+import Carousel from 'react-multi-carousel'
+import classNames from 'classnames'
+import 'react-multi-carousel/lib/styles.css'
+import style from './homeslider.module.css'
 
 const responsive = {
   lgdesktop: {
@@ -33,39 +30,11 @@ const responsive = {
     items: 1,
     slidesToSlide: 1,
   },
-};
+}
 
-const sliderItems = [
-  {
-    imageUrl: Avatar,
-    Heading: "James O.",
-    text: "Therapy helped me rediscover my voice in a world that often silences Black men.",
-  },
-  {
-    imageUrl: Avatar,
-    Heading: "Malik B.",
-    text: "I finally feel seen and heard—my therapist truly understands where I'm coming from.",
-  },
-  {
-    imageUrl: Avatar,
-    Heading: "Tyrone K.",
-    text: "Therapy gave me the space to process generational trauma and move forward.",
-  },
-  {
-    imageUrl: Avatar,
-    Heading: "Andre D.",
-    text: "Speaking with someone who respects my cultural background changed everything for me.",
-  },
-  {
-    imageUrl: Avatar,
-    Heading: "Marcus W.",
-    text: "This journey showed me that vulnerability is strength—not weakness.",
-  },
-];
-
-const HomeSlider = () => {
+const HomeSlider = ({ sliderItems }) => {
   return (
-    <div className="parent" style={{ marginBottom: "0px" }}>
+    <div className="parent" style={{ marginBottom: '0px' }}>
       <Carousel
         responsive={responsive}
         autoPlay={true}
@@ -79,14 +48,14 @@ const HomeSlider = () => {
       >
         {sliderItems.map((item, index) => (
           <div className={style.slider} key={index}>
-            <img src={item.imageUrl} className={style.imgs} />
+            <img alt="slider" src={item.imageUrl} className={style.imgs} />
             <p className={classNames(style.heading)}>{item.Heading}</p>
-            <p className={classNames(style.text)}>{item.text}</p>
+            {/* <p className={classNames(style.text)}>{item.text}</p> */}
           </div>
         ))}
       </Carousel>
     </div>
-  );
-};
+  )
+}
 
-export default HomeSlider;
+export default HomeSlider

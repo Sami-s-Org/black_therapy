@@ -1,10 +1,13 @@
 import { useNavigate } from 'react-router-dom'
 import styles from '../common.module.css'
-
+import { collection, addDoc, Timestamp } from 'firebase/firestore'
+import { db } from '../../Share/FireBase'
 import logo from '../../assets/Black-Yellow-Modern-Digital-Marketing-Facebook-Cover-5.png'
 import { useState } from 'react'
 import AuthModal from '../AuthModels'
 import { AnimatePresence } from 'framer-motion'
+import { notifyError, notifySuccess } from '../Toast'
+import classNames from 'classnames'
 const Footer = () => {
   const [authModalOpen, setAuthModalOpen] = useState(false)
   const [authModalType, setAuthModalType] = useState<'login' | 'register'>('login')
@@ -26,6 +29,29 @@ const Footer = () => {
   const switchAuthModal = () => {
     setAuthModalType(authModalType === 'login' ? 'register' : 'login')
   }
+  const [email, setEmail] = useState('')
+  const [loading, setLoading] = useState(false)
+
+  const handleSubscribe = async () => {
+    if (!email || !email.includes('@')) {
+      notifyError('Please enter a valid email address')
+      return
+    }
+
+    setLoading(true)
+    try {
+      await addDoc(collection(db, 'subscribers'), {
+        email,
+        subscribedAt: Timestamp.now(),
+      })
+      notifySuccess('Successfully subscribed!')
+      setEmail('')
+    } catch (err) {
+      console.error('Subscription failed:', err)
+      notifyError('Something went wrong. Please try again.')
+    }
+    setLoading(false)
+  }
   return (
     <>
       <AnimatePresence>
@@ -34,12 +60,18 @@ const Footer = () => {
       <div className={styles.footer}>
         <div className={styles.footerTop}>
           <div className={styles.w50}>
-            <p className={styles.Newsletter}>Newsletter</p>
             <p className={styles.Get}>Get Newsletter</p>
           </div>
           <div className={styles.w50} style={{ display: 'flex', alignItems: 'center' }}>
-            <input className={styles.footerInput} placeholder="Enter Your Email Address" />
-            <button className={styles.Subscribe}>Subscribe Now</button>
+            <input
+              className={styles.footerInput}
+              placeholder="Enter Your Email Address"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <button className={styles.Subscribe} onClick={handleSubscribe} disabled={loading}>
+              {loading ? 'Subscribing...' : 'Subscribe Now'}
+            </button>
           </div>
         </div>
       </div>
@@ -49,13 +81,13 @@ const Footer = () => {
           Contact Us Now
         </button>
       </div>
-      <footer className={styles.footer}>
+      <footer className={classNames(styles.footer, styles.ml40)}>
         <div className={styles.footerTop}>
           <div className={styles.column}>
             <img src={logo} className={styles.logofooter} />
             <p className={styles.FooterDescripation}>
-              Black Therapy offers holistic healing and personalized coaching to empower your mental and emotional
-              well-being
+              Therapy for black men offers holistic healing and personalized coaching to empower your mental and
+              emotional well-being
             </p>
           </div>
           <div className={styles.column}>
@@ -64,7 +96,6 @@ const Footer = () => {
               <li onClick={() => openAuthModal('login')}>Therapist Sign/Log In</li>
               <li onClick={() => openAuthModal('login')}>Coach Sign/Log In</li>
               <li onClick={() => handleNavigation('/blog')}>Blog</li>
-
               <li onClick={() => handleNavigation('/store')}>Store</li>
               <li onClick={() => handleNavigation('/donate')}>Donate</li>
             </ul>

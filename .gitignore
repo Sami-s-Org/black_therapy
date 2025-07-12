@@ -24,3 +24,5 @@ yarn-error.log*
 
 /src_copy
 package.json.bak
+package-lock.json
+ 

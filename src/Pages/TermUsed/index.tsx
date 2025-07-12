@@ -8,10 +8,10 @@ const TermsOfUse = () => {
   })
   return (
     <>
-      <HeaderBar heading="Term Of Used" />
+      <HeaderBar heading="Term Of Use" />
       <div className={styles.termsContainer}>
         <section className={styles.sectionmargin}>
-          <h2>1. Acceptance of Terms</h2>
+          <h2>Acceptance of Terms</h2>
           <p>
             By accessing or using Therapy for Black Men’s website, services, or resources, you agree to these Terms of
             Use. If you do not agree, please do not use this website.
@@ -19,7 +19,7 @@ const TermsOfUse = () => {
         </section>
 
         <section className={styles.sectionmargin}>
-          <h2>2. Mission & Use</h2>
+          <h2>Mission & Use</h2>
           <p>
             Therapy for Black Men provides mental health resources, therapist and coach directories, and educational
             content to support the healing of Black men and boys. Use of our services should always align with this
@@ -28,7 +28,7 @@ const TermsOfUse = () => {
         </section>
 
         <section className={styles.sectionmargin}>
-          <h2>3. User Responsibilities</h2>
+          <h2>User Responsibilities</h2>
           <ul>
             <li>You must be at least 18 years old or have guardian consent to use our services.</li>
             <li>You agree to provide accurate information during any application or sign-up process.</li>
@@ -37,7 +37,7 @@ const TermsOfUse = () => {
         </section>
 
         <section className={styles.sectionmargin}>
-          <h2>4. Content Disclaimer</h2>
+          <h2>Content Disclaimer</h2>
           <p>
             The information provided on this website is not a substitute for professional medical advice, diagnosis, or
             treatment. Always seek help from a licensed healthcare provider for mental health concerns.
@@ -45,7 +45,7 @@ const TermsOfUse = () => {
         </section>
 
         <section className={styles.sectionmargin}>
-          <h2>5. Therapist & Coach Listings</h2>
+          <h2>Therapist & Coach Listings</h2>
           <p>
             We carefully review therapist and coach profiles before approval. However, we do not guarantee any outcomes
             from therapy or coaching services accessed through our platform.
@@ -53,15 +53,15 @@ const TermsOfUse = () => {
         </section>
 
         <section className={styles.sectionmargin}>
-          <h2>6. Intellectual Property</h2>
+          <h2>Intellectual Property</h2>
           <p>
-            All content on this site—including logos, text, images, and videos—is the property of Therapy for Black Men
+            All content on this site including logos, text, images, and videos is the property of Therapy for Black Men
             unless otherwise noted. You may not copy, modify, or redistribute any materials without written permission.
           </p>
         </section>
 
         <section className={styles.sectionmargin}>
-          <h2>7. Prohibited Conduct</h2>
+          <h2>Prohibited Conduct</h2>
           <ul>
             <li>No harassment, hate speech, or discriminatory behavior is tolerated.</li>
             <li>No impersonation, false information, or spam submissions.</li>
@@ -70,7 +70,7 @@ const TermsOfUse = () => {
         </section>
 
         <section className={styles.sectionmargin}>
-          <h2>8. Changes to Terms</h2>
+          <h2>Changes to Terms</h2>
           <p>
             We may revise these Terms at any time. Changes will be posted on this page with an updated date. Continued
             use of the site after changes implies acceptance.
@@ -78,12 +78,12 @@ const TermsOfUse = () => {
         </section>
 
         <section className={styles.sectionmargin}>
-          <h2>9. Termination</h2>
+          <h2>Termination</h2>
           <p>We reserve the right to suspend or terminate access for users who violate these Terms.</p>
         </section>
 
         <section className={styles.sectionmargin}>
-          <h2>10. Contact Us</h2>
+          <h2>Contact Us</h2>
           <p>
             If you have any questions or concerns about these Terms, please contact us at{' '}
             <a href="mailto:info@therapyforblackmen.org">info@therapyforblackmen.org</a>.

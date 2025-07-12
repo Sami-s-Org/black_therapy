@@ -120,7 +120,7 @@ export default function JoinAsACoach() {
           difference.
         </p>
         <p className={styles.bodyText}>
-          At Therapy for Black Men, we are building a movement—one that empowers Black men to step into their full
+          At Therapy for Black Men, we are building a movement one that empowers Black men to step into their full
           potential, cultivate resilience, and redefine success on their own terms.
         </p>
 
@@ -131,7 +131,7 @@ export default function JoinAsACoach() {
           </li>
           <li>Financial literacy and personal growth resources remain scarce in many Black communities.</li>
           <li>
-            Mental health and success go hand in hand—when Black men have access to coaching, they are better equipped
+            Mental health and success go hand in hand when Black men have access to coaching, they are better equipped
             to thrive in all areas of life.
           </li>
         </ul>

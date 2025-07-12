@@ -35,12 +35,16 @@
 }
 
 .content {
-  position: relative;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 2;
   text-align: center;
   color: white;
-  margin: 0;
-  padding: 0;
+  padding: 0 1rem;
+  width: 100%;
+  max-width: 1000px;
 }
 
 .mainHeadline {
@@ -71,7 +75,7 @@
 }
 
 .ctaButton {
-  background: #ffdb58;
+  background: #a88757;
   color: var(--text-dark);
   padding: 0 2rem;
   height: 55px;
@@ -157,4 +161,29 @@
   .subtext {
     margin-bottom: 1.5rem;
   }
+}
+.paginationDots {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  gap: 12px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #fff;
+  opacity: 0.4;
+  transition: 0.3s ease;
+  cursor: pointer;
+}
+
+.activeDot {
+  opacity: 1;
+  background-color: #a88757;
+  transform: scale(1.2);
 }

@@ -30,6 +30,7 @@
 section h2 {
   font-family: 'Derivia Regular';
   color: #a88757;
+  text-align: start !important;
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
 }
@@ -38,7 +39,6 @@ section p,
 section ul {
   font-size: 1rem;
   line-height: 1.6;
-  text-align: center;
   color: #131313;
 }
 
@@ -48,7 +48,7 @@ section ul {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  align-items: center;
+  align-items: start;
 }
 section ul > li {
   text-align: center;

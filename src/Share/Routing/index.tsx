@@ -25,6 +25,7 @@ import AppointmentList from '../../Pages/Appointmentslist'
 import Chatpage from '../../Pages/Chatpage'
 import MyProfile from '../../Pages/MyProfile'
 import KingTable from "../../Pages/King's Table"
+import FreeTherapy from '../../Pages/FreeTherapy'
 const Layout: React.FC<PropsWithChildren<{}>> = ({ children }) => {
   const location = useLocation()
   const isAdminRoute = location.pathname.startsWith('/admin')
@@ -65,6 +66,7 @@ const AppRouter = () => {
           <Route path="/appointmentlist" element={<AppointmentList />} />
           <Route path="/chat/:appointmentId" element={<Chatpage />} />
           <Route path="/myprofile" element={<MyProfile />} />
+          <Route path="/freeTherapy" element={<FreeTherapy />} />
           <Route path="/kingTable" element={<KingTable />} />
         </Routes>
       </Layout>

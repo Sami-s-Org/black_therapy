@@ -21,7 +21,7 @@ export default function Store() {
         <div className={styles.bannerContent}>
           <h1 className={styles.bannerTitle}>What you wear can tell the story of hope.</h1>
           <p className={styles.bannerSubtitle}>
-            Every piece in our collection was designed with intention—to reflect the strength, healing, and dignity of
+            Every piece in our collection was designed with intention to reflect the strength, healing, and dignity of
             Black men on their journey toward wholeness. Whether you're a brother in healing or a supporter standing in
             the gap, your purchase helps us provide life-changing, free therapy to those in need.
           </p>

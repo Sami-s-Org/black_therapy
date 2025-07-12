@@ -32,7 +32,7 @@ const BoardMembers = () => {
                   A native of Brooklyn, NY, Georges carries the values of community, accountability, and leadership into
                   every aspect of his life. With a bachelor’s degree in Business and a focus on leadership from
                   Northeastern University, he has cultivated a career grounded in problem-solving and forward-thinking
-                  strategies. But for Georges, leadership extends beyond the workplace—it’s about listening, uplifting,
+                  strategies. But for Georges, leadership extends beyond the workplace it’s about listening, uplifting,
                   and building a strong foundation for others to thrive.
                 </p>
                 <div className={styles.email}>
@@ -51,13 +51,13 @@ const BoardMembers = () => {
                 transform lives but also strengthen families and communities
               </p>
               <p>
-                Georges holds fast to the idea that having the right tools—whether for a project, a personal challenge,
-                or a dream—makes success possible. Yet he also recognizes the power of human connection, believing that
+                Georges holds fast to the idea that having the right tools whether for a project, a personal challenge,
+                or a dream makes success possible. Yet he also recognizes the power of human connection, believing that
                 sometimes all it takes to change a life is a listening ear.
               </p>
               <h3>Why Therapy for Black Men Matters</h3>
               <p>
-                For Georges, Therapy for Black Men represents more than a platform—it’s a movement to dismantle
+                For Georges, Therapy for Black Men represents more than a platform it’s a movement to dismantle
                 barriers, foster healing, and empower Black men to reclaim their mental health and well-being. He
                 understands that accountability, leadership, and support are key ingredients in personal transformation,
                 and he is committed to helping the organization expand its reach and impact.

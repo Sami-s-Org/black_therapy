@@ -33,7 +33,7 @@ const Testimonials = () => {
             <div key={index} className={styles.card}>
               <FaQuoteLeft className={styles.quoteIcon} />
               <p className={styles.quote}>{item.quote}</p>
-              <p className={styles.author}>— {item.author}</p>
+              <p className={styles.author}> {item.author}</p>
             </div>
           ))}
         </div>
@@ -42,7 +42,7 @@ const Testimonials = () => {
           <h3 className={styles.heading}>Strength Still Needs Support</h3>
           <p className={styles.supportText}>
             Even the strongest among us need a safe place to rest, to heal, and to grow. Strength doesn’t mean enduring
-            alone—it means having the courage to seek support when you need it most.
+            alone it means having the courage to seek support when you need it most.
           </p>
           <p className={styles.supportText}>
             At <strong style={{ color: '#a88757' }}>Therapy for Black Men</strong>, we provide a compassionate,

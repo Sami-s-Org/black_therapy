@@ -170,7 +170,7 @@ const Navbar: FC = () => {
                       <Link to="/joinAsATherapist">Join As A Therapist</Link>
                     </li>
                     <li>
-                      <Link to="/joinAsACoach"> Find a Coach</Link>
+                      <Link to="/joinAsACoach"> Join As A Coach</Link>
                     </li>
                     <li>
                       <Link to="/ourTeam">Meet Our Team</Link>
@@ -207,6 +207,12 @@ const Navbar: FC = () => {
                     transition={{ duration: 0.3 }}
                   >
                     <li>
+                      <Link to="/blog">Blog</Link>
+                    </li>
+                    <li>
+                      <Link to="/contactUs">Contact Us</Link>
+                    </li>
+                    <li>
                       <Link to="/findTherapist"> Find a Therapist</Link>
                     </li>
                     <li>
@@ -214,14 +220,9 @@ const Navbar: FC = () => {
                     </li>
 
                     <li>
-                      <Link to="/blog">Blog</Link>
-                    </li>
-                    <li>
                       <Link to="/kingTable">King's Table</Link>
                     </li>
-                    <li>
-                      <Link to="/contactUs">Contact Us</Link>
-                    </li>
+
                     {/* <li>
                       <Link to="/faq">FAQ</Link>
                     </li> */}
@@ -285,16 +286,13 @@ const Navbar: FC = () => {
           </div>
         ) : (
           <button className={styles.loginButton} onClick={() => openAuthModal('login')}>
-            Join
+            Sign In / Join
           </button>
         )}
 
         <Link to="/donate" className={styles.donate}>
           <p> Donate</p>
         </Link>
-        <button className={styles.loginButton} onClick={() => openAuthModal('register')}>
-          Sign Up
-        </button>
 
         <div className={styles.menuIcon} onClick={() => setMenuOpen(!menuOpen)}>
           {menuOpen ? <FaTimes /> : <FaBars />}

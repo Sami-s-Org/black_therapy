@@ -9,8 +9,8 @@ export const resources = [
   {
     section: 'Trauma & Grief Healing Resources',
     items: [
-      'Post-Traumatic Slave Syndrome - Dr. Joy DeGruy',
-      'The Body Keeps The Score - Dr. Bessel van der Kolk',
+      'Post-Traumatic Slave Syndrome, Dr. Joy DeGruy',
+      'The Body Keeps The Score, Dr. Bessel van der Kolk',
       'GriefShare (Faith-based grief support groups)',
       'National Center for PTSD (Veterans Affairs resource)',
     ],

@@ -66,31 +66,23 @@ export default function FindTherapist() {
       <HeaderBar heading="Find A Therapist" />
       <div className={styles.page}>
         <h1 className={styles.title}>Break the Silence. Embrace Healing. Find a Therapist Who Understands You</h1>
-        <h1 className={styles.title}>Because Your Well-Being Deserves More</h1>
+        <h1 className={styles.title}>(Because Your Well-Being Deserves More)</h1>
+        <p className={styles.intro}>Finding the right support can feel overwhelming. You may be asking yourself:</p>
+        <ul className={styles.list}>
+          <li>How close are they?</li>
+          <li>Will they accept my insurance?</li>
+          <li>Do they truly understand my experiences?</li>
+        </ul>
         <p className={styles.intro}>
-          At Therapy for Black Men, we recognize that healing extends beyond therapy. Sometimes, you need guidance,
-          structure, and accountability to achieve your personal and professional goals.
+          We understand how deeply personal this decision is, and at <strong>Therapy for Black Men</strong>, we’re
+          committed to making it easier.
         </p>
-        <p className={styles.intro}>Because Your Well-Being Deserves More</p>
-        <section className={styles.intro}>
-          <p>Finding the right support can feel overwhelming. You may be asking yourself:</p>
-          <ul>
-            <li>How close are they?</li>
-            <li>Will they accept my insurance?</li>
-            <li>Do they truly understand my experiences?</li>
-          </ul>
-          <p>
-            We understand how deeply personal this decision is, and at <strong>Therapy for Black Men</strong>, we’re
-            committed to making it easier.
-          </p>
-        </section>
-
         <section className={styles.directory}>
-          <h2 style={{ margin: '40px 0' }}>A Directory Designed With You in Mind</h2>
+          <h2>A Directory Designed With You in Mind</h2>
           <p>
             We’ve created a powerful, user-friendly tool to connect you with professionals who understand your journey.
           </p>
-          <ul>
+          <ul className={styles.list}>
             <li>
               <strong>Location:</strong> Find someone near you or explore virtual options for convenience and
               flexibility.
@@ -105,26 +97,82 @@ export default function FindTherapist() {
             </li>
           </ul>
         </section>
-
         <section className={styles.support}>
-          <h2 style={{ margin: '40px 0' }}>Support Every Step of the Way</h2>
+          <h2>Support Every Step of the Way</h2>
           <p>
             Healing is a journey, not a destination, and you don’t have to walk it alone. Along with access to
             therapists and coaches, we provide resources and tools to support you as you work toward the peace,
             strength, and clarity you deserve.
           </p>
         </section>
-
         <section className={styles.closing}>
-          <h2 style={{ margin: '40px 0' }}>You’re Not Alone</h2>
+          <h2>You’re Not Alone</h2>
           <p>
-            It’s time to let go of the message that you need to “man up.” Vulnerability is not weakness — it’s a
+            It’s time to let go of the message that you need to “man up.” Vulnerability is not weakness, it’s a
             courageous step toward a stronger, more fulfilled version of yourself.
           </p>
+          <p>
+            <strong>Start Your Change Today</strong>
+          </p>
+          <p>
+            Take the first step. Let us help you find the therapist or coach who will stand by your side and help you
+            align with your full potential.
+          </p>
+          <p>You don’t have to ‘man up’; start your healing journey today.</p>
         </section>
-
+        <section className={styles.whyTherapy}>
+          <h2>Why Therapy Matters</h2>
+          <ul className={styles.list}>
+            <li>
+              <strong>Mental Health Support:</strong> Therapy provides the tools to manage anxiety, depression, and
+              stress.
+            </li>
+            <li>
+              <strong>Healing from Trauma:</strong> Process past experiences in a safe and supportive environment.
+            </li>
+            <li>
+              <strong>Relationship Building:</strong> Improve communication and strengthen connections.
+            </li>
+            <li>
+              <strong>Self-Discovery:</strong> Gain clarity, confidence, and resilience.
+            </li>
+          </ul>
+        </section>
+        <section className={styles.howItWorks}>
+          <h2>How It Works</h2>
+          <ol className={styles.numberedList}>
+            <li>
+              <strong>Search for a Therapist:</strong> Use our advanced filters to find a therapist that matches your
+              needs.
+            </li>
+            <li>
+              <strong>Browse Profiles:</strong> View therapist qualifications, specialties, and client reviews.
+            </li>
+            <li>
+              <strong>Connect & Book a Session:</strong> Reach out directly to schedule an appointment or consultation.
+            </li>
+          </ol>
+        </section>{' '}
+        <section className={styles.section}>
+          <p className={styles.title}>Search Filters for Therapists Directory</p>
+          <ul className={styles.list}>
+            <li>
+              <strong>Specialization:</strong> Personal Development, Career Growth, Relationships, Financial Coaching,
+              Health & Wellness
+            </li>
+            <li>
+              <strong>Location:</strong> In-person or virtual sessions available
+            </li>
+            <li>
+              <strong>Price & Packages:</strong> Various pricing options and coaching plans
+            </li>
+            <li>
+              <strong>Languages Spoken:</strong> Connect with a coach who understands your background and culture
+            </li>
+          </ul>
+        </section>
         <section className={styles.featured}>
-          <h2 className={styles.featuredTitle}>Featured Therapists</h2>
+          <h2 className={styles.featuredTitle}>Therapists</h2>
           <div className={styles.searchContainer}>
             <input
               type="text"

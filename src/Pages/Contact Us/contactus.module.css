@@ -1,6 +1,9 @@
 .wrapper {
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
   padding: 40px;
 }
 
@@ -8,17 +11,24 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
+  flex-direction: column;
   max-width: 1200px;
   background-color: #f5f5f5;
   border-radius: 24px;
+  text-align: center;
   padding: 40px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.container22 {
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
 }
 form > input {
   background-color: white;
 }
 .leftPanel {
-  width: 48%;
+  width: 100%;
   padding-right: 20px;
 }
 
@@ -56,7 +66,8 @@ form > input {
 }
 
 .form {
-  width: 48%;
+  width: 100%;
+  margin-top: 40px;
 }
 
 .input,
@@ -86,6 +97,21 @@ form > input {
   border-radius: 0px;
   width: 100%;
 }
+.heroTitle {
+  font-family: 'Derivia Regular';
+  font-size: 60px;
+  font-weight: normal;
+  color: #a88757;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.intro {
+  font-size: 1.05rem;
+  color: #131313;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
 
 .button:hover {
   background-color: #a88757;
@@ -94,6 +120,9 @@ form > input {
 @media (max-width: 768px) {
   .container {
     flex-direction: column;
+    padding: 20px;
+  }
+  .container22 {
     padding: 20px;
   }
 
@@ -107,15 +136,83 @@ form > input {
   .wrapper {
     padding: 40px 20px;
   }
-}
-@media (max-width: 480px) {
-  .container {
-    padding: 20px !important;
-  }
-  .wrapper {
-    padding: 40px 20px;
-  }
-  .title {
+  .heroTitle {
     font-size: 32px;
   }
+}
+@media (max-width: 480px) {
+  .heroTitle {
+    font-size: 32px;
+  }
+  .container {
+    padding: 20px !important;
+    flex-direction: column;
+  }
+}
+.container22 {
+  padding: 20px !important;
+}
+.wrapper {
+  padding: 40px 20px;
+}
+.title {
+  font-size: 32px;
+}
+
+.form,
+.leftPanel {
+  flex: 1 1 100%;
+}
+.leftPanel {
+  flex: 1 1 400px;
+}
+
+.title {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+}
+
+.text {
+  margin-bottom: 25px;
+  color: #555;
+}
+
+.contactItem {
+  margin-bottom: 30px;
+}
+
+.contactItem h4 {
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+}
+
+.contactItem a {
+  color: #a88757;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.contactItem a:hover {
+  text-decoration: underline;
+}
+
+.form {
+  flex: 1 1 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.input,
+.textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.textarea {
+  height: 150px;
+  resize: none;
 }

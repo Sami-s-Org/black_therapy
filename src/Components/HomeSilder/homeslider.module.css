@@ -1,19 +1,20 @@
 .imgs {
   height: 256px;
   width: 25%;
+  object-fit: cover;
   border-radius: 50%;
   position: relative;
   margin: 0 12px;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 * {
-  font-family: "Mulish", sans-serif;
+  font-family: 'Mulish', sans-serif;
   padding: 0%;
   margin: 0%;
   box-sizing: border-box;
 }
 .heading {
-  font-family: "Derivia Regular";
+  font-family: 'Derivia Regular';
   font-size: 32px;
   font-weight: 500;
   margin-top: 16px;
