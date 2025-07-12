@@ -117,7 +117,6 @@
 }
 
 .ctaButton:hover {
-  color: #fff;
   transform: translateY(-3px);
   box-shadow: 0 8px 25px rgba(168, 135, 87, 0.4);
 }
@@ -163,7 +162,6 @@
     margin-bottom: 1.5rem;
   }
 }
-
 .paginationDots {
   position: absolute;
   bottom: 30px;

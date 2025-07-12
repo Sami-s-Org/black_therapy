@@ -16,9 +16,7 @@ const MianSlider = () => {
         <div className={styles.textContent}>
           <h1 className={styles.mainHeadline}>You don't have to carry it alone anymore</h1>
           <p className={styles.subtext}> Therapy for Black Men</p>
-          <a href="/findTherapist" className={styles.ctaButton}>
-            Start Your Journey Home Toward Wholeness
-          </a>
+          <button className={styles.ctaButton}>Start Your Journey Home Toward Wholeness</button>
         </div>
       </div>
 

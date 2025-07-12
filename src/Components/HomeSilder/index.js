@@ -3,6 +3,9 @@ import Carousel from 'react-multi-carousel'
 import classNames from 'classnames'
 import 'react-multi-carousel/lib/styles.css'
 import style from './homeslider.module.css'
+import Avatar from '../../assets/IMG_1518-1-1-1-644x1024.jpg'
+
+import { Laptop } from '@mui/icons-material'
 
 const responsive = {
   lgdesktop: {
@@ -48,7 +51,7 @@ const HomeSlider = ({ sliderItems }) => {
       >
         {sliderItems.map((item, index) => (
           <div className={style.slider} key={index}>
-            <img alt="slider" src={item.imageUrl} className={style.imgs} />
+            <img src={item.imageUrl} className={style.imgs} />
             <p className={classNames(style.heading)}>{item.Heading}</p>
             {/* <p className={classNames(style.text)}>{item.text}</p> */}
           </div>

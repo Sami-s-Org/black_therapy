@@ -120,8 +120,8 @@ const Navbar: FC = () => {
         <img src={logo} className={styles.logo} alt="Black Therapy Logo" onClick={() => navigate('/')} />
 
         <nav className={`${styles.nav} ${menuOpen ? styles.open : ''}`}>
-          <ul>
-            <li>
+          <ul style={{ padding: '0px' }}>
+            <li onClick={() => navigateTo('/')}>
               <Link
                 to="/"
                 className={`${styles.navLink} ${activeLink === '/' ? styles.active : ''}`}
@@ -130,7 +130,7 @@ const Navbar: FC = () => {
                 Home
               </Link>
             </li>
-            <li>
+            <li onClick={() => navigateTo('/findTherapist')}>
               <Link
                 to="/findTherapist"
                 className={`${styles.navLink} ${activeLink === '/findTherapist' ? styles.active : ''}`}
@@ -139,7 +139,7 @@ const Navbar: FC = () => {
                 Find a Therapist
               </Link>
             </li>
-            <li>
+            <li onClick={() => navigateTo('/findCoach')}>
               <Link
                 to="/findCoach"
                 className={`${styles.navLink} ${activeLink === '/findCoach' ? styles.active : ''}`}
@@ -166,22 +166,22 @@ const Navbar: FC = () => {
                     exit={{ opacity: 0, y: -10 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <li>
+                    <li onClick={() => navigateTo('/joinAsATherapist')}>
                       <Link to="/joinAsATherapist">Join As A Therapist</Link>
                     </li>
-                    <li>
+                    <li onClick={() => navigateTo('/joinAsACoach')}>
                       <Link to="/joinAsACoach"> Join As A Coach</Link>
                     </li>
-                    <li>
+                    <li onClick={() => navigateTo('/ourTeam')}>
                       <Link to="/ourTeam">Meet Our Team</Link>
                     </li>
-                    <li>
+                    <li onClick={() => navigateTo('/boardMembers')}>
                       <Link to="/boardMembers">Board Members</Link>
                     </li>
-                    <li>
+                    <li onClick={() => navigateTo('/termsOfUse')}>
                       <Link to="/termsOfUse">Terms of Use</Link>
                     </li>
-                    <li>
+                    <li onClick={() => navigateTo('/privacyPolicy')}>
                       <Link to="/privacyPolicy">Privacy Policy</Link>
                     </li>
                   </motion.ul>
@@ -206,20 +206,20 @@ const Navbar: FC = () => {
                     exit={{ opacity: 0, y: -10 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <li>
+                    <li onClick={() => navigateTo('/blog')}>
                       <Link to="/blog">Blog</Link>
                     </li>
-                    <li>
+                    <li onClick={() => navigateTo('/contactUs')}>
                       <Link to="/contactUs">Contact Us</Link>
                     </li>
-                    <li>
+                    <li onClick={() => navigateTo('/findTherapist')}>
                       <Link to="/findTherapist"> Find a Therapist</Link>
                     </li>
-                    <li>
+                    <li onClick={() => navigateTo('/findCoach')}>
                       <Link to="/findCoach"> Find a Coach</Link>
                     </li>
 
-                    <li>
+                    <li onClick={() => navigateTo('/kingTable')}>
                       <Link to="/kingTable">King's Table</Link>
                     </li>
 
@@ -231,13 +231,14 @@ const Navbar: FC = () => {
               </AnimatePresence>
             </li>
 
-            <li>
-              <Link
-                to="/store"
-                className={`${styles.navLink} ${activeLink === '/store' ? styles.active : ''}`}
-                onClick={() => navigateTo('/store')}
-              >
+            <li onClick={() => navigateTo('/store')}>
+              <Link to="/store" className={`${styles.navLink} ${activeLink === '/store' ? styles.active : ''}`}>
                 Store
+              </Link>
+            </li>
+            <li className={styles.smOnly}>
+              <Link style={{ color: 'white' }} to="/donate" onClick={() => navigateTo('/donate')}>
+                <p style={{ color: 'white', textAlign: 'center' }}>Donate</p>
               </Link>
             </li>
           </ul>

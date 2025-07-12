@@ -128,7 +128,7 @@ const AuthModal: FC<AuthModalProps> = ({ type, onClose, onSwitch, onLoginSuccess
         onClick={(e) => e.stopPropagation()}
       >
         <FaTimes className={styles.closeModal} onClick={onClose} />
-        <h2 className={styles.modelheading}>{type === 'login' ? 'Login' : 'Register'}</h2>
+        <h2 className={styles.modelheading}>{type === 'login' ? 'Login' : 'Add Therapist'}</h2>
 
         {type === 'login' ? (
           <form onSubmit={handleLogin}>

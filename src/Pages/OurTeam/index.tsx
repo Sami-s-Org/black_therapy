@@ -26,9 +26,9 @@ export default function OurTeam() {
                   <h2>Benjamin Calixte</h2>
                   <h3 style={{ textAlign: 'start' }}>Founder of Therapy for Black Men</h3>
                   <p style={{ textAlign: 'start' }}>
-                    "Our team is committed to helping improve our men's overall well-being and mental health as well as
+                    "Our team is committed to helping improve our men's overall well,being and mental health as well as
                     preventing the suffering that occurs when wounds are unaddressed. Our boys and men deserve better."
-                    <br /> <p className={styles.auther}> Benjamin Calixte</p>
+                    <br /> <p className={styles.auther}>— Benjamin Calixte</p>
                   </p>{' '}
                   <br />
                   <div className={styles.email}>
@@ -42,27 +42,27 @@ export default function OurTeam() {
               <div className={styles.dfff}>
                 <h3>Why Therapy for Black Men Matters</h3>
                 <p>
-                  My greatest joy in life was being a stay-at-home dad. That role, rooted in love and service, taught me
+                  My greatest joy in life was being a stay,at,home dad. That role, rooted in love and service, taught me
                   the profound importance of presence, connection, and intentional impact. It shaped my understanding of
                   what it truly means to nurture potential and inspired me to extend that care beyond my own family
                 </p>
                 <p>
-                  My father instilled in my brothers and me a passion for sports a foundation that introduced me to
+                  My father instilled in my brothers and me a passion for sports—a foundation that introduced me to
                   discipline, resilience, and teamwork. Whether it was basketball, football, baseball, or track, these
                   experiences fueled my growth and became a cornerstone of my identity. Coaching naturally followed,
                   allowing me to guide others toward their best selves.
                 </p>
                 <p>
                   Through fatherhood and coaching, I witnessed firsthand the transformative power of genuine support in
-                  shaping mental and emotional well-being. This realization became my calling: to create a space where
+                  shaping mental and emotional well,being. This realization became my calling: to create a space where
                   Black men could find the care and guidance they need to thrive. Together with my wife, Vladimire, we
-                  built TherapyForBlackMen.org a platform to educate, inspire, and empower Black men every single day.
+                  built TherapyForBlackMen.org—a platform to educate, inspire, and empower Black men every single day.
                 </p>
                 <h3>Championing Mental Wellness for Black Men</h3>
                 <p>
-                  As a certified professional coach and New York University-trained life and executive coach, I approach
+                  As a certified professional coach and New York University,trained life and executive coach, I approach
                   health and wellness holistically. My professional journey includes 17 years in customer relations and
-                  8 years in managerial roles, blending hands-on experience with a deep commitment to advocacy and
+                  8 years in managerial roles, blending hands,on experience with a deep commitment to advocacy and
                   empowerment.
                 </p>
                 <p>
@@ -95,9 +95,9 @@ export default function OurTeam() {
                 </p>
                 <h3>Why This Work Matters</h3>
                 <p>
-                  Our mission is simple but vital: to improve the mental health and overall well-being of Black men and
+                  Our mission is simple but vital: to improve the mental health and overall well,being of Black men and
                   boys, breaking the cycles of unaddressed wounds and generational pain. We are here to say that Black
-                  men deserve better because healing isn’t just an option, it’s a right.
+                  men deserve better—because healing isn’t just an option, it’s a right.
                 </p>
               </div>
             </div>
@@ -114,7 +114,7 @@ export default function OurTeam() {
                   <p style={{ textAlign: 'start' }}>
                     "Your healing matters because healing is a destiny decision."
                     <br />
-                    <p className={styles.auther}> Vladimire Calixte</p>
+                    <p className={styles.auther}>— Vladimire Calixte</p>
                   </p>
                   <br />
 
@@ -152,15 +152,15 @@ export default function OurTeam() {
                 <p>
                   As a therapist, I have the privilege of witnessing the courage Black men bring into the therapy space.
                   Each story they share is an act of bravery, a defiance of the harmful stereotypes that seek to silence
-                  them. I started TherapyForBlackMen.org to create a sanctuary a place where men of color could access
+                  them. I started TherapyForBlackMen.org to create a sanctuary—a place where men of color could access
                   the tools, support, and community needed to reclaim their strength and rewrite their narratives.
                 </p>
 
                 <h3>About Vladimire Calixte</h3>
                 <p>
-                  I am proud to bring both lived experience and professional expertise to this mission. Over the last 20
-                  years, I’ve worked with individuals, couples, and families from all walks of life including
-                  celebrities, politicians, and professional athletes helping them overcome addiction, depression,
+                  I am proud to bring both lived experience and professional expertise to this mission. Over the last 21
+                  years, I’ve worked with individuals, couples, and families from all walks of life—including
+                  celebrities, politicians, and professional athletes—helping them overcome addiction, depression,
                   anxiety, trauma, and more.
                 </p>
                 <div className={styles.list}>
@@ -184,8 +184,8 @@ export default function OurTeam() {
                 <h3>My Commitment to You</h3>
                 <p>
                   Through TherapyForBlackMen.org, my mission is clear: to ensure that no Black man has to navigate his
-                  healing journey alone. Together, we can challenge the myths, break the stigmas, and embrace the truth
-                  that strength is found in vulnerability, and healing is your birthright.
+                  healing journey alone. Together, we can challenge the myths, break the stigmas, and embrace the
+                  truth—that strength is found in vulnerability, and healing is your birthright.
                 </p>
               </div>
             </div>
@@ -203,7 +203,7 @@ export default function OurTeam() {
                     "Healing is a collective effort. Together, we can create a world where Black men feel seen,
                     supported, and empowered to thrive."
                     <br />
-                    <p className={styles.auther}> Sacheen Sawney</p>
+                    <p className={styles.auther}>— Sacheen Sawney</p>
                   </p>
                   <br />
 
@@ -230,7 +230,7 @@ export default function OurTeam() {
                 </p>
                 <p>
                   Her work is deeply rooted in her Caribbean heritage, which fuels her passion for helping men of color
-                  align with their greatness and achieve lasting well-being.
+                  align with their greatness and achieve lasting well,being.
                 </p>
                 <p>
                   In 2021, Sacheen joined Spiked Spin Wellness Co. as General Manager, where she furthered their mission
@@ -246,8 +246,8 @@ export default function OurTeam() {
                   and emotional insight to bridge the gap between the community and the transformative power of therapy.
                 </p>
                 <p>
-                  Her work is not just a career it is a calling to guide men of color toward a life of wholeness,
-                  strength, and self-discovery.
+                  Her work is not just a career—it is a calling to guide men of color toward a life of wholeness,
+                  strength, and self,discovery.
                 </p>
               </div>
             </div>
@@ -262,9 +262,9 @@ export default function OurTeam() {
                   <h2>Sabrina Lamour</h2>
                   <h3 style={{ textAlign: 'start' }}>Celebrity Photographer for Therapy for Black Men</h3>
                   <p style={{ textAlign: 'start' }}>
-                    "Through the lens, I don’t just capture moments I uncover stories, emotions, and the essence of who
+                    "Through the lens, I don’t just capture moments—I uncover stories, emotions, and the essence of who
                     we are." <br />
-                    <p className={styles.auther}> Sabrina Lamour</p>
+                    <p className={styles.auther}>— Sabrina Lamour</p>
                   </p>
                   <br />
 
@@ -300,13 +300,13 @@ export default function OurTeam() {
                     <li>MLK Now</li>
                     <li>Afro B. Album Release</li>
                     <li>A Night with Chrisette Michele</li>
-                    <li>And many more red-carpet events, fashion shows, and charity initiatives</li>
+                    <li>And many more red,carpet events, fashion shows, and charity initiatives</li>
                   </ul>
                 </div>
                 <p>
-                  Sabrina’s work is more than just photography it’s a reflection of her passion for human connection and
+                  Sabrina’s work is more than just photography—it’s a reflection of her passion for human connection and
                   storytelling. Her artistry bridges cultures, celebrates diversity, and amplifies voices that often go
-                  unheard. Whether she’s behind the scenes of a high-profile event or on a mission to document everyday
+                  unheard. Whether she’s behind the scenes of a high,profile event or on a mission to document everyday
                   resilience, Sabrina brings authenticity, care, and a profound respect for her craft and her subjects.
                 </p>
                 <p>
@@ -318,7 +318,7 @@ export default function OurTeam() {
                 <p>
                   Through her photography, Sabrina continues to redefine what it means to see, to understand, and to
                   connect. As the Celebrity Photographer for Therapy for Black Men, she captures the essence of the
-                  movement men standing in their truth, breaking barriers, and embracing healing.
+                  movement—men standing in their truth, breaking barriers, and embracing healing.
                 </p>
               </div>
             </div>

@@ -51,7 +51,7 @@ export default function ContactUs() {
           <h1 className={styles.heroTitle}>We're Here for You</h1>
           <p className={styles.intro}>
             At <strong style={{ color: 'black', fontFamily: 'inherit' }}>Therapy for Black Men</strong>, our mission
-            goes beyond providing resources we’re dedicated to creating a community where you feel truly seen,
+            goes beyond providing resources — we’re dedicated to creating a community where you feel truly seen,
             supported, and empowered. Whether you’re reaching out with a question, seeking assistance, or exploring a
             partnership, we want you to know:{' '}
             <strong style={{ color: 'black', fontFamily: 'inherit' }}>you matter to us</strong>.
@@ -67,11 +67,12 @@ export default function ContactUs() {
           <div className={styles.leftPanel}>
             <h2 className={styles.title}>Let’s Connect</h2>
             <p className={styles.text}>
-              We'd love to hear from you. Whether it's a question, feedback, or partnership opportunity just reach out!
+              We'd love to hear from you. Whether it's a question, feedback, or partnership opportunity — just reach
+              out!
             </p>
 
             <div className={styles.contactItem}>
-              <h4>📧 General Inquiries</h4>
+              <h4>General Inquiries</h4>
               <p className={styles.intro}>
                 Have a question that’s not addressed on our site?
                 <br />
@@ -83,7 +84,7 @@ export default function ContactUs() {
             </div>
 
             <div className={styles.contactItem}>
-              <h4>🛠️ Tech Support</h4>
+              <h4>Tech Support</h4>
               <p className={styles.intro}>
                 Have a question that’s not addressed on our site?
                 <br />
@@ -102,7 +103,7 @@ export default function ContactUs() {
                 <br />
                 We’d love to hear your thoughts, ideas, and feedback!
               </p>
-              <h4>🎤 Speaker Booking</h4>
+              <h4> Speaker Booking</h4>
               <a href="mailto:info@therapyforblackmen.org">info@therapyforblackmen.org</a>
             </div>
           </div>

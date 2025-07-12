@@ -76,6 +76,12 @@ const BlogPage = () => {
 
   const totalPages = Math.ceil(filteredBlogs.length / blogsPerPage)
 
+  // @ts-ignore
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber)
+    window.scrollTo(0, 0)
+  }
+
   return (
     <div>
       <HeaderBar heading="Blogs" />
@@ -110,7 +116,7 @@ const BlogPage = () => {
                   <img src={blog.image || dummay} alt={blog.title} className={styles.image} />
                 </div>
                 <div className={styles.content}>
-                  <h1>{blog.title}</h1>
+                  <h1 style={{ color: '#a88757' }}>{blog.title}</h1>
                   <p className={styles.clamptext}>{blog.excerpt}</p>
                   <div className={styles.meta}>
                     <span>{blog.date}</span>

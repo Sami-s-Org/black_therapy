@@ -194,6 +194,9 @@ input:focus {
 .donate:hover {
   opacity: 0.9;
 }
+.smOnly {
+  display: none;
+}
 
 .menuIcon {
   display: none;
@@ -224,6 +227,14 @@ input:focus {
   .w50 {
     width: 100%;
   }
+  .smOnly {
+    display: block;
+    background-color: #a88757;
+    padding: 12px 40px;
+    width: 90%;
+    text-align: center;
+    color: white !important;
+  }
 }
 
 @media screen and (max-width: 960px) {
@@ -238,7 +249,6 @@ input:focus {
     right: 0;
     background: #fff;
     display: none;
-    border-radius: 12px;
     flex-direction: column;
     padding: 1.5rem 2rem;
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.08);
@@ -293,6 +303,15 @@ input:focus {
     position: relative;
     margin-left: 0px !important;
     margin-right: 1rem;
+  }
+}
+@media screen and (min-width: 1040px) and (max-width: 1400px) {
+  .container {
+    gap: 30px;
+    margin: 0;
+    width: 90%;
+    padding: 1.5rem;
+    justify-content: center;
   }
 }
 

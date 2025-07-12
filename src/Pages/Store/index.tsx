@@ -21,16 +21,16 @@ export default function Store() {
         <div className={styles.bannerContent}>
           <h1 className={styles.bannerTitle}>What you wear can tell the story of hope.</h1>
           <p className={styles.bannerSubtitle}>
-            Every piece in our collection was designed with intention to reflect the strength, healing, and dignity of
+            Every piece in our collection was designed with intention—to reflect the strength, healing, and dignity of
             Black men on their journey toward wholeness. Whether you're a brother in healing or a supporter standing in
             the gap, your purchase helps us provide life-changing, free therapy to those in need.
           </p>
-          <button className={styles.ctaButton}>🛒 Shop Now | Support the Mission</button>
+          <button className={styles.ctaButton}>Shop Now | Support the Mission</button>
         </div>
       </div>
 
       <section className={styles.featuredSection}>
-        <h2 className={styles.sectionTitle}>✨ Featured Collections</h2>
+        <h2 className={styles.sectionTitle}>Featured Collections</h2>
         <div className={styles.grid}>
           <div className={styles.card}>
             <h3>Healing Is Revolutionary</h3>
@@ -58,7 +58,7 @@ export default function Store() {
         </div>
       </section>
       <section className={styles.impactSection}>
-        <h2 className={styles.impactTitle}>💛 Your Purchase = Real Healing</h2>
+        <h2 className={styles.impactTitle}> Your Purchase = Real Healing</h2>
         <p className={styles.impactText}>
           When you shop with us, you help provide free therapy sessions to Black men and boys across the country. To
           date, your support has funded over $150,000 in free mental health care.
