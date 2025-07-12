@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import styles from './mianslider.module.css'
 
 const MianSlider = () => {
@@ -16,9 +17,9 @@ const MianSlider = () => {
         <div className={styles.textContent}>
           <h1 className={styles.mainHeadline}>You don't have to carry it alone anymore</h1>
           <p className={styles.subtext}> Therapy for Black Men</p>
-          <a href="/findTherapist" className={styles.ctaButton}>
+          <Link to="/findTherapist" className={styles.ctaButton}>
             Start Your Journey Home Toward Wholeness
-          </a>
+          </Link>
         </div>
       </div>
 

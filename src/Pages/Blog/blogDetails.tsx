@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import styles from './blog.module.css'
 import HeaderBar from '../../Components/Headbar'
+import dummay from '../../assets/dfb58278-4ea5-44e3-bbfd-79dc456ff3b8.jpeg'
 
 const BlogDetails = () => {
   const { state } = useLocation()
@@ -25,7 +26,7 @@ const BlogDetails = () => {
       <HeaderBar heading="Blog Details" />
       <div className={styles.container}>
         <div className={styles.imageWrapper}>
-          <img src={image} alt={title} />
+          <img src={image || dummay} alt={title} />
         </div>
         <div className={styles.content}>
           <h1>{title}</h1>

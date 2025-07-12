@@ -1,0 +1,679 @@
+/* Modern Navbar Styles */
+@font-face {
+   font-family: 'Derivia Regular';
+   font-style: normal;
+   font-weight: normal;
+   src: local('Derivia Regular'), url('../../assets/Derivia-Regular.otf') format('opentype');
+}
+
+.navbar {
+   position: fixed;
+   top: 0;
+   left: 0;
+   right: 0;
+   background: rgba(28, 28, 28, 0.55);
+   backdrop-filter: blur(20px);
+   -webkit-backdrop-filter: blur(20px);
+   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+   z-index: 1000;
+   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.navbar.scrolled {
+   background: rgba(28, 28, 28, 0.78);
+   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.navContainer {
+   max-width: 1400px;
+   margin: 0 auto;
+   padding: 0 1.5rem;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   height: 80px;
+   gap: 1rem;
+   min-width: 0;
+}
+
+.logo {
+   height: 50px;
+   width: 50px;
+   cursor: pointer;
+   transition: transform 0.3s ease;
+}
+
+.logo:hover {
+   transform: scale(1.05);
+}
+
+/* Desktop Navigation */
+.navMenu {
+   display: flex;
+   align-items: center;
+   gap: 2rem;
+   list-style: none;
+   margin: 0;
+   padding: 0;
+   flex-wrap: nowrap;
+   overflow: visible;
+}
+
+.navItem {
+   position: relative;
+}
+
+.navLink {
+   color: #ffffff;
+   text-decoration: none;
+   font-family: 'Derivia Regular', sans-serif;
+   font-size: 0.95rem;
+   font-weight: 400;
+   padding: 0.5rem 0;
+   position: relative;
+   transition: all 0.3s ease;
+   letter-spacing: 1px;
+   white-space: nowrap;
+}
+
+.navLink:hover {
+   color: #a88757;
+}
+
+.navLink.active {
+   color: #a88757;
+}
+
+.navLink.active::after {
+   content: '';
+   position: absolute;
+   bottom: -2px;
+   left: 0;
+   width: 100%;
+   height: 2px;
+   background: linear-gradient(90deg, #a88757, #c8a876);
+   border-radius: 2px;
+}
+
+/* Dropdown Styles */
+.dropdown {
+   position: relative;
+}
+
+.dropdownToggle {
+   display: flex;
+   align-items: center;
+   gap: 0.5rem;
+   color: #ffffff;
+   background: none;
+   border: none;
+   font-family: 'Derivia Regular', sans-serif;
+   font-size: 0.95rem;
+   font-weight: 400;
+   cursor: pointer;
+   padding: 0.5rem 0;
+   transition: all 0.3s ease;
+   letter-spacing: 1px;
+   white-space: nowrap;
+}
+
+.dropdownToggle:hover {
+   color: #a88757;
+}
+
+.dropdownToggle.active {
+   color: #a88757;
+}
+
+.dropdownIcon {
+   font-size: 0.8rem;
+   transition: transform 0.3s ease;
+}
+
+.dropdownToggle.active .dropdownIcon {
+   transform: rotate(180deg);
+}
+
+.dropdownMenu {
+   position: absolute;
+   top: calc(100% + 1rem);
+   left: 0;
+   background: rgba(28, 28, 28, 0.85);
+   backdrop-filter: blur(20px);
+   -webkit-backdrop-filter: blur(20px);
+   border-radius: 12px;
+   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+   padding: 1rem 0;
+   min-width: 220px;
+   border: 1px solid rgba(255, 255, 255, 0.1);
+   z-index: 100;
+}
+
+.dropdownItem {
+   display: block;
+   padding: 0.75rem 1.25rem;
+   color: #ffffff;
+   text-decoration: none;
+   font-family: 'Derivia Regular', sans-serif;
+   font-size: 0.9rem;
+   font-weight: 400;
+   transition: all 0.2s ease;
+   letter-spacing: 1px;
+}
+
+.dropdownItem:hover {
+   background: rgba(168, 135, 87, 0.2);
+   color: #a88757;
+}
+
+/* User Dropdown */
+.userSection {
+   display: flex;
+   align-items: center;
+   gap: 1rem;
+}
+
+.userDropdown {
+   position: relative;
+}
+
+.userButton {
+   display: flex;
+   align-items: center;
+   gap: 0.5rem;
+   background: rgba(255, 255, 255, 0.1);
+   border: 1px solid rgba(255, 255, 255, 0.2);
+   border-radius: 8px;
+   padding: 0.5rem 1rem;
+   color: #ffffff;
+   font-family: 'Derivia Regular', sans-serif;
+   font-size: 0.9rem;
+   font-weight: 400;
+   cursor: pointer;
+   transition: all 0.3s ease;
+   letter-spacing: 1px;
+}
+
+.userButton:hover {
+   background: rgba(255, 255, 255, 0.15);
+   border-color: rgba(255, 255, 255, 0.3);
+}
+
+.userDropdownMenu {
+   position: absolute;
+   top: calc(100% + 0.5rem);
+   right: 0;
+   background: rgba(28, 28, 28, 0.95);
+   backdrop-filter: blur(20px);
+   -webkit-backdrop-filter: blur(20px);
+   border-radius: 12px;
+   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+   padding: 1rem 0;
+   min-width: 200px;
+   border: 1px solid rgba(255, 255, 255, 0.1);
+   z-index: 100;
+}
+
+.userInfo {
+   padding: 0 1rem;
+   color: #cccccc;
+   font-size: 0.85rem;
+   margin-bottom: 0.5rem;
+   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+   padding-bottom: 0.75rem;
+   font-family: 'Derivia Regular', sans-serif;
+}
+
+.userDropdownItem {
+   display: flex;
+   align-items: center;
+   gap: 0.5rem;
+   padding: 0.75rem 1rem;
+   color: #ffffff;
+   text-decoration: none;
+   font-family: 'Derivia Regular', sans-serif;
+   font-size: 0.9rem;
+   font-weight: 400;
+   transition: all 0.2s ease;
+   cursor: pointer;
+   border: none;
+   background: none;
+   width: 100%;
+   text-align: left;
+   letter-spacing: 1px;
+}
+
+.userDropdownItem:hover {
+   background: rgba(168, 135, 87, 0.2);
+   color: #a88757;
+}
+
+.loginButton {
+   background: linear-gradient(135deg, #a88757, #c8a876);
+   color: #fff;
+
+   border: none;
+   border-radius: 8px;
+   padding: 0.75rem 1.5rem;
+   font-family: 'Derivia Regular', sans-serif;
+   font-size: 1rem;
+   font-weight: 900;
+   cursor: pointer;
+   transition: all 0.3s ease;
+   letter-spacing: 1px;
+}
+
+.loginButton:hover {
+   background: linear-gradient(135deg, #c8a876, #a88757);
+   transform: translateY(-2px);
+   box-shadow: 0 8px 20px rgba(168, 135, 87, 0.3);
+}
+
+.donateButton {
+   background: linear-gradient(135deg, #a88757, #c8a876);
+   color: #ffffff;
+   text-decoration: none;
+   border-radius: 8px;
+   padding: 0.75rem 1.5rem;
+   font-family: 'Derivia Regular', sans-serif;
+   font-size: 1rem;
+   font-weight: 900;
+   transition: all 0.3s ease;
+   letter-spacing: 1px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.donateButton:hover {
+   background: linear-gradient(135deg, #c8a876, #a88757);
+   transform: translateY(-2px);
+   box-shadow: 0 8px 20px rgba(168, 135, 87, 0.3);
+}
+
+/* Mobile Menu */
+.mobileMenuButton {
+   display: none;
+   background: none;
+   border: none;
+   color: #ffffff;
+   font-size: 1.5rem;
+   cursor: pointer;
+   padding: 0.5rem;
+   border-radius: 8px;
+   transition: all 0.3s ease;
+}
+
+.mobileMenuButton:hover {
+   background: rgba(255, 255, 255, 0.1);
+}
+
+.mobileMenu {
+   position: fixed;
+   top: 80px;
+   left: 0;
+   right: 0;
+   background: rgba(28, 28, 28, 0.98);
+   backdrop-filter: blur(20px);
+   -webkit-backdrop-filter: blur(20px);
+   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+   max-height: calc(100vh - 80px);
+   overflow-y: auto;
+   z-index: 999;
+}
+
+.mobileMenuContent {
+   padding: 2rem 1.5rem;
+   max-width: 1400px;
+   margin: 0 auto;
+}
+
+.mobileNavMenu {
+   list-style: none;
+   margin: 0;
+   padding: 0;
+   display: flex;
+   flex-direction: column;
+   gap: 1rem;
+}
+
+.mobileNavItem {
+   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+   padding-bottom: 1rem;
+}
+
+.mobileNavLink {
+   color: #ffffff;
+   text-decoration: none;
+   font-family: 'Derivia Regular', sans-serif;
+   font-size: 1.1rem;
+   font-weight: 400;
+   display: block;
+   padding: 0.75rem 0;
+   transition: all 0.3s ease;
+   letter-spacing: 1px;
+}
+
+.mobileNavLink:hover {
+   color: #a88757;
+}
+
+.mobileNavLink.active {
+   color: #a88757;
+}
+
+.mobileDropdown {
+   display: flex;
+   flex-direction: column;
+   gap: 0.5rem;
+}
+
+.mobileDropdownTitle {
+   color: #a88757;
+   font-family: 'Derivia Regular', sans-serif;
+   font-size: 1.1rem;
+   font-weight: 400;
+   padding: 0.75rem 0;
+   letter-spacing: 1px;
+   border-bottom: 1px solid rgba(168, 135, 87, 0.3);
+   margin-bottom: 0.5rem;
+}
+
+.mobileDropdownList {
+   display: flex;
+   flex-direction: column;
+   gap: 0.25rem;
+   padding-left: 1rem;
+}
+
+.mobileDropdownItem {
+   display: block;
+   padding: 0.5rem 0;
+   color: #cccccc;
+   text-decoration: none;
+   font-family: 'Derivia Regular', sans-serif;
+   font-size: 0.95rem;
+   font-weight: 400;
+   transition: all 0.2s ease;
+   letter-spacing: 1px;
+}
+
+.mobileDropdownItem:hover {
+   color: #a88757;
+}
+
+.mobileUserSection {
+   margin-top: 2rem;
+   padding-top: 2rem;
+   border-top: 1px solid rgba(255, 255, 255, 0.1);
+   display: flex;
+   flex-direction: column;
+   gap: 1rem;
+}
+
+.mobileUserInfo {
+   color: #cccccc;
+   font-size: 0.9rem;
+   padding: 0.5rem 0;
+   font-family: 'Derivia Regular', sans-serif;
+}
+
+.mobileUserActions {
+   display: flex;
+   flex-direction: column;
+   gap: 0.5rem;
+}
+
+.mobileUserAction {
+   display: flex;
+   align-items: center;
+   gap: 0.75rem;
+   color: #ffffff;
+   text-decoration: none;
+   font-family: 'Derivia Regular', sans-serif;
+   font-size: 1rem;
+   font-weight: 400;
+   padding: 0.75rem 0;
+   transition: all 0.3s ease;
+   letter-spacing: 1px;
+   background: none;
+   border: none;
+   cursor: pointer;
+   text-align: left;
+}
+
+.mobileUserAction:hover {
+   color: #a88757;
+}
+
+.mobileAuthButtons {
+   display: flex;
+   flex-direction: column;
+   gap: 1rem;
+}
+
+.mobileLoginButton {
+   background: linear-gradient(135deg, #a88757, #c8a876);
+   color: #ffffff;
+   border: none;
+   border-radius: 8px;
+   padding: 1rem 1.5rem;
+   font-family: 'Derivia Regular', sans-serif;
+   font-size: 1rem;
+   font-weight: 400;
+   cursor: pointer;
+   transition: all 0.3s ease;
+   letter-spacing: 1px;
+}
+
+.mobileDonateButton {
+   background: transparent;
+   color: #a88757;
+   border: 2px solid #a88757;
+   border-radius: 8px;
+   padding: 1rem 1.5rem;
+   font-family: 'Derivia Regular', sans-serif;
+   font-size: 1rem;
+   font-weight: 400;
+   cursor: pointer;
+   transition: all 0.3s ease;
+   letter-spacing: 1px;
+   text-decoration: none;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.mobileDonateButton:hover {
+   background: #a88757;
+   color: #ffffff;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+   .navMenu {
+      gap: 1.5rem;
+   }
+
+   .navLink {
+      font-size: 0.9rem;
+   }
+
+   .dropdownToggle {
+      font-size: 0.9rem;
+   }
+
+   .userSection {
+      gap: 0.75rem;
+   }
+
+   .donateButton {
+      padding: 0.6rem 1.2rem;
+      font-size: 0.85rem;
+   }
+
+   .loginButton {
+      padding: 0.6rem 1.2rem;
+      font-size: 0.85rem;
+   }
+}
+
+@media (max-width: 900px) {
+   .navMenu {
+      gap: 1rem;
+   }
+
+   .navLink {
+      font-size: 0.85rem;
+   }
+
+   .dropdownToggle {
+      font-size: 0.85rem;
+   }
+
+   .navContainer {
+      padding: 0 1rem;
+   }
+}
+
+@media (max-width: 850px) {
+   .navMenu {
+      gap: 0.75rem;
+   }
+
+   .navLink {
+      font-size: 0.8rem;
+      letter-spacing: 0.3px;
+   }
+
+   .dropdownToggle {
+      font-size: 0.8rem;
+      letter-spacing: 0.3px;
+   }
+
+   .userSection {
+      gap: 0.5rem;
+   }
+
+   .donateButton {
+      padding: 0.5rem 1rem;
+      font-size: 0.8rem;
+   }
+
+   .loginButton {
+      padding: 0.5rem 1rem;
+      font-size: 0.8rem;
+   }
+
+   .userButton {
+      padding: 0.4rem 0.8rem;
+      font-size: 0.8rem;
+   }
+}
+
+@media (max-width: 800px) {
+   .navMenu {
+      display: none;
+   }
+
+   .userSection {
+      display: none;
+   }
+
+   .mobileMenuButton {
+      display: block;
+   }
+
+   .navContainer {
+      padding: 0 1rem;
+   }
+}
+
+@media (max-width: 480px) {
+   .navContainer {
+      height: 70px;
+   }
+
+   .mobileMenu {
+      top: 70px;
+      max-height: calc(100vh - 70px);
+   }
+
+   .mobileMenuContent {
+      padding: 1.5rem 1rem;
+   }
+
+   .logo {
+      height: 45px;
+      width: 45px;
+   }
+}
+
+/* Animation Classes */
+.fadeIn {
+   animation: fadeIn 0.3s ease-in-out;
+}
+
+.fadeOut {
+   animation: fadeOut 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+   from {
+      opacity: 0;
+      transform: translateY(-10px);
+   }
+
+   to {
+      opacity: 1;
+      transform: translateY(0);
+   }
+}
+
+@keyframes fadeOut {
+   from {
+      opacity: 1;
+      transform: translateY(0);
+   }
+
+   to {
+      opacity: 0;
+      transform: translateY(-10px);
+   }
+}
+
+/* Smooth scrolling */
+html {
+   scroll-behavior: smooth;
+}
+
+
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+   .navbar {
+      background: #000000;
+      border-bottom: 2px solid #ffffff;
+   }
+
+   .navLink,
+   .dropdownToggle,
+   .userButton {
+      color: #ffffff;
+   }
+
+   .dropdownMenu,
+   .userDropdownMenu {
+      background: #ffffff;
+      border: 2px solid #000000;
+   }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+   * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+   }
+}
