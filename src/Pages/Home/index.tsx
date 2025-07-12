@@ -357,7 +357,7 @@ export default function Home() {
       </section>
 
       {/* Quote Banner Section */}
-      <section className={styles.quoteBannerSection}>
+      {/* <section className={styles.quoteBannerSection}>
         <div className={styles.quoteBanner}>
           <div className={styles.quoteBannerOverlay}>
             <motion.p
@@ -398,7 +398,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Safe Space Section */}
       <section className={styles.safeSpaceSection}>
