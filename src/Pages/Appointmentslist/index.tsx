@@ -13,7 +13,7 @@ import {
   FaTimes,
   FaComments,
 } from 'react-icons/fa'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, Variants } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { ref, onValue } from 'firebase/database'
 import { realtimeDB } from '../../Share/FireBase'
@@ -102,7 +102,7 @@ const AppointmentRow = ({ appointment, userRole, onStatusUpdate }: AppointmentRo
     }
   }
 
-  const menuVariants = {
+  const menuVariants: Variants = {
     hidden: {
       opacity: 0,
       scale: 0.95,
