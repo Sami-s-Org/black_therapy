@@ -13,9 +13,10 @@ function App() {
   //   return () => unsubscribe()
   // }, [])
   return (
-    <div>
-      <AppRouter />
-    </div>
+    <p>Under development</p>
+    // <div>
+    //   <AppRouter />
+    // </div>
   )
 }
 
