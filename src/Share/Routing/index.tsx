@@ -16,7 +16,6 @@ import FindTherapist from '../../Pages/FindTherapist'
 import PrivacyPolicy from '../../Pages/Privacypolicy'
 import TermsOfUse from '../../Pages/TermUsed'
 import BlogPage from '../../Pages/Blog'
-import Donate from '../../Pages/Donate'
 import BlogDetailPage from '../../Pages/Blog/blogDetails'
 import AdminPanel from '../../Pages/AdminPage'
 import ToastNotification from '../../Components/Toast'
@@ -26,6 +25,7 @@ import Chatpage from '../../Pages/Chatpage'
 import MyProfile from '../../Pages/MyProfile'
 import KingTable from "../../Pages/King's Table"
 import FreeTherapy from '../../Pages/FreeTherapy'
+import ThankYouPage from '../../Pages/ThankYou'
 const Layout: React.FC<PropsWithChildren<{}>> = ({ children }) => {
   const location = useLocation()
   const isAdminRoute = location.pathname.startsWith('/admin')
@@ -59,7 +59,6 @@ const AppRouter = () => {
           <Route path="/profile" element={<Profile />} />
           <Route path="/termsOfUse" element={<TermsOfUse />} />
           <Route path="/blog" element={<BlogPage />} />
-          <Route path="/donate" element={<Donate />} />
           <Route path="/blogDetails" element={<BlogDetailPage />} />
           <Route path="/admin/*" element={<AdminPanel />} />
           <Route path="/findTherapist" element={<FindTherapist />} />
@@ -68,6 +67,7 @@ const AppRouter = () => {
           <Route path="/myprofile" element={<MyProfile />} />
           <Route path="/freeTherapy" element={<FreeTherapy />} />
           <Route path="/kingTable" element={<KingTable />} />
+          <Route path="/thankyou-page" element={<ThankYouPage />} />
         </Routes>
       </Layout>
     </Router>
