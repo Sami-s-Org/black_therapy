@@ -331,8 +331,17 @@ const Navbar: React.FC = () => {
               </button>
             )}
 
-            <Link to="/donate" className={styles.donateButton}>
-              Donate
+            <Link to="https://buy.stripe.com/test_cNifZi3sd06S24B6Z65J600" className={styles.donateButton} style={{
+              padding: '12px 20px',
+              borderRadius: 8,
+              background: '#635bff',
+              color: '#fff',
+              border: 'none',
+              cursor: 'pointer',
+              fontWeight: 600,
+              textDecoration: 'none',
+            }}>
+              Donate Now
             </Link>
           </div>
 
