@@ -47,7 +47,7 @@ const HomeSlider = ({ sliderItems }) => {
         dotListClass="custom-dot-list-style"
       >
         {sliderItems.map((item, index) => (
-          <div className={style.slider} key={index}>
+          <div className={style.slider} key={index} style={{ textAlign: 'center' }}>
             <img alt="slider" src={item.imageUrl} className={style.imgs} />
             <p className={classNames(style.heading)}>{item.Heading}</p>
             {/* <p className={classNames(style.text)}>{item.text}</p> */}
