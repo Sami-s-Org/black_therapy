@@ -8,6 +8,7 @@ import AuthModal from '../AuthModels'
 import { AnimatePresence } from 'framer-motion'
 import { notifyError, notifySuccess } from '../Toast'
 import classNames from 'classnames'
+import LiveTicker from '../LiveTracker'
 const Footer = () => {
   const [authModalOpen, setAuthModalOpen] = useState(false)
   const [authModalType, setAuthModalType] = useState<'login' | 'register'>('login')
@@ -77,6 +78,7 @@ const Footer = () => {
       </div>
       <div className={styles.ContactBg}>
         <p className={styles.Get}>Lets Celebrate Your Love</p>
+        <LiveTicker />
         <button className={styles.ContactBtn} onClick={() => handleNavigation('/contactUs')}>
           Contact Us Now
         </button>
@@ -84,7 +86,7 @@ const Footer = () => {
       <footer className={classNames(styles.footer, styles.ml40)}>
         <div className={styles.footerTop}>
           <div className={styles.column}>
-            <img src={logo} className={styles.logofooter} />
+            <img alt="logo" src={logo} className={styles.logofooter} />
             <p className={styles.FooterDescripation}>
               Therapy for black men offers holistic healing and personalized coaching to empower your mental and
               emotional well-being

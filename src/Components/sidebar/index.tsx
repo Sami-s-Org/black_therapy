@@ -6,22 +6,24 @@ import { GrResources } from 'react-icons/gr'
 import { IoMdContact } from 'react-icons/io'
 import { MdRememberMe } from 'react-icons/md'
 import { RiPsychotherapyFill } from 'react-icons/ri'
-
 import { FaListAlt } from 'react-icons/fa'
 import { PiArticleNyTimesBold } from 'react-icons/pi'
+import { useAdmin } from '../../Share/Context/AdminContext'
+
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(true)
   const navigate = useNavigate()
+  const { signOutAdmin } = useAdmin()
 
-  const handleLogout = () => {
-    localStorage.removeItem('isAdmin')
-    window.location.reload()
+  const handleLogout = async () => {
+    await signOutAdmin()
     navigate('/admin')
   }
+
   const toggleSidebar = () => setIsOpen(!isOpen)
 
   const navItems = [
-    { path: '/admin/dashBoard', label: 'Dashboard', icon: <FaHome /> },
+    { path: '/admin/dashboard', label: 'Dashboard', icon: <FaHome /> },
     { path: '/admin/appointments', label: 'Appointments', icon: <FaListAlt /> },
     { path: '/admin/coaches', label: 'Coaches', icon: <FaUserAlt /> },
     { path: '/admin/therapist', label: 'Therapists', icon: <FaUserAlt /> },

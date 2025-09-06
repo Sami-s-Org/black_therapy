@@ -1,6 +1,4 @@
-import React from 'react'
 import Carousel from 'react-multi-carousel'
-import classNames from 'classnames'
 import 'react-multi-carousel/lib/styles.css'
 import style from './homeslider.module.css'
 
@@ -32,7 +30,7 @@ const responsive = {
   },
 }
 
-const HomeSlider = ({ sliderItems }) => {
+const HomeSlider = ({ sliderItems }: { sliderItems: any }) => {
   return (
     <div className="parent" style={{ marginBottom: '0px' }}>
       <Carousel
@@ -46,10 +44,10 @@ const HomeSlider = ({ sliderItems }) => {
         infinite={true}
         dotListClass="custom-dot-list-style"
       >
-        {sliderItems.map((item, index) => (
+        {sliderItems.map((item: any, index: any) => (
           <div className={style.slider} key={index}>
             <img alt="slider" src={item.imageUrl} className={style.imgs} />
-            <p className={classNames(style.heading)}>{item.Heading}</p>
+            <p className={style.heading}>{item.Heading}</p>
             {/* <p className={classNames(style.text)}>{item.text}</p> */}
           </div>
         ))}

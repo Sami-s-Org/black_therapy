@@ -5,10 +5,7 @@ const MianSlider = () => {
   return (
     <section className={styles.heroSection}>
       <video className={styles.backgroundVideo} autoPlay loop muted>
-        <source
-          src="https://media.istockphoto.com/id/469267480/video/happy-healthy-athlete-appeciating-the-sun-while-on-a-run.mp4?s=mp4-640x640-is&k=20&c=UzM-ooJS19rJbSAvszJ5BTmZS2R80qaVzxyvw9jCwL0="
-          type="video/mp4"
-        />
+        <source src="/main.webm" type="video/webm" />
       </video>
 
       <div className={styles.overlay}></div>

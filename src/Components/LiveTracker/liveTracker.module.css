@@ -1,13 +1,14 @@
 .tickerContainer {
-  position: fixed;
-  top: 120px;
-  right: 0px;
   background-color: #a88757;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
   color: #fff;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   padding: 10px 16px;
   border-radius: 16px 0 0 16px;
-  width: 250px;
+  max-width: clamp(200px, 30vw, 400px);
   z-index: 999;
   height: auto;
 }
@@ -28,15 +29,20 @@
     transform: translateX(-100%);
   }
 }
+
 .tickerText > p > strong {
   color: white !important;
 }
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .tickerContainer {
-    top: auto;
-    bottom: 10px;
-    right: 0px;
+    background-color: #a8875755;
+    position: relative;
+    border-radius: 10px;
+    top: 0;
+    max-width: 400px;
+    transform: translateY(0);
     font-size: 0.85rem;
     animation: none;
     text-align: center;

@@ -20,12 +20,12 @@ import Donate from '../../Pages/Donate'
 import BlogDetailPage from '../../Pages/Blog/blogDetails'
 import AdminPanel from '../../Pages/AdminPage'
 import ToastNotification from '../../Components/Toast'
-import ChatBot from '../../Components/Chatbot'
 import AppointmentList from '../../Pages/Appointmentslist'
 import Chatpage from '../../Pages/Chatpage'
 import MyProfile from '../../Pages/MyProfile'
 import KingTable from "../../Pages/King's Table"
 import FreeTherapy from '../../Pages/FreeTherapy'
+
 const Layout: React.FC<PropsWithChildren<{}>> = ({ children }) => {
   const location = useLocation()
   const isAdminRoute = location.pathname.startsWith('/admin')
@@ -35,7 +35,6 @@ const Layout: React.FC<PropsWithChildren<{}>> = ({ children }) => {
       {!isAdminRoute && <Navbar />}
       {children}
       <ToastNotification />
-      {!isAdminRoute && <ChatBot />}
       {!isAdminRoute && <Footer />}
     </>
   )

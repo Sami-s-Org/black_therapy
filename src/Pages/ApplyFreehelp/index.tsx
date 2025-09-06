@@ -8,7 +8,11 @@ export default function ApplyForFreeHelp() {
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>🌿 Apply for Free Therapy Help</h1>
-      <p className={styles.subtitle}>We see you. We hear you. We're here for you.</p>
+      <p className={styles.subtitle}>
+        We see you.
+        <br /> We hear you.
+        <br /> We're here for you.
+      </p>
 
       <form className={styles.form}>
         <input type="text" placeholder="Full Name" className={styles.input} />

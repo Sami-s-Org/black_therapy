@@ -11,10 +11,12 @@
   font-family: 'Derivia Regular';
   transition: background-color 0.3s ease, color 0.3s ease;
 }
+
 input:focus {
   border: none;
   outline: none;
 }
+
 .home {
   cursor: pointer;
   font-family: 'Derivia Regular';
@@ -29,7 +31,8 @@ input:focus {
   font-family: 'Derivia Regular';
   font-style: normal;
   font-weight: normal;
-  src: local('Derivia Regular'), url('../assets/Derivia-Regular.otf') format('woff');
+  font-display: swap;
+  src: local('Derivia Regular'), url('../assets/Derivia-Regular.otf') format('opentype');
 }
 
 .container {
@@ -201,13 +204,16 @@ input:focus {
   cursor: pointer;
   color: white;
 }
+
 .ml40 {
   padding-left: 50px;
 }
+
 @media screen and (max-width: 510px) {
   .ml40 {
     padding-left: 0px;
   }
+
   .column {
     width: 100%;
     text-align: center;
@@ -430,7 +436,9 @@ input:focus {
   justify-content: center;
   gap: 24px;
   padding: 40px;
+  position: relative;
 }
+
 
 .Celebratetext {
   font-family: 'Derivia Regular';

@@ -9,10 +9,7 @@ export default function Store() {
     <div className={styles.storeContainer}>
       <div className={styles.banner}>
         <video autoPlay loop muted playsInline className={styles.bannerVideo}>
-          <source
-            src="https://media.istockphoto.com/id/469267480/video/happy-healthy-athlete-appeciating-the-sun-while-on-a-run.mp4?s=mp4-640x640-is&k=20&c=UzM-ooJS19rJbSAvszJ5BTmZS2R80qaVzxyvw9jCwL0="
-            type="video/mp4"
-          />
+          <source src="/main.webm" type="video/webm" />
           Your browser does not support the video tag.
         </video>
 
@@ -30,7 +27,7 @@ export default function Store() {
       </div>
 
       <section className={styles.featuredSection}>
-        <h2 className={styles.sectionTitle}>✨ Featured Collections</h2>
+        <h2 className={styles.sectionTitle}>Featured Collections</h2>
         <div className={styles.grid}>
           <div className={styles.card}>
             <h3>Healing Is Revolutionary</h3>

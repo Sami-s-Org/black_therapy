@@ -40,7 +40,8 @@ export default function AdminDashboard() {
   const [appointments, setAppointments] = useState<Appointment[]>([])
   const [therapists, setTherapists] = useState<Therapist[]>([])
   const [coaches, setCoaches] = useState<Coach[]>([])
-  const [_loading, setLoading] = useState(true)
+  const [blogs, setBlogs] = useState<{ id: string }[]>()
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -63,9 +64,16 @@ export default function AdminDashboard() {
           ...doc.data(),
         })) as Coach[]
 
+        const blogSnapshot = await getDocs(collection(db, 'blogs'))
+        const blogData = blogSnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }))
+
         setAppointments(appointmentData)
         setTherapists(therapistData)
         setCoaches(coachData)
+        setBlogs(blogData)
       } catch (error) {
         console.error('Error fetching data: ', error)
       } finally {
@@ -75,6 +83,10 @@ export default function AdminDashboard() {
 
     fetchData()
   }, [])
+
+  if (loading) {
+    return <div>Loading...</div>
+  }
 
   return (
     <div>
@@ -94,7 +106,7 @@ export default function AdminDashboard() {
         </div>
         <div className={style.dashcard}>
           <p>Bloges</p>
-          <h1>10</h1>
+          <h1>{blogs?.length}</h1>
         </div>
       </div>
     </div>
