@@ -78,7 +78,7 @@ const AuthModal: FC<AuthModalProps> = ({ type, onClose, onSwitch, onLoginSuccess
         createdAt: new Date(),
         location: '', // Initialize location
       }
-      console.log(userData)
+      
 
       await setDoc(doc(db, 'users', user.uid), userData)
 
@@ -94,7 +94,7 @@ const AuthModal: FC<AuthModalProps> = ({ type, onClose, onSwitch, onLoginSuccess
           location: '', // Include location
         })
       }
-
+      console.log(userData)
       onClose()
     } catch (error: any) {
       notifyError('Something went wrong please try again.')

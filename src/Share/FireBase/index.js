@@ -18,6 +18,7 @@ import { getFirestore } from 'firebase/firestore'
 const firebaseConfig = {
   apiKey: 'AIzaSyDM-Edju6Xw160BQS89XGwhugZuQ247b9I',
   authDomain: 'therapyforblkmen.firebaseapp.com',
+  databaseURL: 'https://therapyforblkmen-default-rtdb.firebaseio.com',
   projectId: 'therapyforblkmen',
   storageBucket: 'therapyforblkmen.firebasestorage.app',
   messagingSenderId: '831685819013',
