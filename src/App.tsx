@@ -19,6 +19,7 @@ function App() {
   }, [])
 
   return (
+    // <p>Under development</p>
     <div>
       <AppRouter />
     </div>

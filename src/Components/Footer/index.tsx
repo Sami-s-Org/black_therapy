@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import styles from '../common.module.css'
+import footerStyles from './footerInstaSection.module.css'
 import { collection, addDoc, Timestamp } from 'firebase/firestore'
 import { db } from '../../Share/FireBase'
 import logo from '../../assets/Black-Yellow-Modern-Digital-Marketing-Facebook-Cover-5.png'
@@ -8,8 +9,43 @@ import AuthModal from '../AuthModels'
 import { AnimatePresence } from 'framer-motion'
 import { notifyError, notifySuccess } from '../Toast'
 import classNames from 'classnames'
-import LiveTicker from '../LiveTracker'
+import { useEffect } from 'react'
+import { fetchInstagramMedia } from '../../services/instagramService';
+
 const Footer = () => {
+  // For the vanishing slider
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [currentInstaIdx, setCurrentInstaIdx] = useState(0);
+  
+  const [instagramMedia, setInstagramMedia] = useState<Array<{
+    id: string;
+    media_type: string;
+    media_url: string;
+    permalink: string;
+    timestamp: string;
+  }>>([]);
+
+  // Fetch Instagram media on component mount
+  useEffect(() => {
+    const loadInstagramMedia = async () => {
+      const media = await fetchInstagramMedia();
+      setInstagramMedia(media);
+    };
+    
+    loadInstagramMedia();
+  }, []);
+
+  // Auto-advance the Instagram slider every 3 seconds
+  useEffect(() => {
+    if (instagramMedia.length === 0) return;
+    
+    const timer = setInterval(() => {
+      setCurrentInstaIdx((prevIdx) => (prevIdx + 1) % instagramMedia.length);
+    }, 3000);
+
+    return () => clearInterval(timer);
+  }, [instagramMedia.length]);
+
   const [authModalOpen, setAuthModalOpen] = useState(false)
   const [authModalType, setAuthModalType] = useState<'login' | 'register'>('login')
 
@@ -28,6 +64,7 @@ const Footer = () => {
   }
 
   const switchAuthModal = () => {
+    console.log(currentInstaIdx)
     setAuthModalType(authModalType === 'login' ? 'register' : 'login')
   }
   const [email, setEmail] = useState('')
@@ -76,17 +113,50 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className={styles.ContactBg}>
-        <p className={styles.Get}>Lets Celebrate Your Love</p>
-        <LiveTicker />
-        <button className={styles.ContactBtn} onClick={() => handleNavigation('/contactUs')}>
-          Contact Us Now
-        </button>
-      </div>
+      {/* Footer section with left 1/3 text/button and right 2/3 Instagram feed */}
+      <div className={footerStyles.footerInstaSection}>
+  <div className={footerStyles.footerLeft}>
+    <p className={styles.Get}>Lets Celebrate Your Love</p>
+    <button 
+      className={styles.ContactBtn} 
+      onClick={() => handleNavigation('/contactUs')}
+    >
+      Contact Us Now
+    </button>
+  </div>
+
+  <div className={footerStyles.footerRight}>
+    <div className={footerStyles.instaFeedGrid}>
+      {instagramMedia.length === 0 ? (
+        <div className={footerStyles.instaPlaceholder}>
+          Loading Instagram feed...
+        </div>
+      ) : (
+        instagramMedia.slice(0, 4).map((media, idx) => (
+          <a 
+            key={idx}
+            href={media.permalink} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className={footerStyles.instaCard}
+          >
+            <img
+              src={media.media_url}
+              alt="Instagram post"
+              loading="lazy"
+            />
+          </a>
+        ))
+      )}
+    </div>
+  </div>
+</div>
+
+
       <footer className={classNames(styles.footer, styles.ml40)}>
         <div className={styles.footerTop}>
           <div className={styles.column}>
-            <img alt="logo" src={logo} className={styles.logofooter} />
+            <img src={logo} className={styles.logofooter} />
             <p className={styles.FooterDescripation}>
               Therapy for black men offers holistic healing and personalized coaching to empower your mental and
               emotional well-being
