@@ -8,6 +8,7 @@ import { HiOutlineUpload } from 'react-icons/hi'
 import { notifyError, notifySuccess } from '../../Components/Toast'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { auth, db } from '../../Share/FireBase'
+import { geocodeAddress } from '../../utils/geocoding'
 
 export default function JoinAsACoach() {
   const storage = getStorage()
@@ -74,14 +75,23 @@ export default function JoinAsACoach() {
   const handleSave = async () => {
     setLoading(true)
     try {
+      // ✅ Get coordinates from location using Google Geocoding API
+      let coordinates = { lat: 0, lng: 0 }
+      const geocodeResult = await geocodeAddress(coachData.location)
+      if (geocodeResult) {
+        coordinates = { lat: geocodeResult.lat, lng: geocodeResult.lng }
+      }
+
       const userCredential = await createUserWithEmailAndPassword(auth, coachData.email, coachData.password)
       const userId = userCredential.user.uid
 
-      // Add Therapist to Firestore
+      // Add Coach to Firestore with coordinates
       await setDoc(doc(db, 'coaches', userId), {
         ...coachData,
         userId,
         imageUrl: previewImage || '',
+        lat: coordinates.lat,
+        lng: coordinates.lng,
         createdAt: Timestamp.now(),
         accepted: false,
       })

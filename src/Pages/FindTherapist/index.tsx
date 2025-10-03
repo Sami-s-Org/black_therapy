@@ -21,190 +21,6 @@ interface Therapist {
   lng?: number
 }
 
-// Sample data with coordinates for major cities
-const sampleTherapists: TherapistLocation[] = [
-  {
-    id: '1',
-    name: 'Dr. Marcus Johnson',
-    specialization: 'Anxiety & Depression',
-    location: 'New York, NY',
-    price: '$120/session',
-    image: 'https://i.pravatar.cc/150?img=12',
-    lat: 40.7128,
-    lng: -74.006,
-  },
-  {
-    id: '2',
-    name: 'Dr. James Williams',
-    specialization: 'Trauma & PTSD',
-    location: 'Los Angeles, CA',
-    price: '$150/session',
-    image: 'https://i.pravatar.cc/150?img=13',
-    lat: 34.0522,
-    lng: -118.2437,
-  },
-  {
-    id: '3',
-    name: 'Dr. Terrence Davis',
-    specialization: 'Relationship Counseling',
-    location: 'Chicago, IL',
-    price: '$100/session',
-    image: 'https://i.pravatar.cc/150?img=14',
-    lat: 41.8781,
-    lng: -87.6298,
-  },
-  {
-    id: '4',
-    name: 'Dr. Andre Mitchell',
-    specialization: 'Family Therapy',
-    location: 'Houston, TX',
-    price: '$110/session',
-    image: 'https://i.pravatar.cc/150?img=15',
-    lat: 29.7604,
-    lng: -95.3698,
-  },
-  {
-    id: '5',
-    name: 'Dr. Kevin Brown',
-    specialization: 'Stress Management',
-    location: 'Phoenix, AZ',
-    price: '$95/session',
-    image: 'https://i.pravatar.cc/150?img=33',
-    lat: 33.4484,
-    lng: -112.074,
-  },
-  {
-    id: '6',
-    name: 'Dr. Malcolm Harris',
-    specialization: 'Grief Counseling',
-    location: 'Philadelphia, PA',
-    price: '$130/session',
-    image: 'https://i.pravatar.cc/150?img=51',
-    lat: 39.9526,
-    lng: -75.1652,
-  },
-  {
-    id: '7',
-    name: 'Dr. Isaiah Thompson',
-    specialization: 'Addiction Recovery',
-    location: 'San Antonio, TX',
-    price: '$115/session',
-    image: 'https://i.pravatar.cc/150?img=52',
-    lat: 29.4241,
-    lng: -98.4936,
-  },
-  {
-    id: '8',
-    name: 'Dr. Darius Martinez',
-    specialization: 'Career Counseling',
-    location: 'San Diego, CA',
-    price: '$105/session',
-    image: 'https://i.pravatar.cc/150?img=60',
-    lat: 32.7157,
-    lng: -117.1611,
-  },
-  {
-    id: '9',
-    name: 'Dr. Ayesha Khan',
-    specialization: 'Cognitive Behavioral Therapy',
-    location: 'Karachi, Pakistan',
-    price: 'PKR 4000/session',
-    image: 'https://i.pravatar.cc/150?img=65',
-    lat: 24.8607,
-    lng: 67.0011,
-  },
-  {
-    id: '10',
-    name: 'Dr. Imran Siddiqui',
-    specialization: 'Child & Adolescent Therapy',
-    location: 'Lahore, Pakistan',
-    price: 'PKR 3500/session',
-    image: 'https://i.pravatar.cc/150?img=66',
-    lat: 31.5497,
-    lng: 74.3436,
-  },
-  {
-    id: '11',
-    name: 'Dr. Fatima Noor',
-    specialization: 'Marriage Counseling',
-    location: 'Islamabad, Pakistan',
-    price: 'PKR 4500/session',
-    image: 'https://i.pravatar.cc/150?img=67',
-    lat: 33.6844,
-    lng: 73.0479,
-  },
-  {
-    id: '12',
-    name: 'Dr. Bilal Ahmed',
-    specialization: 'Anxiety & Depression',
-    location: 'Rawalpindi, Pakistan',
-    price: 'PKR 3000/session',
-    image: 'https://i.pravatar.cc/150?img=68',
-    lat: 33.5651,
-    lng: 73.0169,
-  },
-  {
-    id: '13',
-    name: 'Dr. Sana Tariq',
-    specialization: 'Trauma Therapy',
-    location: 'Peshawar, Pakistan',
-    price: 'PKR 3200/session',
-    image: 'https://i.pravatar.cc/150?img=69',
-    lat: 34.0151,
-    lng: 71.5249,
-  },
-  {
-    id: '14',
-    name: 'Dr. Usman Raza',
-    specialization: 'Family Therapy',
-    location: 'Multan, Pakistan',
-    price: 'PKR 2800/session',
-    image: 'https://i.pravatar.cc/150?img=70',
-    lat: 30.1575,
-    lng: 71.5249,
-  },
-  {
-    id: '15',
-    name: 'Dr. Hassan Malik',
-    specialization: 'Stress Management',
-    location: 'Sargodha, Pakistan',
-    price: 'PKR 3000/session',
-    image: 'https://i.pravatar.cc/150?img=71',
-    lat: 32.0836,
-    lng: 72.6711,
-  },
-  {
-    id: '16',
-    name: 'Dr. Zainab Ali',
-    specialization: 'Depression & Mood Disorders',
-    location: 'Faisalabad, Pakistan',
-    price: 'PKR 3500/session',
-    image: 'https://i.pravatar.cc/150?img=72',
-    lat: 31.4504,
-    lng: 73.1350,
-  },
-  {
-    id: '17',
-    name: 'Dr. Ahmed Rauf',
-    specialization: 'Addiction Counseling',
-    location: 'Gujranwala, Pakistan',
-    price: 'PKR 3200/session',
-    image: 'https://i.pravatar.cc/150?img=73',
-    lat: 32.1617,
-    lng: 74.1883,
-  },
-  {
-    id: '18',
-    name: 'Dr. Rabia Sheikh',
-    specialization: 'Youth Counseling',
-    location: 'Sialkot, Pakistan',
-    price: 'PKR 2900/session',
-    image: 'https://i.pravatar.cc/150?img=74',
-    lat: 32.4972,
-    lng: 74.5361,
-  },
-]
-
 export default function FindTherapist() {
   const navigate = useNavigate()
   const [data, setData] = useState<Therapist[]>([])
@@ -233,6 +49,8 @@ export default function FindTherapist() {
           image: data.image || Avatar,
           bio: data.bio || '',
           accepted: data.accepted || false,
+          lat: data.lat,
+          lng: data.lng,
         }
       }) as Therapist[]
 
@@ -273,6 +91,8 @@ export default function FindTherapist() {
           image: data.image || Avatar,
           bio: data.bio || '',
           accepted: data.accepted || false,
+          lat: data.lat,
+          lng: data.lng,
         }
       }) as Therapist[]
 
@@ -394,7 +214,7 @@ export default function FindTherapist() {
             Explore therapist locations on the map. Click on a marker to view details.
           </p>
           <TherapistMap
-            therapists={therapistLocations.length > 0 ? therapistLocations : sampleTherapists}
+            therapists={therapistLocations}
             onTherapistClick={handleMapTherapistClick}
           />
         </section>
