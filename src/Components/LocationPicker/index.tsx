@@ -15,7 +15,7 @@ const LocationPicker = ({ initialLat = 31.5497, initialLng = 74.3436, onLocation
   const [searchAddress, setSearchAddress] = useState(address)
   const [isGeocoding, setIsGeocoding] = useState(false)
 
-  const API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY || 'AIzaSyDM-Edju6Xw160BQS89XGwhugZuQ247b9I'
+  const API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY || ''
 
   const mapContainerStyle = {
     width: '100%',

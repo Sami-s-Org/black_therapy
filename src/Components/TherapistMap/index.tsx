@@ -163,7 +163,7 @@ const TherapistMap = ({ therapists, onTherapistClick }: TherapistMapProps) => {
   }, [map, mapLoaded, displayTherapists, onTherapistClick])
 
   // Replace with your actual Google Maps API key
-  const API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY || 'AIzaSyDM-Edju6Xw160BQS89XGwhugZuQ247b9I'
+  const API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY || ''
 
   const handleMapLoad = (mapInstance: google.maps.Map) => {
     setMap(mapInstance)

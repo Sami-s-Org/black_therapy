@@ -14,16 +14,15 @@ import { getFirestore } from 'firebase/firestore'
 //   appId: '1:622094469052:web:ef9c30c3fa9f8f8eee8db9',
 //   measurementId: 'G-20DXJWQEYN',
 // }
-
 const firebaseConfig = {
-  apiKey: 'AIzaSyDM-Edju6Xw160BQS89XGwhugZuQ247b9I',
-  authDomain: 'therapyforblkmen.firebaseapp.com',
-  databaseURL: 'https://therapyforblkmen-default-rtdb.firebaseio.com',
-  projectId: 'therapyforblkmen',
-  storageBucket: 'therapyforblkmen.firebasestorage.app',
-  messagingSenderId: '831685819013',
-  appId: '1:831685819013:web:cec419d61a3fa6a97b07ec',
-  measurementId: 'G-FXDTHDP8TS',
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
+  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
 }
 
 const app = initializeApp(firebaseConfig)
