@@ -64,6 +64,34 @@
   font-style: italic;
 }
 
+/* Map Section */
+.mapSection {
+  margin: 40px 0;
+  padding: 30px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid #f0f0f0;
+}
+
+.mapTitle {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #2c2c2c;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.mapDescription {
+  text-align: center;
+  color: #666;
+  font-size: 1.05rem;
+  margin-bottom: 25px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* Search and Filters Section - Compact */
 .searchFiltersSection {
   margin-bottom: 30px;

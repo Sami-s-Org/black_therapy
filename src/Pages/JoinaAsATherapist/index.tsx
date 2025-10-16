@@ -8,6 +8,7 @@ import { HiOutlineUpload } from 'react-icons/hi'
 import { notifyError, notifySuccess } from '../../Components/Toast'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../../Share/FireBase'
+import LocationPicker from '../../Components/LocationPicker'
 
 export default function JoinAsATherapist() {
   const storage = getStorage()
@@ -29,6 +30,9 @@ export default function JoinAsATherapist() {
     phone: '',
     password: '',
   })
+
+  const [coordinates, setCoordinates] = useState({ lat: 31.5497, lng: 74.3436 }) // Default: Lahore
+  const [exactAddress, setExactAddress] = useState('')
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target
@@ -71,18 +75,35 @@ export default function JoinAsATherapist() {
     }
   }
 
+  const handleLocationChange = (lat: number, lng: number, address: string) => {
+    setCoordinates({ lat, lng })
+    setExactAddress(address)
+    // Also update the location field with the address
+    setTherapistData(prev => ({ ...prev, location: address }))
+  }
+
   const handleSave = async () => {
     setLoading(true)
     try {
+      // Validate coordinates
+      if (coordinates.lat === 0 && coordinates.lng === 0) {
+        notifyError('Please set your exact location on the map')
+        setLoading(false)
+        return
+      }
+
       // ✅ Create Auth User
       const userCredential = await createUserWithEmailAndPassword(auth, therapistData.email, therapistData.password)
       const userId = userCredential.user.uid
 
-      // ✅ Add Therapist to Firestore
+      // ✅ Add Therapist to Firestore with EXACT coordinates
       await setDoc(doc(db, 'therapists', userId), {
         ...therapistData,
         userId,
         imageUrl: previewImage || '',
+        lat: coordinates.lat,
+        lng: coordinates.lng,
+        exactAddress: exactAddress || therapistData.location,
         createdAt: Timestamp.now(),
         accepted: false,
       })
@@ -110,6 +131,8 @@ export default function JoinAsATherapist() {
         phone: '',
         password: '',
       })
+      setCoordinates({ lat: 31.5497, lng: 74.3436 })
+      setExactAddress('')
       setPreviewImage(null)
       setImageFileName(null)
       window.location.reload()
@@ -270,34 +293,53 @@ export default function JoinAsATherapist() {
               </div>
             </div>
 
-            <label htmlFor="fileInput" className={styles.uploadBox}>
-              {previewImage ? (
-                <img src={previewImage} alt="Preview" className={styles.preview} />
-              ) : (
-                <div className={styles.uploadContent}>
-                  <HiOutlineUpload className={styles.UploadIcon} />
-                  <p>Click to upload profile photo</p>
-                  {imageUploading && <p className={styles.uploadingText}>Uploading image...</p>}
-                </div>
-              )}
-              <input
-                id="fileInput"
-                type="file"
-                accept="image/*"
-                onChange={handleImageChange}
-                className={styles.hiddenInput}
+            {/* Profile Photo Upload */}
+            <div className={styles.fieldContainer}>
+              <label className={styles.fieldLabel}>📸 Profile Photo</label>
+              <label htmlFor="fileInput" className={styles.uploadBox}>
+                {previewImage ? (
+                  <img src={previewImage} alt="Preview" className={styles.preview} />
+                ) : (
+                  <div className={styles.uploadContent}>
+                    <HiOutlineUpload className={styles.UploadIcon} />
+                    <p>Click to upload profile photo</p>
+                    {imageUploading && <p className={styles.uploadingText}>Uploading image...</p>}
+                  </div>
+                )}
+                <input
+                  id="fileInput"
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageChange}
+                  className={styles.hiddenInput}
+                />
+              </label>
+              {imageFileName && <p className={styles.fileName}>Uploaded: {imageFileName}</p>}
+            </div>
+
+            {/* Professional Bio */}
+            <div className={styles.fieldContainer}>
+              <label className={styles.fieldLabel} htmlFor="bio">📝 Professional Bio</label>
+              <textarea
+                id="bio"
+                name="bio"
+                placeholder="Tell us about your approach, experience, and what makes you unique as a therapist..."
+                value={therapistData.bio}
+                onChange={handleBioChange}
+                required
+              ></textarea>
+            </div>
+
+            {/* Location Picker */}
+            <div className={styles.locationSection}>
+              <h3 className={styles.locationTitle}>📍 Set Your Practice Location</h3>
+              <LocationPicker
+                initialLat={coordinates.lat}
+                initialLng={coordinates.lng}
+                onLocationChange={handleLocationChange}
+                address={therapistData.location}
               />
-            </label>
-
-            {imageFileName && <p className={styles.fileName}>Uploaded: {imageFileName}</p>}
-
-            <textarea
-              name="bio"
-              placeholder="Professional Bio (Your approach, experience, etc.)"
-              value={therapistData.bio}
-              onChange={handleBioChange}
-              required
-            ></textarea>
+            </div>
 
             <div className={styles.modalButtons}>
               <button className={styles.cancelBtn} onClick={() => setModalOpen(false)}>

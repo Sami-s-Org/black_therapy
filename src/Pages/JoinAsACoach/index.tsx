@@ -8,6 +8,7 @@ import { HiOutlineUpload } from 'react-icons/hi'
 import { notifyError, notifySuccess } from '../../Components/Toast'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { auth, db } from '../../Share/FireBase'
+import { geocodeAddress } from '../../utils/geocoding'
 
 export default function JoinAsACoach() {
   const storage = getStorage()
@@ -74,19 +75,28 @@ export default function JoinAsACoach() {
   const handleSave = async () => {
     setLoading(true)
     try {
+      // ✅ Get coordinates from location using Google Geocoding API
+      let coordinates = { lat: 0, lng: 0 }
+      const geocodeResult = await geocodeAddress(coachData.location)
+      if (geocodeResult) {
+        coordinates = { lat: geocodeResult.lat, lng: geocodeResult.lng }
+      }
+
       const userCredential = await createUserWithEmailAndPassword(auth, coachData.email, coachData.password)
       const userId = userCredential.user.uid
 
-      // ✅ Add Therapist to Firestore
+      // Add Coach to Firestore with coordinates
       await setDoc(doc(db, 'coaches', userId), {
         ...coachData,
         userId,
         imageUrl: previewImage || '',
+        lat: coordinates.lat,
+        lng: coordinates.lng,
         createdAt: Timestamp.now(),
         accepted: false,
       })
 
-      // ✅ Add Auth Data to 'users' collection
+      // Add Auth Data to 'users' collection
       await setDoc(doc(db, 'users', userId), {
         name: coachData.name,
         email: coachData.email,
@@ -139,19 +149,19 @@ export default function JoinAsACoach() {
         <h2 className={styles.sectionTitle}>Why Join Us?</h2>
         <ul className={styles.checkList}>
           <li>
-            ✅ A Personalized, Editable Profile – Showcase your coaching philosophy, specializations, and expertise to
+            A Personalized, Editable Profile – Showcase your coaching philosophy, specializations, and expertise to
             connect with potential clients.
           </li>
           <li>
-            ✅ Direct Client Engagement – Get discovered by Black men actively seeking guidance, mentorship, and
-            personal development strategies.
+            Direct Client Engagement – Get discovered by Black men actively seeking guidance, mentorship, and personal
+            development strategies.
           </li>
           <li>
-            ✅ Increased Visibility – Feature your coaching services on our website, social media, and marketing
-            campaigns, amplifying your influence.
+            Increased Visibility – Feature your coaching services on our website, social media, and marketing campaigns,
+            amplifying your influence.
           </li>
           <li>
-            ✅ Exclusive Community & Networking – Join a powerful network of Black coaches, therapists, and leaders
+            Exclusive Community & Networking – Join a powerful network of Black coaches, therapists, and leaders
             dedicated to empowering Black men.
           </li>
         </ul>
@@ -163,7 +173,7 @@ export default function JoinAsACoach() {
         </p>
 
         <h2 className={styles.sectionTitle}>Membership Details</h2>
-        <p className={styles.highlight}>💼 Join for Just $20/Month</p>
+        <p className={styles.highlight}>Join for Just $20/Month</p>
         <ul className={styles.bulletList}>
           <li>A customizable profile that allows potential clients to find and book you.</li>
           <li>Access to marketing support, social media promotion, and community events.</li>

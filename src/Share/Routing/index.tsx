@@ -19,7 +19,6 @@ import BlogPage from '../../Pages/Blog'
 import BlogDetailPage from '../../Pages/Blog/blogDetails'
 import AdminPanel from '../../Pages/AdminPage'
 import ToastNotification from '../../Components/Toast'
-import ChatBot from '../../Components/Chatbot'
 import AppointmentList from '../../Pages/Appointmentslist'
 import Chatpage from '../../Pages/Chatpage'
 import MyProfile from '../../Pages/MyProfile'
@@ -35,7 +34,6 @@ const Layout: React.FC<PropsWithChildren<{}>> = ({ children }) => {
       {!isAdminRoute && <Navbar />}
       {children}
       <ToastNotification />
-      {!isAdminRoute && <ChatBot />}
       {!isAdminRoute && <Footer />}
     </>
   )

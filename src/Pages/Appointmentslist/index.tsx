@@ -214,6 +214,7 @@ const UserAppointmentTable = ({ appointments }: AppointmentTableProps) => {
   useEffect(() => {
     // Check if chat is initiated for each appointment
     appointments.forEach((appointment) => {
+      console.log('appointment', appointment)
       const chatRef = ref(realtimeDB, `chats/${appointment.id}/messages`)
       onValue(chatRef, (snapshot) => {
         const hasMessages = snapshot.exists()
@@ -359,39 +360,60 @@ export default function AppointmentList() {
   useEffect(() => {
     const auth = getAuth()
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      // console.log('USER', USER)
-      if (user && user.email && USER.role === 'user') {
-        try {
-          const q = query(collection(db, 'appointments'), where('userEmail', '==', USER.email))
-          const snapshot = await getDocs(q)
-          const fetchedAppointments: Appointment[] = snapshot.docs.map((doc) => ({
-            id: doc.id,
-            ...(doc.data() as Omit<Appointment, 'id'>),
-          }))
-          // console.log('fetchedAppointments', fetchedAppointments)
-          setAppointments(fetchedAppointments)
-          setIsLoading(false)
-        } catch (error) {
-          console.error('Error fetching appointments:', error)
-          setIsLoading(false)
-        }
-      } else if (user && user.email && ['therapist', 'coach'].includes(USER.role)) {
-        try {
-          const q = query(collection(db, 'appointments'), where('therapistEmail', '==', USER.email))
-          const snapshot = await getDocs(q)
-          const fetchedAppointments: Appointment[] = snapshot.docs.map((doc) => ({
-            id: doc.id,
-            ...(doc.data() as Omit<Appointment, 'id'>),
-          }))
-          // console.log('fetchedAppointments', fetchedAppointments)
-          setAppointments(fetchedAppointments)
-          setIsLoading(false)
-        } catch (error) {
-          console.error('Error fetching appointments:', error)
-          setIsLoading(false)
-        }
-      } else {
+      if (!user || !user.email) {
         setAppointments([])
+        setIsLoading(false)
+        return
+      }
+
+      try {
+        let q
+        if (USER.role === 'user') {
+          // For regular users, only show their own appointments
+          q = query(collection(db, 'appointments'), where('userEmail', '==', user.email))
+        } else if (['therapist', 'coach'].includes(USER.role)) {
+          // For therapists/coaches, only show appointments assigned to them
+          q = query(collection(db, 'appointments'), where('therapistEmail', '==', user.email))
+        } else {
+          // For any other role, don't show any appointments
+          setAppointments([])
+          setIsLoading(false)
+          return
+        }
+
+        const snapshot = await getDocs(q)
+        const fetchedAppointments: Appointment[] = []
+
+        for (const doc of snapshot.docs) {
+          const data = doc.data() as Omit<Appointment, 'id'>
+          // Only add the appointment if the user has permission to view it
+          if (
+            (USER.role === 'user' && data.userEmail === user.email) ||
+            (['therapist', 'coach'].includes(USER.role) && data.therapistEmail === user.email)
+          ) {
+            let therapistName = data.therapistName
+            
+            // If therapist name is not available, try to fetch it
+            if (!therapistName && data.therapistEmail) {
+              const therapistQuery = query(collection(db, 'therapists'), where('email', '==', data.therapistEmail))
+              const therapistSnapshot = await getDocs(therapistQuery)
+              if (!therapistSnapshot.empty) {
+                therapistName = therapistSnapshot.docs[0].data().name || 'Unknown Therapist'
+              }
+            }
+            
+            fetchedAppointments.push({
+              id: doc.id,
+              ...data,
+              therapistName: therapistName || 'Unknown Therapist'
+            })
+          }
+        }
+
+        setAppointments(fetchedAppointments)
+      } catch (error) {
+        console.error('Error fetching appointments:', error)
+      } finally {
         setIsLoading(false)
       }
     })

@@ -7,21 +7,30 @@
   margin: 0 12px;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
+
 * {
   font-family: 'Mulish', sans-serif;
   padding: 0%;
   margin: 0%;
   box-sizing: border-box;
 }
+
 .heading {
   font-family: 'Derivia Regular';
-  font-size: 32px;
+  font-size: var(--font-size-3xl);
   font-weight: 500;
   margin-top: 16px;
   color: #a88757;
   margin-bottom: 8px;
   text-align: center;
   margin-top: 10px;
+}
+
+.slider {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .text {
@@ -38,11 +47,13 @@
   width: 100%;
   overflow: hidden;
 }
+
 @keyframes fall {
   0% {
     opacity: 1;
     transform: translateY(-100%);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0);
@@ -51,11 +62,11 @@
 
 @media (min-width: 320px) and (max-width: 480px) {
   .heading {
-    font-size: 15px;
     font-weight: 600;
     text-align: center;
     margin-bottom: 0px;
   }
+
   .imgs {
     height: auto;
     width: 55%;
@@ -64,6 +75,7 @@
     position: relative;
   }
 }
+
 @media (min-width: 481px) and (max-width: 768px) {
   .imgs {
     height: auto;
@@ -71,13 +83,14 @@
     position: relative;
   }
 }
+
 @media (min-width: 769px) and (max-width: 1040px) {
   .heading {
-    font-size: 15px;
     font-weight: 600;
     text-align: center;
     margin-bottom: 10px;
   }
+
   .imgs {
     height: auto;
     width: 60%;
@@ -86,11 +99,11 @@
   }
 
   .heading {
-    font-size: 18px;
     font-weight: 600;
     text-align: center;
   }
 }
+
 @media (min-width: 1041px) and (max-width: 1440px) {
   .imgs {
     height: auto;
@@ -100,12 +113,12 @@
   }
 
   .heading {
-    font-size: 16px;
     font-weight: 600;
     text-align: center;
     margin-bottom: 8px;
   }
 }
+
 @media (min-width: 1441px) and (max-width: 3500px) {
   .imgs {
     height: auto;
@@ -113,6 +126,7 @@
     position: relative;
     margin: 0 12px;
   }
+
   .headingouter {
     width: 95%;
     position: absolute;

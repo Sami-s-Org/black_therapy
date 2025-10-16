@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import { notifyError } from '../Toast'
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+import { signInWithEmailAndPassword } from 'firebase/auth'
+import { doc, getDoc } from 'firebase/firestore'
+import { auth, db } from '../../Share/FireBase'
 
 // Props to notify parent when login is successful
 interface AdminLoginModalProps {
@@ -15,21 +17,42 @@ const AdminLoginModal: React.FC<AdminLoginModalProps> = ({ onLogin }) => {
   const [loading, setLoading] = useState(false)
 
   const handleLogin = async () => {
-    const auth = getAuth()
     setLoading(true)
+
     try {
+      // First, authenticate the user with Firebase Auth
       const userCredential = await signInWithEmailAndPassword(auth, email, password)
       const user = userCredential.user
 
-      if (user.uid === 'n3EWjofKtTVyLubZEZheQeX3bsH2') {
-        localStorage.setItem('isAdmin', 'true')
-        onLogin()
+      // Check if the user is an admin by looking up their UID in the admins collection
+      const adminDocRef = doc(db, 'admins', user.uid)
+      const adminDoc = await getDoc(adminDocRef)
+
+      if (adminDoc.exists()) {
+        const adminData = adminDoc.data()
+        if (adminData.isActive !== false) {
+          // Admin verification successful - call the onLogin callback
+          // The parent component should handle the admin state management
+          onLogin()
+        } else {
+          // Admin account is deactivated
+          await auth.signOut()
+          notifyError('Your admin account has been deactivated')
+        }
       } else {
+        // If not found in admins collection, sign out the user
+        await auth.signOut()
         notifyError('You are not authorized as admin')
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error(error)
-      notifyError('Invalid email or password')
+      if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
+        notifyError('Invalid email or password')
+      } else if (error.code === 'auth/invalid-email') {
+        notifyError('Invalid email format')
+      } else {
+        notifyError('Login failed. Please try again.')
+      }
     } finally {
       setLoading(false)
     }

@@ -3,6 +3,7 @@
    font-family: 'Derivia Regular';
    font-style: normal;
    font-weight: normal;
+   font-display: swap;
    src: local('Derivia Regular'), url('../../assets/Derivia-Regular.otf') format('opentype');
 }
 

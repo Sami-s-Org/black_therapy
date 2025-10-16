@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import styles from './home.module.css'
 import MianSlider from '../../Components/MianSlider'
 import { Link, useNavigate } from 'react-router-dom'
@@ -8,8 +8,8 @@ import AuthModal from '../../Components/ModelAuth'
 import Reverence from '../../assets/wmremove-transformed111.jpeg'
 import Support from '../../assets/757b6fea-2487-4fd0-9a62-a4baec514e7b.jpeg'
 import Therapist from '../../assets/dfb58278-4ea5-44e3-bbfd-79dc456ff3b8.jpeg'
-import LiveTicker from '../../Components/LiveTracker'
 import Avatar from '../../assets/IMG_1518-1-1-1-644x1024.jpg'
+import Testimonials from '../../Components/Testimonial'
 
 const standardTransition: Transition = {
   duration: 0.6,
@@ -74,24 +74,28 @@ const cards = [
     image:
       'https://media.istockphoto.com/id/1329038035/photo/psychological-counselling-black-male-patient-with-depression-having-session-with.jpg?s=612x612&w=0&k=20&c=3JNZsAhwNlEuDmxSaUZL_8cK26PECyob5Fv-ZKtBo98=',
     button: 'Find Now',
+    link: '/findTherapist',
   },
   {
     title: 'Free Help',
     desc: 'Apply for sponsored therapy sessions, thanks to our donors.',
     image: 'https://t3.ftcdn.net/jpg/03/38/55/48/360_F_338554860_bZNpmpwOqfJp1YG4Q9B1ckrLYyFlPhCr.jpg',
     button: 'Apply',
+    link: '/FreeTherapy',
   },
   {
     title: 'Join as a Therapist',
     desc: 'Grow your online presence by joining our directory.',
     image: Therapist,
     button: 'Join Us',
+    link: '/joinAsATherapist',
   },
   {
     title: 'Support Us',
     desc: 'Help Black men & boys access therapy by donating.',
     image: Support,
     button: 'Donate',
+    link: '#',
   },
 ]
 
@@ -182,9 +186,9 @@ const Coaches = [
 export default function Home() {
   const [showModal, setShowModal] = useState(false)
 
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
+  // useEffect(() => {
+  //   window.scrollTo(0, 0)
+  // }, [])
   const navigate = useNavigate()
   const handleGotoTerapist = () => {
     navigate('/findTherapist')
@@ -194,20 +198,21 @@ export default function Home() {
   // }
   return (
     <>
-      <LiveTicker />
       {showModal && <AuthModal closeModal={() => setShowModal(false)} />}
-
       {/* Main Slider/Banner */}
       <section className={styles.mainSlider}>
         <MianSlider />
       </section>
-
       {/* Hero Section */}
       <section className={styles.heroContainer}>
         <div className={styles.banner2}>
           <div className={styles.overlay}>
             <motion.div variants={fadeUpVariant} initial="hidden" animate="visible" transition={{ duration: 0.8 }}>
-              <div className={styles.quote}>"We see you. We hear you. We're here for you."</div>
+              <div className={styles.quote}>
+                "We see you.
+                <br /> We hear you.
+                <br /> We're here for you."
+              </div>
               <p className={styles.overlayText}>
                 "Even in brokenness, light reaches us. Healing is not far, it lives within the reach of grace"
               </p>
@@ -240,7 +245,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* numbers section */}
       <section className={styles.numbersSection}>
         <div className={styles.sectionShape}></div>
@@ -249,11 +253,10 @@ export default function Home() {
             variants={fadeUpVariant}
             initial="hidden"
             whileInView="visible"
+            style={{ width: '100%', display: 'flex', justifyContent: 'center' }}
             viewport={{ once: true, margin: '-100px' }}
           >
-            <p className={styles.sectionHeading} style={{ margin: '40px 0' }}>
-              The Need for Therapy Access for Black Men and Boys
-            </p>
+            <p className={styles.sectionHeading}>The Need for Therapy Access for Black Men and Boys</p>
           </motion.div>
 
           <motion.div
@@ -307,7 +310,6 @@ export default function Home() {
         </div>
         <div className={styles.sectionShape}></div>
       </section>
-
       {/* Values Section */}
       {/* <section className={styles.valuesSection} style={{ backgroundColor: '#f8f7f5' }}>
         <div className={styles.sectionShape}></div>
@@ -346,7 +348,6 @@ export default function Home() {
         </div>
         <div className={styles.sectionShape}></div>
       </section> */}
-
       {/* Service Cards Section */}
       <section className={styles.cardsSection}>
         <div className={styles.sectionShape}></div>
@@ -380,7 +381,7 @@ export default function Home() {
                 <div className={styles.cardContent}>
                   <h3>{card.title}</h3>
                   <p>{card.desc}</p>
-                  <button>{card.button}</button>
+                  <button onClick={() => navigate(card.link)}>{card.button}</button>
                 </div>
               </motion.div>
             ))}
@@ -388,7 +389,6 @@ export default function Home() {
         </div>
         <div className={styles.sectionShape}></div>
       </section>
-
       {/* Quote Banner Section */}
       {/* <section className={styles.quoteBannerSection}>
         <div className={styles.quoteBanner}>
@@ -432,7 +432,6 @@ export default function Home() {
           </div>
         </div>
       </section> */}
-
       {/* Safe Space Section */}
       <section className={styles.safeSpaceSection}>
         <div className={styles.sectionShape}></div>
@@ -471,6 +470,7 @@ export default function Home() {
               variants={staggerItemVariant}
               className={styles.primaryButton}
               whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
+              onClick={() => navigate('/contactUs')}
             >
               Contact Us
             </motion.button>
@@ -478,7 +478,6 @@ export default function Home() {
         </div>
         <div className={styles.sectionShape}></div>
       </section>
-
       {/* Support Options Section */}
       <section className={styles.supportSection}>
         <div className={styles.sectionShape}></div>
@@ -544,7 +543,6 @@ export default function Home() {
         </div>
         <div className={styles.sectionShape}></div>
       </section>
-
       {/* Featured Therapists Section */}
       <section className={styles.featuredSection}>
         <div className={styles.sectionShape}></div>
@@ -588,7 +586,6 @@ export default function Home() {
         </div>
         <div className={styles.sectionShape}></div>
       </section>
-
       {/* Featured Coaches Section */}
       <section className={styles.featuredSection}>
         <div className={styles.sectionShape}></div>
@@ -632,8 +629,8 @@ export default function Home() {
         </div>
         <div className={styles.sectionShape}></div>
       </section>
-
       {/* Testimonials Section */}
+      <Testimonials />
     </>
   )
 }

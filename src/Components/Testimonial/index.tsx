@@ -64,9 +64,7 @@ const Testimonials = () => {
             </div>
           </div>
 
-          <div className={styles.cta}>
-            Your healing starts <span>here</span>.
-          </div>
+          <div className={styles.cta}>Your healing starts here.</div>
         </div>
       </div>
     </div>

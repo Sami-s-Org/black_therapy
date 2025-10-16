@@ -3,252 +3,570 @@ import styles from './freetherapy.module.css'
 import { motion } from 'framer-motion'
 import { db } from '../../Share/FireBase'
 import { collection, addDoc, Timestamp } from 'firebase/firestore'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { notifyError, notifySuccess } from '../../Components/Toast'
 
+const THERAPY_REASONS = [
+  'Anxiety or Stress',
+  'Depression or Mood Concerns',
+  'Relationship Challenges',
+  'Family Issues',
+  'Grief & Loss',
+  'Trauma or PTSD',
+  'Racial Identity & Cultural Issues',
+  'Personal Growth & Self-Esteem',
+  'Career or Life Transitions',
+  'Other',
+]
+
+const AGE_GROUPS = [
+  { value: 'under-18', label: 'Under 18' },
+  { value: '18-24', label: '18-24' },
+  { value: '25-34', label: '25-34' },
+  { value: '35-44', label: '35-44' },
+  { value: '45-54', label: '45-54' },
+  { value: '55+', label: '55+' },
+]
+
+interface FormData {
+  fullName: string
+  email: string
+  phone: string
+  ageGroup: string
+  contactMethod: string
+  therapyType: string
+  therapistGender: string
+  reasons: string[]
+  previousTherapy: string
+  urgencyLevel: string
+  preferredTime: string
+  additionalInfo: string
+  financialHardship: boolean
+  consent: boolean
+}
+
 export default function FreeTherapy() {
-  const [formData, setFormData] = useState({})
+  const [currentStep, setCurrentStep] = useState(1)
+  const [formData, setFormData] = useState<FormData>({
+    // Personal Info
+    fullName: '',
+    email: '',
+    phone: '',
+    ageGroup: '',
+
+    // Preferences
+    contactMethod: '',
+    therapyType: '',
+    therapistGender: '',
+
+    // Therapy Details
+    reasons: [],
+    previousTherapy: '',
+    urgencyLevel: '',
+    preferredTime: '',
+
+    // Additional Info
+    additionalInfo: '',
+    financialHardship: false,
+    consent: false,
+  })
   const [loading, setLoading] = useState(false)
-  const handleChange = (e: any) => {
-    const { name, value, type, checked } = e.target
-    if (type === 'checkbox') {
-      setFormData((prev: any) => {
-        const existing = prev[name] || []
-        return {
-          ...prev,
-          [name]: checked ? [...existing, value] : existing.filter((item: any) => item !== value),
-        }
-      })
-    } else {
-      setFormData((prev) => ({
-        ...prev,
-        [name]: value,
-      }))
+  const [errors, setErrors] = useState<any>({})
+
+  const validateStep = (step: number) => {
+    const newErrors: any = {}
+
+    if (step === 1) {
+      if (!formData.fullName.trim()) newErrors.fullName = 'Name is required'
+      if (!formData.email.trim()) newErrors.email = 'Email is required'
+      if (!formData.ageGroup) newErrors.ageGroup = 'Age group is required'
+    } else if (step === 2) {
+      if (!formData.contactMethod) newErrors.contactMethod = 'Contact method is required'
+      if (!formData.therapyType) newErrors.therapyType = 'Therapy type is required'
+      if (!formData.therapistGender) newErrors.therapistGender = 'Therapist preference is required'
+    } else if (step === 3) {
+      if (formData.reasons.length === 0) newErrors.reasons = 'Please select at least one reason'
+      if (!formData.previousTherapy) newErrors.previousTherapy = 'Please answer about previous therapy'
+      if (!formData.urgencyLevel) newErrors.urgencyLevel = 'Please select urgency level'
+    } else if (step === 4) {
+      if (!formData.financialHardship) newErrors.financialHardship = 'Please confirm financial need'
+      if (!formData.consent) newErrors.consent = 'Please agree to terms'
+    }
+
+    setErrors(newErrors)
+    return Object.keys(newErrors).length === 0
+  }
+
+  const handleNext = () => {
+    if (validateStep(currentStep)) {
+      setCurrentStep((prev) => Math.min(prev + 1, 4))
     }
   }
 
-  const handleSubmit = async (e: any) => {
-    e.preventDefault()
-    setLoading(true)
+  const handlePrev = () => {
+    setCurrentStep((prev) => Math.max(prev - 1, 1))
+  }
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    const { name, value, type, checked } = e.target as HTMLInputElement
+
+    if (type === 'checkbox' && name === 'reasons') {
+      setFormData((prev: FormData) => ({
+        ...prev,
+        reasons: checked ? [...prev.reasons, value] : prev.reasons.filter((reason) => reason !== value),
+      }))
+    } else if (type === 'checkbox') {
+      setFormData((prev: FormData) => ({ ...prev, [name]: checked }))
+    } else {
+      setFormData((prev: FormData) => ({ ...prev, [name]: value }))
+    }
+
+    // Clear error when user starts typing
+    if (errors[name]) {
+      setErrors((prev: Record<string, string>) => ({ ...prev, [name]: '' }))
+    }
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!validateStep(4)) return
+
+    setLoading(true)
     try {
       await addDoc(collection(db, 'freeTherapy'), {
         ...formData,
         submittedAt: Timestamp.now(),
+        status: 'pending',
       })
-      notifySuccess('Application submitted successfully!')
+      notifySuccess("Application submitted successfully! We'll contact you within 48 hours.")
 
-      setFormData({})
-      e.target.reset()
+      // Reset form
+      setFormData({
+        fullName: '',
+        email: '',
+        phone: '',
+        ageGroup: '',
+        contactMethod: '',
+        therapyType: '',
+        therapistGender: '',
+        reasons: [],
+        previousTherapy: '',
+        urgencyLevel: '',
+        preferredTime: '',
+        additionalInfo: '',
+        financialHardship: false,
+        consent: false,
+      })
+      setCurrentStep(1)
     } catch (error) {
       console.error('Error submitting application:', error)
       notifyError('Something went wrong. Please try again.')
     }
-
     setLoading(false)
   }
 
-  return (
-    <div style={{ backgroundColor: '#f9fafb' }}>
-      <HeaderBar heading="Free Therapy" />
-      <h1 className={styles.title}>Apply for Free Therapy Help</h1>
-      <div className={styles.wrapper}>
-        <motion.div
-          className={styles.container}
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <p className={styles.subtitle}>
-            We see you. We hear you. We're here for you. Therapy for Black Men is committed to ensuring that financial
-            barriers don’t prevent you from getting the support you deserve. Please take a moment to answer a few
-            questions so we can connect you with the right therapist.
-          </p>
+  const renderStepIndicator = () => (
+    <div className={styles.stepIndicator}>
+      {[1, 2, 3, 4].map((step) => (
+        <div key={step} className={`${styles.step} ${currentStep >= step ? styles.active : ''}`}>
+          <span>{step}</span>
+          {step < 4 && <div className={styles.connector} />}
+        </div>
+      ))}
+    </div>
+  )
 
-          <form className={styles.form} onSubmit={handleSubmit}>
-            <h2 className={styles.heading}>1. Basic Information</h2>
-            <input
-              className={styles.input}
-              type="text"
-              name="fullName"
-              placeholder="Full Name"
-              required
-              onChange={handleChange}
-            />
-            <input
-              className={styles.input}
-              type="email"
-              name="email"
-              placeholder="Email Address"
-              required
-              onChange={handleChange}
-            />
-            <input
-              className={styles.input}
-              type="tel"
-              name="phone"
-              placeholder="Phone Number (Optional)"
-              onChange={handleChange}
-            />
-            <label style={{ marginTop: '24px' }} className={styles.label}>
-              Preferred Contact Method:
-            </label>
-            <div className={styles.checkboxGroup}>
-              <label>
-                <input type="checkbox" name="contactMethod" value="Email" onChange={handleChange} /> Email
-              </label>
-              <label>
-                <input type="checkbox" name="contactMethod" value="Phone" onChange={handleChange} /> Phone
-              </label>
-              <label>
-                <input type="checkbox" name="contactMethod" value="Text" onChange={handleChange} /> Text
-              </label>
-            </div>
+  const renderStep1 = () => (
+    <motion.div
+      className={styles.stepContent}
+      initial={{ opacity: 0, x: 20 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.3 }}
+    >
+      <h2 className={styles.stepTitle}>Personal Information</h2>
+      <p className={styles.stepDescription}>Let's start with some basic information about you.</p>
 
-            <h2 className={styles.heading}>2. Age Group</h2>
-            <div className={styles.checkboxGroup}>
-              <label>
-                <input type="checkbox" name="ageGroup" value="Under 18" onChange={handleChange} /> Under 18
-              </label>
-              <label>
-                <input type="checkbox" name="ageGroup" value="18–24" onChange={handleChange} /> 18–24
-              </label>
-              <label>
-                <input type="checkbox" name="ageGroup" value="25–34" onChange={handleChange} /> 25–34
-              </label>
-              <label>
-                <input type="checkbox" name="ageGroup" value="35–44" onChange={handleChange} /> 35–44
-              </label>
-              <label>
-                <input type="checkbox" name="ageGroup" value="45–54" onChange={handleChange} /> 45–54
-              </label>
-              <label>
-                <input type="checkbox" name="ageGroup" value="55+" onChange={handleChange} /> 55+
-              </label>
-            </div>
+      <div className={styles.formGroup}>
+        <label className={styles.label}>Full Name *</label>
+        <input
+          className={`${styles.input} ${errors.fullName ? styles.error : ''}`}
+          type="text"
+          name="fullName"
+          value={formData.fullName}
+          onChange={handleChange}
+          placeholder="First & Last Name"
+        />
+        {errors.fullName && <span className={styles.errorText}>{errors.fullName}</span>}
+      </div>
 
-            <h2 className={styles.heading}>3. How Would You Like to Receive Therapy?</h2>
-            <div className={styles.checkboxGroup}>
-              <label>
-                <input type="checkbox" name="therapyType" value="Virtual" onChange={handleChange} /> Virtual (Online
-                Sessions)
-              </label>
-              <label>
-                <input type="checkbox" name="therapyType" value="In-Person" onChange={handleChange} /> In-Person (If
-                available in your area)
-              </label>
-              <label>
-                <input type="checkbox" name="therapyType" value="No Preference" onChange={handleChange} /> No Preference
-              </label>
-            </div>
+      <div className={styles.formGroup}>
+        <label className={styles.label}>Email Address *</label>
+        <input
+          className={`${styles.input} ${errors.email ? styles.error : ''}`}
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          placeholder="For confidential updates about your application"
+        />
+        {errors.email && <span className={styles.errorText}>{errors.email}</span>}
+      </div>
 
-            <h2 className={styles.heading}>4. What Brings You to Therapy?</h2>
-            <div className={styles.checkboxGroup}>
-              <label>
-                <input type="checkbox" name="reasons" value="Anxiety or Stress" onChange={handleChange} /> Anxiety or
-                Stress
-              </label>
-              <label>
-                <input type="checkbox" name="reasons" value="Depression" onChange={handleChange} /> Depression or Mood
-                Concerns
-              </label>
-              <label>
-                <input type="checkbox" name="reasons" value="Relationship Challenges" onChange={handleChange} />{' '}
-                Relationship Challenges
-              </label>
-              <label>
-                <input type="checkbox" name="reasons" value="Family Issues" onChange={handleChange} /> Family Issues
-              </label>
-              <label>
-                <input type="checkbox" name="reasons" value="Grief" onChange={handleChange} /> Grief & Loss
-              </label>
-              <label>
-                <input type="checkbox" name="reasons" value="Trauma" onChange={handleChange} /> Trauma or PTSD
-              </label>
-              <label>
-                <input type="checkbox" name="reasons" value="Racial Identity" onChange={handleChange} /> Racial Identity
-                & Cultural Issues
-              </label>
-              <label>
-                <input type="checkbox" name="reasons" value="Self-Esteem" onChange={handleChange} /> Personal Growth &
-                Self-Esteem
-              </label>
-              <label>
-                <input type="checkbox" name="reasons" value="Career" onChange={handleChange} /> Career or Life
-                Transitions
-              </label>
-              <label>
-                <input type="checkbox" name="reasons" value="Other" onChange={handleChange} /> Other (Please describe
-                briefly)
-              </label>
+      <div className={styles.formGroup}>
+        <label className={styles.label}>Phone Number (Optional)</label>
+        <input
+          className={styles.input}
+          type="tel"
+          name="phone"
+          value={formData.phone}
+          onChange={handleChange}
+          placeholder="For scheduling assistance, if needed"
+        />
+      </div>
+
+      <div className={styles.formGroup}>
+        <label className={styles.label}>Age Group *</label>
+        <div className={styles.radioGrid}>
+          {AGE_GROUPS.map((age) => (
+            <label key={age.value} className={styles.radioOption}>
               <input
-                className={styles.input}
-                type="text"
-                name="otherReason"
-                placeholder="Other (Optional)"
+                type="radio"
+                name="ageGroup"
+                value={age.value}
+                checked={formData.ageGroup === age.value}
                 onChange={handleChange}
               />
+              <span className={styles.radioLabel} style={{ maxWidth: age.value === 'under-18' ? '300px' : 'auto' }}>
+                {age.label}
+                {age.value === 'under-18' && ' (If under 18, parent/guardian consent will be required.)'}
+              </span>
+            </label>
+          ))}
+        </div>
+        {errors.ageGroup && <span className={styles.errorText}>{errors.ageGroup}</span>}
+      </div>
+    </motion.div>
+  )
+
+  const renderStep2 = () => (
+    <motion.div
+      className={styles.stepContent}
+      initial={{ opacity: 0, x: 20 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.3 }}
+    >
+      <h2 className={styles.stepTitle}>Preferences</h2>
+      <p className={styles.stepDescription}>Help us understand how you'd like to receive therapy.</p>
+
+      <div className={styles.formGroup}>
+        <label className={styles.label}>Preferred Contact Method *</label>
+        <div className={styles.radioRow}>
+          {['Email', 'Phone', 'Text'].map((method) => (
+            <label key={method} className={styles.radioOption}>
+              <input
+                type="radio"
+                name="contactMethod"
+                value={method}
+                checked={formData.contactMethod === method}
+                onChange={handleChange}
+              />
+              <span className={styles.radioLabel}>{method}</span>
+            </label>
+          ))}
+        </div>
+        {errors.contactMethod && <span className={styles.errorText}>{errors.contactMethod}</span>}
+      </div>
+
+      <div className={styles.formGroup}>
+        <label className={styles.label}>Therapy Format *</label>
+        <div className={styles.radioRow}>
+          {[
+            { value: 'Virtual', label: 'Virtual (Online Sessions)' },
+            { value: 'In-Person', label: 'In-Person (If available in your area)' },
+            { value: 'No Preference', label: 'No Preference' },
+          ].map((type) => (
+            <label key={type.value} className={styles.radioOption}>
+              <input
+                type="radio"
+                name="therapyType"
+                value={type.value}
+                checked={formData.therapyType === type.value}
+                onChange={handleChange}
+              />
+              <span className={styles.radioLabel}>{type.label}</span>
+            </label>
+          ))}
+        </div>
+        {errors.therapyType && <span className={styles.errorText}>{errors.therapyType}</span>}
+      </div>
+
+      <div className={styles.formGroup}>
+        <label className={styles.label}>What Type of Therapist Would You Feel Most Comfortable With? *</label>
+        <p className={styles.helperText}>(Check any that apply, or leave blank if no preference)</p>
+        <div className={styles.radioRow}>
+          {[
+            { value: 'Male', label: 'Male Therapist' },
+            { value: 'Female', label: 'Female Therapist' },
+            { value: 'No Preference', label: 'No Preference' },
+          ].map((gender) => (
+            <label key={gender.value} className={styles.radioOption}>
+              <input
+                type="radio"
+                name="therapistGender"
+                value={gender.value}
+                checked={formData.therapistGender === gender.value}
+                onChange={handleChange}
+              />
+              <span className={styles.radioLabel}>{gender.label}</span>
+            </label>
+          ))}
+        </div>
+        {errors.therapistGender && <span className={styles.errorText}>{errors.therapistGender}</span>}
+      </div>
+
+      <div className={styles.formGroup}>
+        <label className={styles.label}>Preferred Session Time (Optional)</label>
+        <select className={styles.input} name="preferredTime" value={formData.preferredTime} onChange={handleChange}>
+          <option value="">Select a time preference</option>
+          <option value="Morning">Morning (9 AM - 12 PM)</option>
+          <option value="Afternoon">Afternoon (12 PM - 5 PM)</option>
+          <option value="Evening">Evening (5 PM - 8 PM)</option>
+          <option value="Flexible">Flexible</option>
+        </select>
+      </div>
+    </motion.div>
+  )
+
+  const renderStep3 = () => (
+    <motion.div
+      className={styles.stepContent}
+      initial={{ opacity: 0, x: 20 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.3 }}
+    >
+      <h2 className={styles.stepTitle}>Therapy Details</h2>
+      <p className={styles.stepDescription}>Tell us about your therapy needs and background.</p>
+
+      <div className={styles.formGroup}>
+        <label className={styles.label}>What brings you to therapy? (Select all that apply) *</label>
+        <div className={styles.checkboxGrid}>
+          {THERAPY_REASONS.map((reason) => (
+            <label key={reason} className={styles.checkboxOption}>
+              <input
+                type="checkbox"
+                name="reasons"
+                value={reason}
+                checked={formData.reasons.includes(reason)}
+                onChange={handleChange}
+              />
+              <span className={styles.checkboxLabel}>{reason}</span>
+            </label>
+          ))}
+        </div>
+        {errors.reasons && <span className={styles.errorText}>{errors.reasons}</span>}
+      </div>
+
+      <div className={styles.formGroup}>
+        <label className={styles.label}>Have you attended therapy before? *</label>
+        <div className={styles.radioRow}>
+          {['Yes', 'No'].map((option) => (
+            <label key={option} className={styles.radioOption}>
+              <input
+                type="radio"
+                name="previousTherapy"
+                value={option}
+                checked={formData.previousTherapy === option}
+                onChange={handleChange}
+              />
+              <span className={styles.radioLabel}>{option}</span>
+            </label>
+          ))}
+        </div>
+        {errors.previousTherapy && <span className={styles.errorText}>{errors.previousTherapy}</span>}
+      </div>
+
+      <div className={styles.formGroup}>
+        <label className={styles.label}>How urgent is your need for therapy? *</label>
+        <div className={styles.radioColumn}>
+          {[
+            { value: 'Immediate', label: 'Immediate - I need help right away' },
+            { value: 'Soon', label: 'Soon - Within the next 2 weeks' },
+            { value: 'Flexible', label: 'Flexible - I can wait for the right match' },
+          ].map((urgency) => (
+            <label key={urgency.value} className={styles.radioOption}>
+              <input
+                type="radio"
+                name="urgencyLevel"
+                value={urgency.value}
+                checked={formData.urgencyLevel === urgency.value}
+                onChange={handleChange}
+              />
+              <span className={styles.radioLabel}>{urgency.label}</span>
+            </label>
+          ))}
+        </div>
+        {errors.urgencyLevel && <span className={styles.errorText}>{errors.urgencyLevel}</span>}
+      </div>
+
+      <div className={styles.formGroup}>
+        <label className={styles.label}>Additional Information (Optional)</label>
+        <textarea
+          className={styles.textarea}
+          name="additionalInfo"
+          value={formData.additionalInfo}
+          onChange={handleChange}
+          placeholder="Share anything else that might help us match you with the right therapist..."
+          rows={4}
+        />
+      </div>
+    </motion.div>
+  )
+
+  const renderStep4 = () => (
+    <motion.div
+      className={styles.stepContent}
+      initial={{ opacity: 0, x: 20 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.3 }}
+    >
+      <h2 className={styles.stepTitle}>Confirmation</h2>
+      <p className={styles.stepDescription}>Please review and confirm your application.</p>
+
+      <div className={styles.summaryCard}>
+        <h3>Application Summary</h3>
+        <div className={styles.summaryItem}>
+          <strong>Name:</strong> {formData.fullName}
+        </div>
+        <div className={styles.summaryItem}>
+          <strong>Email:</strong> {formData.email}
+        </div>
+        <div className={styles.summaryItem}>
+          <strong>Age Group:</strong> {AGE_GROUPS.find((age) => age.value === formData.ageGroup)?.label}
+        </div>
+        <div className={styles.summaryItem}>
+          <strong>Contact Preference:</strong> {formData.contactMethod}
+        </div>
+        <div className={styles.summaryItem}>
+          <strong>Therapy Type:</strong> {formData.therapyType}
+        </div>
+        <div className={styles.summaryItem}>
+          <strong>Therapist Preference:</strong> {formData.therapistGender}
+        </div>
+        <div className={styles.summaryItem}>
+          <strong>Main Concerns:</strong> {formData.reasons.slice(0, 3).join(', ')}
+          {formData.reasons.length > 3 && '...'}
+        </div>
+      </div>
+
+      <div className={styles.formGroup}>
+        <label className={styles.checkboxOption}>
+          <input
+            type="checkbox"
+            name="financialHardship"
+            checked={formData.financialHardship}
+            onChange={handleChange}
+          />
+          <span className={styles.checkboxLabel}>
+            I am experiencing financial hardship and cannot afford therapy at this time. *
+          </span>
+        </label>
+        {errors.financialHardship && <span className={styles.errorText}>{errors.financialHardship}</span>}
+      </div>
+
+      <div className={styles.formGroup}>
+        <label className={styles.checkboxOption}>
+          <input type="checkbox" name="consent" checked={formData.consent} onChange={handleChange} />
+          <span className={styles.checkboxLabel}>
+            I understand that free therapy sessions are subject to availability, and I will be matched based on the best
+            available therapist for my needs. I agree to be contacted by Therapy for Black Men regarding my application
+            and therapy options. *
+          </span>
+        </label>
+        {errors.consent && <span className={styles.errorText}>{errors.consent}</span>}
+      </div>
+
+      <div className={styles.infoBox}>
+        <h4>What happens next?</h4>
+        <p>
+          Once you submit your application, our team will carefully review it and follow up with you as soon as
+          possible. Thank you for taking this step toward healing.
+        </p>
+        <ul>
+          <li>We'll review your application within 48 hours</li>
+          <li>You'll receive an email with next steps</li>
+          <li>We'll match you with a qualified therapist</li>
+          <li>Sessions are typically scheduled within 1-2 weeks</li>
+        </ul>
+      </div>
+    </motion.div>
+  )
+
+  const renderStepContent = () => {
+    switch (currentStep) {
+      case 1:
+        return renderStep1()
+      case 2:
+        return renderStep2()
+      case 3:
+        return renderStep3()
+      case 4:
+        return renderStep4()
+      default:
+        return renderStep1()
+    }
+  }
+
+  return (
+    <div className={styles.pageWrapper}>
+      <HeaderBar heading="Free Therapy Application" />
+
+      <div className={styles.hero}>
+        <h1 className={styles.title}>Apply for Free Therapy Help</h1>
+        <p className={styles.subtitle}>
+          We see you. We hear you. We're here for you.
+          <br />
+          <span className={styles.highlight}>
+            Therapy for Black Men is committed to ensuring that financial barriers don't prevent you from getting the
+            support you deserve. Please take a moment to answer a few questions so we can connect you with the right
+            therapist.
+          </span>
+        </p>
+      </div>
+
+      <div className={styles.wrapper}>
+        <div className={styles.container}>
+          {renderStepIndicator()}
+
+          <form onSubmit={handleSubmit}>
+            {renderStepContent()}
+
+            <div className={styles.navigation}>
+              {currentStep > 1 && (
+                <button type="button" className={styles.backButton} onClick={handlePrev}>
+                  Previous
+                </button>
+              )}
+
+              {currentStep < 4 ? (
+                <button type="button" className={styles.nextButton} onClick={handleNext}>
+                  Next Step
+                </button>
+              ) : (
+                <motion.button
+                  type="submit"
+                  className={styles.submitButton}
+                  disabled={loading}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  {loading ? 'Submitting...' : 'Submit Application'}
+                </motion.button>
+              )}
             </div>
-
-            <h2 className={styles.heading}>5. Have You Ever Attended Therapy Before?</h2>
-            <div className={styles.checkboxGroup}>
-              <label>
-                <input type="checkbox" name="attended" value="Yes" onChange={handleChange} /> Yes
-              </label>
-              <label>
-                <input type="checkbox" name="attended" value="No" onChange={handleChange} /> No
-              </label>
-            </div>
-
-            <h2 className={styles.heading}>6. Therapist Preference</h2>
-            <div className={styles.checkboxGroup}>
-              <label>
-                <input type="checkbox" name="therapistType" value="Male" onChange={handleChange} /> Male Therapist
-              </label>
-              <label>
-                <input type="checkbox" name="therapistType" value="Female" onChange={handleChange} /> Female Therapist
-              </label>
-              <label>
-                <input type="checkbox" name="therapistType" value="No Preference" onChange={handleChange} /> No
-                Preference
-              </label>
-            </div>
-
-            <h2 className={styles.heading}>7. Financial Need Confirmation</h2>
-            <div className={styles.checkboxGroup}>
-              <label>
-                <input type="checkbox" name="financial" value="Hardship" onChange={handleChange} /> I am experiencing
-                financial hardship and cannot afford therapy at this time.
-              </label>
-            </div>
-
-            <h2 className={styles.heading}>8. Anything Else You’d Like Us to Know?</h2>
-            <textarea
-              className={styles.textarea}
-              name="extraDetails"
-              placeholder="Write your message (optional)"
-              onChange={handleChange}
-            />
-
-            <h2 className={styles.heading}>9. Agreement & Consent</h2>
-            <div className={styles.checkboxGroup}>
-              <label>
-                <input type="checkbox" name="consent" value="Availability" required onChange={handleChange} /> I
-                understand that free therapy sessions are subject to availability.
-              </label>
-              <label>
-                <input type="checkbox" name="consent" value="Contact Permission" required onChange={handleChange} /> I
-                agree to be contacted regarding my application.
-              </label>
-            </div>
-
-            <p className={styles.footerNote}>🖤 You are not alone. We are here for you.</p>
-
-            <motion.button type="submit" className={styles.button}>
-              {loading ? 'Loading....' : 'Submit Application'}
-            </motion.button>
           </form>
-        </motion.div>
+
+          <div className={styles.footerNote}>🖤 You are not alone. We are here for you.</div>
+        </div>
       </div>
     </div>
   )

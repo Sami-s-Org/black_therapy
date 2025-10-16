@@ -207,7 +207,7 @@ export default function Adminbloges() {
           <thead>
             <tr>
               <th>Title</th>
-              <th>Excerpt</th>
+              <th>Content</th>
               <th>Author</th>
               <th>Read Time</th>
               <th>Tags</th>
@@ -271,7 +271,7 @@ export default function Adminbloges() {
               name="excerpt"
               value={formData.excerpt}
               onChange={handleChange}
-              placeholder="Excerpt *"
+              placeholder="Content *"
               required
             />
             <input name="author" value={formData.author} onChange={handleChange} placeholder="Author *" required />

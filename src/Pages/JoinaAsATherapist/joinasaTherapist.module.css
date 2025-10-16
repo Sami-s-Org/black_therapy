@@ -99,6 +99,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .modal {
@@ -110,10 +112,13 @@
   border-radius: 8px;
   width: 100%;
   max-width: 800px;
+  max-height: 90vh;
   animation: popUp 0.3s ease;
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 .UploadIcon {
   color: #a88757;
@@ -128,6 +133,7 @@ h2 {
 }
 select {
   width: 100%;
+  appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
   background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
@@ -150,6 +156,12 @@ select {
   font-size: 1rem;
   width: 100%;
 }
+
+.modal textarea {
+  min-height: 100px;
+  resize: vertical;
+  font-family: inherit;
+}
 .uploadBox {
   width: 100%;
   height: 100px;
@@ -162,6 +174,13 @@ select {
   position: relative;
   overflow: hidden;
   background: #f9f9f9;
+  margin: 15px 0;
+  transition: all 0.3s ease;
+}
+
+.uploadBox:hover {
+  background: #f0f0f0;
+  border-color: #8f7147;
 }
 .modalButtons {
   display: flex;
@@ -187,8 +206,9 @@ select {
 
 .preview {
   width: 100%;
-  height: 100%;
+  max-height: 250px;
   object-fit: cover;
+  border-radius: 12px;
 }
 
 .modal button {
@@ -205,13 +225,6 @@ select {
   transition: background 0.3s ease;
 }
 
-.preview {
-  width: 100%;
-  max-height: 250px;
-  object-fit: cover;
-  border-radius: 12px;
-  margin-top: 0.5rem;
-}
 
 @keyframes popUp {
   from {
@@ -228,6 +241,13 @@ select {
   color: #555;
   margin-top: 0.3rem;
   text-align: center;
+}
+
+.uploadingText {
+  font-size: 0.8rem;
+  color: #a88757;
+  margin-top: 0.2rem;
+  font-weight: 600;
 }
 @media (min-width: 320px) and (max-width: 480px) {
   .container {
@@ -252,7 +272,17 @@ select {
     font-size: 32px;
   }
   .modal textarea {
-    height: 70px;
+    min-height: 80px;
+  }
+  .modalBackdrop {
+    padding: 10px;
+    align-items: flex-start;
+    padding-top: 20px;
+  }
+  .modal {
+    max-height: 95vh;
+    padding: 1rem;
+    margin: 0;
   }
 }
 .bulletList > li::marker {
@@ -287,6 +317,13 @@ select {
   .heroTitle {
     font-size: 32px;
   }
+  .modalBackdrop {
+    padding: 15px;
+  }
+  .modal {
+    max-height: 92vh;
+    padding: 1.5rem;
+  }
 }
 .errorInput {
   border-color: #ff4444 !important;
@@ -300,4 +337,81 @@ select {
 }
 .w100 {
   width: 100%;
+}
+
+.fieldLabel {
+  display: block;
+  color: #333;
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.fieldContainer {
+  margin: 20px 0;
+}
+
+/* Location Picker Section */
+.locationSection {
+  margin: 20px 0;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 12px;
+  border: 2px solid #e0e0e0;
+}
+
+.locationTitle {
+  color: #a88757;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+  font-family: 'Derivia Regular', serif;
+}
+
+/* Compact LocationPicker for modal */
+.locationSection :global(.mapWrapper) {
+  height: 300px !important;
+}
+
+.locationSection :global(.instructions) {
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+.locationSection :global(.instructions p) {
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.locationSection :global(.instructions ul) {
+  font-size: 13px;
+}
+
+@media (max-width: 768px) {
+  .locationSection {
+    padding: 15px;
+    margin: 15px 0;
+  }
+
+  .locationTitle {
+    font-size: 1.1rem;
+  }
+
+  .locationSection :global(.mapWrapper) {
+    height: 250px !important;
+  }
+
+  .locationSection :global(.instructions) {
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  .locationSection :global(.instructions p) {
+    font-size: 13px;
+    margin-bottom: 4px;
+  }
+
+  .locationSection :global(.instructions ul) {
+    font-size: 12px;
+  }
 }

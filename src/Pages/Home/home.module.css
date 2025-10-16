@@ -38,7 +38,7 @@ input[type='checkbox'] {
 }
 
 .sectionHeading {
-  font-size: var(--font-size-4xl);
+  font-size: var(--font-size-3xxl);
   font-weight: 400;
   color: var(--primary-color);
   font-family: var(--font-heading);
@@ -107,7 +107,7 @@ section {
 .banner2 {
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: max(min(100vw, 100vh), 500px);
   background-image: url('../../assets/wmremove-transformed.jpeg');
   display: flex;
   align-items: center;
@@ -168,14 +168,14 @@ section {
 
 /* Button Styles */
 .primaryButton {
-  height: 55px;
+  /* height: 55px; */
   border: none;
   background-color: var(--primary-color);
   color: #fff;
   font-weight: 600;
   font-size: 1rem;
-  padding: 0 2rem;
-  min-width: 200px;
+  padding: clamp(0.5rem, 1vw, 1rem) clamp(0.6rem, 2vw, 2rem);
+  /* min-width: 200px; */
   border-radius: var(--border-radius);
   cursor: pointer;
   transition: var(--transition-standard);
@@ -1005,16 +1005,13 @@ section {
 }
 
 @media (max-width: 480px) {
-  .banner2 {
-    height: 160vh;
-  }
 
   .quote {
     font-size: var(--font-size-3xl);
   }
 
   .overlayText {
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-md);
   }
 
   .quoteBannerText {
@@ -1280,7 +1277,7 @@ section {
 }
 
 .factNumber {
-  font-size: 3.5rem;
+  font-size: var(--font-size-3xl);
   font-weight: 700;
   color: var(--primary-color);
   font-family: var(--font-heading);
@@ -1329,10 +1326,6 @@ section {
     padding: 3rem 2rem;
   }
 
-  .factNumber {
-    font-size: 4rem;
-  }
-
   .factText {
     font-size: 1.1rem;
   }
@@ -1352,10 +1345,6 @@ section {
     padding: 2rem 1.5rem;
   }
 
-  .factNumber {
-    font-size: 3rem;
-  }
-
   .factText {
     font-size: 0.95rem;
   }
@@ -1367,9 +1356,6 @@ section {
     padding: 1.5rem 1rem;
   }
 
-  .factNumber {
-    font-size: 2.5rem;
-  }
 
   .factText {
     font-size: 0.9rem;

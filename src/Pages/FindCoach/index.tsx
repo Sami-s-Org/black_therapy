@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useMemo } from 'react'
 import styles from './findcoach.module.css'
 import { useNavigate } from 'react-router-dom'
 import { db } from '../../Share/FireBase'
@@ -6,6 +6,7 @@ import { collection, getDocs, query, where } from 'firebase/firestore'
 import HeaderBar from '../../Components/Headbar'
 import Avatar from '../../assets/download.jpeg'
 import RingLoader from '../../Components/RingLoader'
+import TherapistMap, { TherapistLocation } from '../../Components/TherapistMap'
 
 interface Coaches {
   id: string
@@ -16,6 +17,8 @@ interface Coaches {
   image: string
   bio: string
   accepted: boolean
+  lat?: number
+  lng?: number
 }
 
 export default function FindCoach() {
@@ -165,6 +168,26 @@ export default function FindCoach() {
     setSelectedPriceRange('')
   }
 
+  // Convert coach data to map locations
+  const coachLocations: TherapistLocation[] = useMemo(() => {
+    return data
+      .filter((c) => c.lat && c.lng)
+      .map((c) => ({
+        id: c.id,
+        name: c.name,
+        specialization: c.specialization,
+        location: c.location,
+        price: c.price,
+        image: c.image,
+        lat: c.lat!,
+        lng: c.lng!,
+      }))
+  }, [data])
+
+  const handleMapCoachClick = (coach: TherapistLocation) => {
+    navigate('/profile', { state: coach })
+  }
+
   return (
     <>
       <HeaderBar heading="Find A Coach" />
@@ -177,6 +200,18 @@ export default function FindCoach() {
             <p className={styles.heroTagline}>Transform Your Life with Expert Guidance</p>
           </div>
         </div>
+
+        {/* Google Map Section */}
+        <section className={styles.mapSection}>
+          <h2 className={styles.mapTitle}>Find Coaches Near You</h2>
+          <p className={styles.mapDescription}>
+            Explore coach locations on the map. Click on a marker to view details.
+          </p>
+          <TherapistMap
+            therapists={coachLocations.length > 0 ? coachLocations : undefined}
+            onTherapistClick={handleMapCoachClick}
+          />
+        </section>
 
         {/* Search and Filters Section - Combined */}
         <section className={styles.searchFiltersSection}>

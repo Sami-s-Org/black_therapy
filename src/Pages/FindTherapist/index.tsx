@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useMemo } from 'react'
 import styles from './findtherapist.module.css'
 import { useNavigate } from 'react-router-dom'
 import { db } from '../../Share/FireBase'
@@ -6,6 +6,7 @@ import { collection, getDocs, query, where } from 'firebase/firestore'
 import HeaderBar from '../../Components/Headbar'
 import Avatar from '../../assets/download.jpeg'
 import RingLoader from '../../Components/RingLoader'
+import TherapistMap, { TherapistLocation } from '../../Components/TherapistMap'
 
 interface Therapist {
   id: string
@@ -16,6 +17,8 @@ interface Therapist {
   image: string
   bio: string
   accepted: boolean
+  lat?: number
+  lng?: number
 }
 
 export default function FindTherapist() {
@@ -46,6 +49,8 @@ export default function FindTherapist() {
           image: data.image || Avatar,
           bio: data.bio || '',
           accepted: data.accepted || false,
+          lat: data.lat,
+          lng: data.lng,
         }
       }) as Therapist[]
 
@@ -86,6 +91,8 @@ export default function FindTherapist() {
           image: data.image || Avatar,
           bio: data.bio || '',
           accepted: data.accepted || false,
+          lat: data.lat,
+          lng: data.lng,
         }
       }) as Therapist[]
 
@@ -167,6 +174,26 @@ export default function FindTherapist() {
     setSelectedPriceRange('')
   }
 
+  // Convert therapist data to map locations
+  const therapistLocations: TherapistLocation[] = useMemo(() => {
+    return data
+      .filter((t) => t.lat && t.lng)
+      .map((t) => ({
+        id: t.id,
+        name: t.name,
+        specialization: t.specialization,
+        location: t.location,
+        price: t.price,
+        image: t.image,
+        lat: t.lat!,
+        lng: t.lng!,
+      }))
+  }, [data])
+
+  const handleMapTherapistClick = (therapist: TherapistLocation) => {
+    navigate('/profile', { state: therapist })
+  }
+
   return (
     <>
       <HeaderBar heading="Find A Therapist" />
@@ -179,6 +206,18 @@ export default function FindTherapist() {
             <p className={styles.heroTagline}>Because Your Well-Being Deserves More</p>
           </div>
         </div>
+
+        {/* Google Map Section */}
+        <section className={styles.mapSection}>
+          <h2 className={styles.mapTitle}>Find Therapists Near You</h2>
+          <p className={styles.mapDescription}>
+            Explore therapist locations on the map. Click on a marker to view details.
+          </p>
+          <TherapistMap
+            therapists={therapistLocations}
+            onTherapistClick={handleMapTherapistClick}
+          />
+        </section>
 
         {/* Search and Filters Section - Combined */}
         <section className={styles.searchFiltersSection}>
