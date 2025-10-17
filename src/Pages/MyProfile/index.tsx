@@ -18,10 +18,12 @@ import {
   FiChevronUp,
   FiChevronDown,
   FiPhone,
+  FiCreditCard,
 } from 'react-icons/fi'
 import { MdLocationOn, MdAttachMoney } from 'react-icons/md'
 import { BsPencilSquare } from 'react-icons/bs'
 import RingLoader from '../../Components/RingLoader'
+import SubscriptionModal from '../../Components/SubscriptionModal'
 
 export default function MyProfile() {
   const [userData, setUserData] = useState({
@@ -42,6 +44,7 @@ export default function MyProfile() {
   const [needsReauth, setNeedsReauth] = useState(false)
   const [originalEmail, setOriginalEmail] = useState('')
   const [isLoading, setIsLoading] = useState(true)
+  const [showSubscriptionModal, setShowSubscriptionModal] = useState(false)
 
   // New state for managing sections
   const [openSections, setOpenSections] = useState({
@@ -329,6 +332,17 @@ export default function MyProfile() {
       ) : (
         <div className={styles.outermain}>
           <h1 className={styles.heading}>Update Profile</h1>
+
+          {/* Subscription Button for Coaches and Therapists */}
+          {/* {(userData.role === 'therapist' || userData.role === 'coach') && ( */}
+          <div className={styles.subscriptionSection}>
+            <button className={styles.subscriptionButton} onClick={() => setShowSubscriptionModal(true)}>
+              <FiCreditCard className={styles.buttonIcon} />
+              Buy Subscription
+            </button>
+          </div>
+          {/* )} */}
+
           <div className={styles.Containter}>
             <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
               {/* Basic Information Section */}
@@ -599,6 +613,15 @@ export default function MyProfile() {
             </form>
           </div>
         </div>
+      )}
+
+      {/* Subscription Modal */}
+      {showSubscriptionModal && (
+        <SubscriptionModal
+          closeModal={() => setShowSubscriptionModal(false)}
+          userRole={userData.role as 'coach' | 'therapist' | 'user'}
+          userName={userData.name}
+        />
       )}
     </div>
   )

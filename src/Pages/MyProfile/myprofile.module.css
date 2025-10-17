@@ -339,7 +339,7 @@
 }
 
 /* Custom file input styling */
-.inputGroup input[type="file"] + label {
+.inputGroup input[type='file'] + label {
   padding: 10px 20px;
   color: #a88757;
   background: rgba(168, 135, 87, 0.08);
@@ -351,7 +351,7 @@
   text-align: center;
 }
 
-.inputGroup input[type="file"] + label:hover {
+.inputGroup input[type='file'] + label:hover {
   background: rgba(168, 135, 87, 0.12);
   transform: translateY(-1px);
 }
@@ -368,4 +368,42 @@
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 2rem;
+}
+
+.subscriptionSection {
+  max-width: 800px;
+  margin: 0 auto 32px;
+  display: flex;
+  justify-content: center;
+}
+
+.subscriptionButton {
+  padding: 16px 40px;
+  background: linear-gradient(135deg, #f0c040, #d4a73a);
+  border: none;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-size: 18px;
+  font-family: 'Derivia Regular', serif;
+  letter-spacing: 0.5px;
+  box-shadow: 0 6px 20px rgba(240, 192, 64, 0.3);
+}
+
+.subscriptionButton:hover {
+  background: linear-gradient(135deg, #d4a73a, #c49530);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(240, 192, 64, 0.4);
+}
+
+.subscriptionButton .buttonIcon {
+  width: 20px;
+  height: 20px;
+  margin-right: 0;
 }

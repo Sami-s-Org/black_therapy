@@ -1,0 +1,449 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  padding: 20px;
+  overflow-y: auto;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal {
+  background: #ffffff;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 900px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.closeButton {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(168, 135, 87, 0.1);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #a88757;
+  font-size: 24px;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.closeButton:hover {
+  background: #a88757;
+  color: white;
+  transform: rotate(90deg);
+}
+
+.header {
+  text-align: center;
+  padding: 40px 40px 20px;
+  background: linear-gradient(to bottom, rgba(168, 135, 87, 0.03), transparent);
+}
+
+.title {
+  font-family: 'Derivia Regular', serif;
+  font-size: 36px;
+  color: #2c3e50;
+  margin-bottom: 12px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+}
+
+.subtitle {
+  color: #7d7d7d;
+  font-size: 16px;
+  margin: 0;
+}
+
+/* Coupon Banner */
+.couponBanner {
+  background: linear-gradient(135deg, #fff8e7, #fffbf2);
+  border: 2px solid #f0c040;
+  border-radius: 16px;
+  padding: 24px;
+  margin: 0 40px 32px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(240, 192, 64, 0.15);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    box-shadow: 0 4px 12px rgba(240, 192, 64, 0.15);
+  }
+  50% {
+    box-shadow: 0 4px 20px rgba(240, 192, 64, 0.25);
+  }
+}
+
+.couponIcon {
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, #f0c040, #d4a73a);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 28px;
+  flex-shrink: 0;
+}
+
+.couponContent {
+  flex: 1;
+}
+
+.couponTitle {
+  font-family: 'Derivia Regular', serif;
+  font-size: 20px;
+  color: #2c3e50;
+  margin: 0 0 8px 0;
+  font-weight: 400;
+}
+
+.couponText {
+  color: #7d7d7d;
+  margin: 0 0 12px 0;
+  font-size: 14px;
+}
+
+.couponCodeContainer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.couponCode {
+  background: white;
+  border: 2px dashed #f0c040;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-family: 'Courier New', monospace;
+  font-size: 18px;
+  font-weight: bold;
+  color: #a88757;
+  letter-spacing: 2px;
+}
+
+.copyButton {
+  background: #a88757;
+  border: none;
+  border-radius: 8px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: white;
+  font-size: 18px;
+  transition: all 0.3s ease;
+}
+
+.copyButton:hover {
+  background: #97784c;
+  transform: scale(1.1);
+}
+
+/* Pricing Plans */
+.plansContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  padding: 0 40px 32px;
+}
+
+.planCard {
+  background: white;
+  border: 2px solid rgba(168, 135, 87, 0.2);
+  border-radius: 16px;
+  padding: 32px 24px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.planCard:hover {
+  border-color: #a88757;
+  box-shadow: 0 8px 24px rgba(168, 135, 87, 0.15);
+  transform: translateY(-4px);
+}
+
+.planCard.selected {
+  border-color: #a88757;
+  background: linear-gradient(to bottom, rgba(168, 135, 87, 0.03), white);
+  box-shadow: 0 8px 24px rgba(168, 135, 87, 0.2);
+}
+
+.popularPlan {
+  border-color: #f0c040;
+  box-shadow: 0 8px 24px rgba(240, 192, 64, 0.15);
+}
+
+.popularPlan:hover {
+  border-color: #f0c040;
+  box-shadow: 0 12px 32px rgba(240, 192, 64, 0.25);
+}
+
+.popularBadge {
+  position: absolute;
+  top: 16px;
+  right: -32px;
+  background: linear-gradient(135deg, #f0c040, #d4a73a);
+  color: white;
+  padding: 6px 40px;
+  font-size: 12px;
+  font-weight: 600;
+  transform: rotate(45deg);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.selectedBadge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: #a88757;
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  animation: checkmarkPop 0.3s ease;
+}
+
+@keyframes checkmarkPop {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.planHeader {
+  text-align: center;
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(168, 135, 87, 0.1);
+}
+
+.planTitle {
+  font-family: 'Derivia Regular', serif;
+  font-size: 24px;
+  color: #2c3e50;
+  margin-bottom: 16px;
+  font-weight: 400;
+}
+
+.planPrice {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.currency {
+  font-size: 24px;
+  color: #a88757;
+  font-weight: 600;
+}
+
+.amount {
+  font-size: 48px;
+  color: #2c3e50;
+  font-weight: 700;
+  font-family: 'Derivia Regular', serif;
+}
+
+.period {
+  font-size: 16px;
+  color: #7d7d7d;
+}
+
+.savingsText {
+  color: #27ae60;
+  font-size: 14px;
+  font-weight: 600;
+  margin: 8px 0 0 0;
+}
+
+.planFeatures {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #2c3e50;
+  font-size: 14px;
+}
+
+.featureIcon {
+  color: #27ae60;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+/* Actions */
+.actions {
+  padding: 0 40px 40px;
+  text-align: center;
+}
+
+.subscribeButton {
+  width: 100%;
+  max-width: 400px;
+  padding: 18px 32px;
+  background: linear-gradient(135deg, #a88757, #c4a77d);
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  font-family: 'Derivia Regular', serif;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 20px rgba(168, 135, 87, 0.3);
+  letter-spacing: 0.5px;
+}
+
+.subscribeButton:hover:not(:disabled) {
+  background: linear-gradient(135deg, #97784c, #b39b72);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(168, 135, 87, 0.4);
+}
+
+.subscribeButton:disabled {
+  background: #e0e0e0;
+  color: #999;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.disclaimer {
+  margin-top: 16px;
+  color: #7d7d7d;
+  font-size: 13px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .modal {
+    max-width: 95%;
+    margin: 10px;
+  }
+
+  .header {
+    padding: 30px 20px 15px;
+  }
+
+  .title {
+    font-size: 28px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+  }
+
+  .couponBanner {
+    margin: 0 20px 24px;
+    padding: 20px;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .couponCodeContainer {
+    justify-content: center;
+  }
+
+  .plansContainer {
+    grid-template-columns: 1fr;
+    padding: 0 20px 24px;
+  }
+
+  .actions {
+    padding: 0 20px 30px;
+  }
+
+  .amount {
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 24px;
+  }
+
+  .couponTitle {
+    font-size: 18px;
+  }
+
+  .couponCode {
+    font-size: 16px;
+    padding: 10px 16px;
+  }
+
+  .planCard {
+    padding: 24px 20px;
+  }
+
+  .subscribeButton {
+    font-size: 16px;
+    padding: 16px 28px;
+  }
+}
