@@ -9,6 +9,7 @@ import { notifyError, notifySuccess } from '../../Components/Toast'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../../Share/FireBase'
 import LocationPicker from '../../Components/LocationPicker'
+import SubscriptionModal from '../../Components/SubscriptionModal'
 
 export default function JoinAsATherapist() {
   const storage = getStorage()
@@ -19,6 +20,7 @@ export default function JoinAsATherapist() {
   const [modalOpen, setModalOpen] = useState(false)
   const [previewImage, setPreviewImage] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
+  const [showSubscriptionModal, setShowSubscriptionModal] = useState(false)
 
   const [therapistData, setTherapistData] = useState({
     name: '',
@@ -79,7 +81,7 @@ export default function JoinAsATherapist() {
     setCoordinates({ lat, lng })
     setExactAddress(address)
     // Also update the location field with the address
-    setTherapistData(prev => ({ ...prev, location: address }))
+    setTherapistData((prev) => ({ ...prev, location: address }))
   }
 
   const handleSave = async () => {
@@ -135,7 +137,9 @@ export default function JoinAsATherapist() {
       setExactAddress('')
       setPreviewImage(null)
       setImageFileName(null)
-      window.location.reload()
+
+      // ✅ Show subscription modal instead of reloading
+      setShowSubscriptionModal(true)
     } catch (error: any) {
       console.error(error)
       notifyError(error.message || 'Error saving therapist data')
@@ -319,7 +323,9 @@ export default function JoinAsATherapist() {
 
             {/* Professional Bio */}
             <div className={styles.fieldContainer}>
-              <label className={styles.fieldLabel} htmlFor="bio">📝 Professional Bio</label>
+              <label className={styles.fieldLabel} htmlFor="bio">
+                📝 Professional Bio
+              </label>
               <textarea
                 id="bio"
                 name="bio"
@@ -351,6 +357,16 @@ export default function JoinAsATherapist() {
             </div>
           </div>
         </div>
+      )}
+
+      {showSubscriptionModal && (
+        <SubscriptionModal
+          closeModal={() => {
+            setShowSubscriptionModal(false)
+            window.location.reload()
+          }}
+          userRole="therapist"
+        />
       )}
     </>
   )

@@ -9,6 +9,7 @@ import { notifyError, notifySuccess } from '../../Components/Toast'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { auth, db } from '../../Share/FireBase'
 import { geocodeAddress } from '../../utils/geocoding'
+import SubscriptionModal from '../../Components/SubscriptionModal'
 
 export default function JoinAsACoach() {
   const storage = getStorage()
@@ -17,6 +18,7 @@ export default function JoinAsACoach() {
   const [modalOpen, setModalOpen] = useState(false)
   const [previewImage, setPreviewImage] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
+  const [showSubscriptionModal, setShowSubscriptionModal] = useState(false)
 
   const [coachData, setCoachData] = useState({
     name: '',
@@ -105,9 +107,25 @@ export default function JoinAsACoach() {
         createdAt: Timestamp.now(),
       })
 
-      notifySuccess('Coach added successfully!')
+      notifySuccess('Coach application submitted successfully!')
       setModalOpen(false)
-      window.location.reload()
+
+      // ✅ Reset form
+      setCoachData({
+        name: '',
+        specialization: '',
+        location: '',
+        price: '',
+        bio: '',
+        email: '',
+        phone: '',
+        password: '',
+      })
+      setPreviewImage(null)
+      setImageFileName(null)
+
+      // ✅ Show subscription modal instead of reloading
+      setShowSubscriptionModal(true)
     } catch (error) {
       notifyError('Error saving coach data')
     } finally {
@@ -296,6 +314,16 @@ export default function JoinAsACoach() {
             </div>
           </div>
         </div>
+      )}
+
+      {showSubscriptionModal && (
+        <SubscriptionModal
+          closeModal={() => {
+            setShowSubscriptionModal(false)
+            window.location.reload()
+          }}
+          userRole="coach"
+        />
       )}
     </>
   )
