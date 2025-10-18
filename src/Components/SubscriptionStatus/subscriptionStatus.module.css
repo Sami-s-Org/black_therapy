@@ -1,0 +1,260 @@
+.container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.loadingSpinner {
+  border: 4px solid #f3f4f6;
+  border-top: 4px solid #667eea;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 20px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 24px;
+  color: white;
+}
+
+.headerContent {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.headerIcon {
+  font-size: 40px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+}
+
+.statusBadge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.statusActive {
+  background: #10b981;
+  color: white;
+}
+
+.statusTrialing {
+  background: #3b82f6;
+  color: white;
+}
+
+.statusPastDue {
+  background: #f59e0b;
+  color: white;
+}
+
+.statusCanceled {
+  background: #ef4444;
+  color: white;
+}
+
+.statusDefault {
+  background: #6b7280;
+  color: white;
+}
+
+.details {
+  padding: 24px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.detailRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+}
+
+.detailLabel {
+  font-weight: 500;
+  color: #6b7280;
+}
+
+.detailValue {
+  font-weight: 600;
+  color: #1f2937;
+  text-transform: capitalize;
+}
+
+.warningBox {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #fef3c7;
+  border: 2px solid #fbbf24;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-top: 16px;
+  color: #78350f;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.benefits {
+  padding: 24px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.benefitsTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 16px;
+}
+
+.benefitsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.benefitsList li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #4b5563;
+  font-size: 14px;
+}
+
+.checkIcon {
+  color: #10b981;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.actions {
+  padding: 24px;
+  text-align: center;
+}
+
+.manageButton {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 12px 32px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  max-width: 300px;
+}
+
+.manageButton:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+}
+
+.manageButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.manageNote {
+  margin-top: 12px;
+  font-size: 14px;
+  color: #9ca3af;
+}
+
+.noSubscriptionCard {
+  background: white;
+  border-radius: 16px;
+  padding: 40px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.noSubIcon {
+  font-size: 60px;
+  color: #f59e0b;
+  margin-bottom: 16px;
+}
+
+.noSubTitle {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 12px;
+}
+
+.noSubText {
+  font-size: 16px;
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 12px;
+  }
+
+  .header {
+    padding: 20px;
+  }
+
+  .headerIcon {
+    font-size: 32px;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .details,
+  .benefits,
+  .actions {
+    padding: 20px;
+  }
+
+  .benefitsList {
+    grid-template-columns: 1fr;
+  }
+
+  .detailRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .manageButton {
+    width: 100%;
+  }
+}

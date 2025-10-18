@@ -3,6 +3,7 @@ import styles from './subscription.module.css'
 import { FiCheck, FiCopy, FiCheckCircle } from 'react-icons/fi'
 import { MdClose } from 'react-icons/md'
 import { notifySuccess, notifyError } from '../Toast'
+import { redirectToCheckout } from '../../services/stripeService'
 
 type SubscriptionModalProps = {
   closeModal: () => void
@@ -35,32 +36,10 @@ const SubscriptionModal: React.FC<SubscriptionModalProps> = ({ closeModal, userR
     setIsProcessing(true)
 
     try {
-      // Here you would integrate with your Stripe backend
-      // For now, we'll redirect to Stripe Checkout
-      // Replace with your actual Stripe Price IDs based on selected plan:
-      // const priceId = selectedPlan === 'monthly' ? 'price_monthly_id' : 'price_annual_id'
-
-      // Construct Stripe checkout URL with coupon parameter
-      const stripeCheckoutUrl = `https://buy.stripe.com/test_YOUR_CHECKOUT_URL?prefilled_promo_code=${couponCode}`
-
-      // In production, you would call your backend to create a checkout session
-      // const response = await fetch('/api/create-checkout-session', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify({
-      //     priceId,
-      //     userId: auth.currentUser?.uid,
-      //     couponCode
-      //   })
-      // })
-      // const { sessionId } = await response.json()
-      // const stripe = await loadStripe('your_publishable_key')
-      // await stripe.redirectToCheckout({ sessionId })
-
       notifySuccess('Redirecting to secure checkout...')
-      setTimeout(() => {
-        window.location.href = stripeCheckoutUrl
-      }, 1500)
+
+      // Redirect to Stripe Checkout
+      await redirectToCheckout(selectedPlan, userRole)
     } catch (error) {
       console.error('Error processing subscription:', error)
       notifyError('Failed to process subscription. Please try again.')

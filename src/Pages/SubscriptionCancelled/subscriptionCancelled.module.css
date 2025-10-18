@@ -1,0 +1,197 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f87171 0%, #ef4444 100%);
+  padding: 20px;
+}
+
+.card {
+  background: white;
+  border-radius: 20px;
+  padding: 40px;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.iconContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.cancelIcon {
+  font-size: 80px;
+  color: #ef4444;
+  background: #fee2e2;
+  border-radius: 50%;
+  padding: 20px;
+  animation: scaleIn 0.5s ease-out;
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 12px;
+}
+
+.subtitle {
+  font-size: 18px;
+  color: #6b7280;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+.infoBox {
+  background: #f9fafb;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.infoTitle {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.benefitsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.benefitsList li {
+  padding: 10px 0;
+  color: #4b5563;
+  font-size: 16px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.benefitsList li:last-child {
+  border-bottom: none;
+}
+
+.offerBox {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 30px;
+  border: 2px solid #fbbf24;
+}
+
+.offerText {
+  margin: 0;
+  color: #78350f;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.offerText strong {
+  font-weight: 700;
+  color: #92400e;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.primaryButton {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.primaryButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+}
+
+.secondaryButton {
+  background: white;
+  color: #667eea;
+  border: 2px solid #667eea;
+  padding: 14px 28px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.secondaryButton:hover {
+  background: #f3f4f6;
+}
+
+.note {
+  font-size: 14px;
+  color: #9ca3af;
+  margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .card {
+    padding: 30px 20px;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+  }
+
+  .infoTitle {
+    font-size: 18px;
+  }
+
+  .benefitsList li {
+    font-size: 14px;
+  }
+
+  .offerText {
+    font-size: 14px;
+  }
+}

@@ -25,6 +25,9 @@ import MyProfile from '../../Pages/MyProfile'
 import KingTable from "../../Pages/King's Table"
 import FreeTherapy from '../../Pages/FreeTherapy'
 import ThankYouPage from '../../Pages/ThankYou'
+import SubscriptionSuccess from '../../Pages/SubscriptionSuccess'
+import SubscriptionCancelled from '../../Pages/SubscriptionCancelled'
+
 const Layout: React.FC<PropsWithChildren<{}>> = ({ children }) => {
   const location = useLocation()
   const isAdminRoute = location.pathname.startsWith('/admin')
@@ -66,6 +69,8 @@ const AppRouter = () => {
           <Route path="/freeTherapy" element={<FreeTherapy />} />
           <Route path="/kingTable" element={<KingTable />} />
           <Route path="/thankyou-page" element={<ThankYouPage />} />
+          <Route path="/subscription-success" element={<SubscriptionSuccess />} />
+          <Route path="/subscription-cancelled" element={<SubscriptionCancelled />} />
         </Routes>
       </Layout>
     </Router>

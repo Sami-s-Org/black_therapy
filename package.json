@@ -11,6 +11,7 @@
     "@mui/material": "^6.4.5",
     "@mui/x-date-pickers": "^7.27.1",
     "@react-google-maps/api": "^2.20.6",
+    "@stripe/stripe-js": "^2.4.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",

@@ -1,3 +1,102 @@
+# Black Therapy Platform
+
+A comprehensive therapy and coaching platform built with React and Node.js, featuring Stripe payment integration.
+
+## Project Structure
+
+- `/src` - React frontend application
+- `/server` - Node.js backend with Express and Stripe integration
+- `/public` - Static assets
+
+## Features
+
+- 🔐 Firebase Authentication
+- 💳 Stripe Payment Integration
+- 📅 Appointment Management
+- 💬 Real-time Chat
+- 🗺️ Therapist/Coach Finder with Maps
+- 📱 Responsive Design
+- 🔔 Subscription Management
+
+## Quick Start
+
+### Prerequisites
+
+- Node.js (v16 or higher)
+- npm or yarn
+- Firebase account
+- Stripe account
+
+### Installation
+
+1. **Clone the repository**
+
+```bash
+git clone <repository-url>
+cd black_therapy
+```
+
+2. **Install frontend dependencies**
+
+```bash
+npm install
+```
+
+3. **Install backend dependencies**
+
+```bash
+cd server
+npm install
+cd ..
+```
+
+4. **Configure environment variables**
+
+Create `.env` file in the root directory:
+
+```env
+REACT_APP_FIREBASE_API_KEY=your_firebase_api_key
+REACT_APP_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
+REACT_APP_FIREBASE_PROJECT_ID=your_project_id
+REACT_APP_API_URL=http://localhost:5000
+```
+
+Create `.env` file in the `server` directory:
+
+```env
+PORT=5000
+STRIPE_SECRET_KEY=sk_test_your_key
+STRIPE_PUBLISHABLE_KEY=pk_test_your_key
+FRONTEND_URL=http://localhost:3000
+```
+
+See [STRIPE_SETUP_GUIDE.md](STRIPE_SETUP_GUIDE.md) for complete configuration details.
+
+### Running the Application
+
+**Start the backend server:**
+
+```bash
+cd server
+npm run dev
+```
+
+**In a new terminal, start the frontend:**
+
+```bash
+npm start
+```
+
+The frontend will run on [http://localhost:3000](http://localhost:3000)  
+The backend will run on [http://localhost:5000](http://localhost:5000)
+
+## Documentation
+
+- [Stripe Setup Guide](STRIPE_SETUP_GUIDE.md) - Complete guide for setting up Stripe integration
+- [Server README](server/README.md) - Backend API documentation
+
+---
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
