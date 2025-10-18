@@ -334,14 +334,14 @@ export default function MyProfile() {
           <h1 className={styles.heading}>Update Profile</h1>
 
           {/* Subscription Button for Coaches and Therapists */}
-          {/* {(userData.role === 'therapist' || userData.role === 'coach') && ( */}
-          <div className={styles.subscriptionSection}>
-            <button className={styles.subscriptionButton} onClick={() => setShowSubscriptionModal(true)}>
-              <FiCreditCard className={styles.buttonIcon} />
-              Buy Subscription
-            </button>
-          </div>
-          {/* )} */}
+          {(userData.role === 'therapist' || userData.role === 'coach') && (
+            <div className={styles.subscriptionSection}>
+              <button className={styles.subscriptionButton} onClick={() => setShowSubscriptionModal(true)}>
+                <FiCreditCard className={styles.buttonIcon} />
+                Buy Subscription
+              </button>
+            </div>
+          )}
 
           <div className={styles.Containter}>
             <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
