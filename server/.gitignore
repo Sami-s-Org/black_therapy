@@ -19,6 +19,7 @@ lerna-debug.log*
 
 # Firebase
 serviceAccountKey.json
+*-firebase-adminsdk*.json
 firebase-debug.log
 .firebase/
 
