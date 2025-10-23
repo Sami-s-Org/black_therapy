@@ -31,7 +31,7 @@ const SubscriptionSuccess: React.FC = () => {
   }, [sessionId])
 
   const handleContinue = () => {
-    navigate('/my-profile')
+    navigate('/myprofile')
   }
 
   if (isVerifying) {
@@ -53,7 +53,7 @@ const SubscriptionSuccess: React.FC = () => {
           <FiCheckCircle className={styles.successIcon} />
         </div>
 
-        <h1 className={styles.title}>Subscription Successful! 🎉</h1>
+        <h1 className={styles.title}>Subscription Successful!</h1>
         <p className={styles.subtitle}>
           Thank you for subscribing to Black Therapy. Your premium access is now active.
         </p>

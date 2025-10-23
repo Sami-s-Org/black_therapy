@@ -112,7 +112,7 @@ router.post('/create-portal-session', verifyAuth, async (req, res) => {
 
     const session = await stripe.billingPortal.sessions.create({
       customer: customerId,
-      return_url: `${process.env.FRONTEND_URL}/my-profile`,
+      return_url: `${process.env.FRONTEND_URL}/myprofile`,
     })
 
     res.json({ url: session.url })

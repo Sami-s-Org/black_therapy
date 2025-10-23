@@ -40,6 +40,17 @@
   transform: translateY(-2px);
 }
 
+/* Enhanced styling for subscription section */
+.sectionCard:has(.sectionTitle:contains("Subscription Management")) {
+  border: 1px solid rgba(76, 175, 80, 0.2);
+  background: linear-gradient(135deg, #ffffff, #f8fff8);
+}
+
+.sectionCard:has(.sectionTitle:contains("Subscription Management")):hover {
+  box-shadow: 0 8px 32px rgba(76, 175, 80, 0.1);
+  border-color: rgba(76, 175, 80, 0.3);
+}
+
 .sectionHeader {
   padding: 20px 24px;
   cursor: pointer;
@@ -372,14 +383,42 @@
 
 .subscriptionSection {
   max-width: 800px;
-  margin: 0 auto 32px;
+  margin: 0 auto 40px;
   display: flex;
   justify-content: center;
+  padding: 0 20px;
+}
+
+/* Responsive design for subscription section */
+@media (max-width: 768px) {
+  .subscriptionSection {
+    padding: 0 16px;
+    margin-bottom: 32px;
+  }
+
+  .subscriptionStatusIndicator {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+    padding: 16px;
+  }
+
+  .statusContent {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .subscriptionButton {
+    width: 100%;
+    min-width: auto;
+    padding: 14px 28px;
+    font-size: 15px;
+  }
 }
 
 .subscriptionButton {
   padding: 16px 40px;
-  background: linear-gradient(135deg, #f0c040, #d4a73a);
+  background: linear-gradient(135deg, #a88757, #c4a77d);
   border: none;
   color: white;
   font-weight: 600;
@@ -390,20 +429,139 @@
   align-items: center;
   justify-content: center;
   gap: 12px;
-  font-size: 18px;
+  font-size: 16px;
   font-family: 'Derivia Regular', serif;
   letter-spacing: 0.5px;
-  box-shadow: 0 6px 20px rgba(240, 192, 64, 0.3);
+  box-shadow: 0 4px 16px rgba(168, 135, 87, 0.2);
+  position: relative;
+  overflow: hidden;
+  min-width: 200px;
 }
 
 .subscriptionButton:hover {
-  background: linear-gradient(135deg, #d4a73a, #c49530);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(240, 192, 64, 0.4);
+  background: linear-gradient(135deg, #97784c, #b39b72);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(168, 135, 87, 0.3);
+}
+
+.subscriptionButton:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(168, 135, 87, 0.2);
 }
 
 .subscriptionButton .buttonIcon {
   width: 20px;
   height: 20px;
   margin-right: 0;
+}
+
+.subscriptionStatusIndicator {
+  background: linear-gradient(135deg, #f8f6f0, #f0ede4);
+  border: 1px solid rgba(168, 135, 87, 0.2);
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 12px rgba(168, 135, 87, 0.08);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.subscriptionStatusIndicator::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #a88757, #c4a77d, #d4b896);
+  border-radius: 12px 12px 0 0;
+}
+
+.subscriptionStatusIndicator:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(168, 135, 87, 0.12);
+  border-color: rgba(168, 135, 87, 0.3);
+}
+
+.statusContent {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex: 1;
+}
+
+.statusIcon {
+  width: 40px;
+  height: 40px;
+  color: #a88757;
+  flex-shrink: 0;
+  background: rgba(168, 135, 87, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  box-shadow: 0 2px 8px rgba(168, 135, 87, 0.15);
+}
+
+.statusText h3 {
+  margin: 0 0 6px 0;
+  color: #2c3e50;
+  font-size: 18px;
+  font-weight: 600;
+  font-family: 'Derivia Regular', serif;
+  letter-spacing: 0.3px;
+}
+
+.statusText p {
+  margin: 0;
+  color: #a88757;
+  font-size: 14px;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+.manageSubscriptionButton {
+  background: linear-gradient(135deg, #a88757, #c4a77d);
+  border: none;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 14px 28px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  font-family: 'Derivia Regular', serif;
+  letter-spacing: 0.3px;
+  box-shadow: 0 4px 12px rgba(168, 135, 87, 0.2);
+  position: relative;
+  overflow: hidden;
+  min-width: 160px;
+  text-align: center;
+}
+
+.manageSubscriptionButton:hover {
+  background: linear-gradient(135deg, #97784c, #b39b72);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(168, 135, 87, 0.3);
+}
+
+.manageSubscriptionButton:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(168, 135, 87, 0.2);
+}
+
+/* Enhanced section header for subscription */
+.sectionHeader:has(.sectionTitle:contains("Subscription Management")) {
+  background: linear-gradient(135deg, rgba(168, 135, 87, 0.05), rgba(168, 135, 87, 0.02));
+  border-bottom: 2px solid rgba(168, 135, 87, 0.1);
+}
+
+.sectionHeader:has(.sectionTitle:contains("Subscription Management")) .sectionIcon {
+  color: #a88757;
+  background: rgba(168, 135, 87, 0.1);
+  padding: 8px;
+  border-radius: 8px;
 }

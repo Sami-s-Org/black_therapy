@@ -6,6 +6,7 @@ import { doc, getDoc, updateDoc } from 'firebase/firestore'
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 import { updatePassword, EmailAuthProvider, reauthenticateWithCredential, sendEmailVerification } from 'firebase/auth'
 import { notifyError, notifySuccess } from '../../Components/Toast'
+import { getSubscriptionStatus } from '../../services/stripeService'
 import {
   FiUser,
   FiBriefcase,
@@ -19,11 +20,13 @@ import {
   FiChevronDown,
   FiPhone,
   FiCreditCard,
+  FiCheckCircle,
 } from 'react-icons/fi'
 import { MdLocationOn, MdAttachMoney } from 'react-icons/md'
 import { BsPencilSquare } from 'react-icons/bs'
 import RingLoader from '../../Components/RingLoader'
 import SubscriptionModal from '../../Components/SubscriptionModal'
+import SubscriptionStatus from '../../Components/SubscriptionStatus'
 
 export default function MyProfile() {
   const [userData, setUserData] = useState({
@@ -45,12 +48,14 @@ export default function MyProfile() {
   const [originalEmail, setOriginalEmail] = useState('')
   const [isLoading, setIsLoading] = useState(true)
   const [showSubscriptionModal, setShowSubscriptionModal] = useState(false)
+  const [subscriptionStatus, setSubscriptionStatus] = useState<any>(null)
 
   // New state for managing sections
   const [openSections, setOpenSections] = useState({
     basicInfo: true,
     professionalInfo: false,
     security: false,
+    subscription: false,
   })
   const [isEditingPassword, setIsEditingPassword] = useState(false)
   const [isEditingEmail, setIsEditingEmail] = useState(false)
@@ -102,10 +107,22 @@ export default function MyProfile() {
     setIsLoading(false)
   }
 
+  const fetchSubscriptionStatus = async () => {
+    try {
+      const status = await getSubscriptionStatus()
+      setSubscriptionStatus(status)
+    } catch (error) {
+      console.error('Error fetching subscription status:', error)
+      // Don't show error to user, just set as no subscription
+      setSubscriptionStatus({ hasSubscription: false })
+    }
+  }
+
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user) {
         fetchUserData()
+        fetchSubscriptionStatus()
       }
     })
   }, [])
@@ -333,13 +350,21 @@ export default function MyProfile() {
         <div className={styles.outermain}>
           <h1 className={styles.heading}>Update Profile</h1>
 
-          {/* Subscription Button for Coaches and Therapists */}
-          {(userData.role === 'therapist' || userData.role === 'coach') && (
+          {/* Subscription Status Indicator for Coaches and Therapists */}
+          {(userData.role === 'therapist' || userData.role === 'coach') && subscriptionStatus?.hasSubscription && (
             <div className={styles.subscriptionSection}>
-              <button className={styles.subscriptionButton} onClick={() => setShowSubscriptionModal(true)}>
-                <FiCreditCard className={styles.buttonIcon} />
-                Buy Subscription
-              </button>
+              <div className={styles.subscriptionStatusIndicator}>
+                <div className={styles.statusContent}>
+                  <FiCheckCircle className={styles.statusIcon} />
+                  <div className={styles.statusText}>
+                    <h3>Active Subscription</h3>
+                    <p>
+                      {subscriptionStatus.planType === 'monthly' ? 'Monthly' : 'Annual'} Plan -
+                      {subscriptionStatus.status === 'active' ? ' Active' : ' ' + subscriptionStatus.status}
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           )}
 
@@ -591,6 +616,26 @@ export default function MyProfile() {
                         </div>
                       </div>
                     )}
+                  </div>
+                )}
+              </div>
+
+              {/* Subscription Management Section */}
+              <div className={styles.sectionCard}>
+                <div className={styles.sectionHeader} onClick={() => toggleSection('subscription')}>
+                  <div className={styles.sectionTitle}>
+                    <FiCreditCard className={styles.sectionIcon} />
+                    Subscription Management
+                  </div>
+                  {openSections.subscription ? (
+                    <FiChevronUp className={styles.sectionIcon} />
+                  ) : (
+                    <FiChevronDown className={styles.sectionIcon} />
+                  )}
+                </div>
+                {openSections.subscription && (
+                  <div className={styles.sectionContent}>
+                    <SubscriptionStatus />
                   </div>
                 )}
               </div>
