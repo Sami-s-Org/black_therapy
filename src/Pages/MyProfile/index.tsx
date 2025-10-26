@@ -635,7 +635,7 @@ export default function MyProfile() {
                 </div>
                 {openSections.subscription && (
                   <div className={styles.sectionContent}>
-                    <SubscriptionStatus />
+                    <SubscriptionStatus onSubscribeClick={() => setShowSubscriptionModal(true)} />
                   </div>
                 )}
               </div>

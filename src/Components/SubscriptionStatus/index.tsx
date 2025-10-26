@@ -19,7 +19,11 @@ interface SubscriptionData {
   }
 }
 
-const SubscriptionStatus: React.FC = () => {
+interface SubscriptionStatusProps {
+  onSubscribeClick?: () => void
+}
+
+const SubscriptionStatus: React.FC<SubscriptionStatusProps> = ({ onSubscribeClick }) => {
   const [loading, setLoading] = useState(true)
   const [subscription, setSubscription] = useState<SubscriptionData | null>(null)
   const [managingSubscription, setManagingSubscription] = useState(false)
@@ -64,12 +68,59 @@ const SubscriptionStatus: React.FC = () => {
   if (!subscription?.hasSubscription) {
     return (
       <div className={styles.container}>
-        <div className={styles.noSubscriptionCard}>
-          <FiAlertCircle className={styles.noSubIcon} />
-          <h3 className={styles.noSubTitle}>No Active Subscription</h3>
-          <p className={styles.noSubText}>
-            You don't have an active subscription. Subscribe now to unlock premium features!
-          </p>
+        <div className={styles.card}>
+          <div className={styles.header}>
+            <div className={styles.headerContent}>
+              <FiAlertCircle className={styles.headerIcon} />
+              <div>
+                <h2 className={styles.title}>No Active Subscription</h2>
+                <span className={`${styles.statusBadge} ${styles.statusInactive}`}>Inactive</span>
+              </div>
+            </div>
+          </div>
+
+          <div className={styles.details}>
+            <div className={styles.detailRow}>
+              <span className={styles.detailLabel}>Status</span>
+              <span className={styles.detailValue}>Not subscribed</span>
+            </div>
+
+            <div className={styles.detailRow}>
+              <span className={styles.detailLabel}>Profile Visibility</span>
+              <span className={styles.detailValue}>Hidden from patients</span>
+            </div>
+          </div>
+
+          <div className={styles.benefits}>
+            <h3 className={styles.benefitsTitle}>Subscribe to Unlock</h3>
+            <ul className={styles.benefitsList}>
+              <li>
+                <FiCheck className={styles.checkIcon} />
+                <span>Make your profile visible to patients</span>
+              </li>
+              <li>
+                <FiCheck className={styles.checkIcon} />
+                <span>Unlimited appointments</span>
+              </li>
+              <li>
+                <FiCheck className={styles.checkIcon} />
+                <span>Priority support</span>
+              </li>
+              <li>
+                <FiCheck className={styles.checkIcon} />
+                <span>Analytics dashboard</span>
+              </li>
+            </ul>
+          </div>
+
+          <div className={styles.actions}>
+            <button className={styles.manageButton} onClick={onSubscribeClick}>
+              Get Subscription
+            </button>
+            <p className={styles.manageNote}>
+              Subscribe to make your profile visible to patients and unlock premium features
+            </p>
+          </div>
         </div>
       </div>
     )
